@@ -60,7 +60,6 @@ build/
 dist/
 out/
 output/
-sim/
 tmp/
 
 # Backup-Dateien (Ubuntu/Editor)
