@@ -1,0 +1,86 @@
+# ==========================================
+# GHDL - VHDL Simulation
+# ==========================================
+# Compiled objects & libraries
+*.o
+*.obj
+*.cf                 # GHDL library index (work-obj93.cf, work-obj08.cf)
+work-obj*.cf
+e~*                  # GHDL executables (starten mit e~ auf Linux)
+
+# Simulation outputs (können sehr groß werden!)
+*.vcd                # Value Change Dump
+*.ghw                # GHDL Waveform Format
+*.fst                # Fast Signal Trace
+
+# ==========================================
+# YOSYS - Open Source Synthese
+# ==========================================
+# Generierte Netzlisten (werden neu erzeugt)
+*.json               # JSON Netzliste für nextpnr
+*.blif               # Berkeley Logic Interchange Format
+*.edif               # EDIF Netzliste
+*.svg                # Schaltplandiagramme (wenn mit "show" generiert)
+*.ps
+*.dot
+
+# Yosys temporär/logs
+*.log
+yosys.log
+synth.log
+*.dcp
+
+# ==========================================
+# NEXTPNR - Place & Route (Lattice iCE40)
+# ==========================================
+# Bitstreams (das Endergebnis - je nachdem ob ihr die im Repo wollt)
+*.asc                # ASCII Bitstream (nextpnr output)
+*.bin                # Binary Bitstream (icepack output)
+*.bit                # Bitstream (konvertiert)
+*.hex                # Intel HEX Format
+*.txt                # Text-Dump manchmal generiert
+
+# Reports & Constraints-Generierung
+*_timing.rpt
+*_util.rpt
+*.rpt
+nextpnr.log
+
+# ==========================================
+# GTKWave - Waveform Viewer
+# ==========================================
+# Session-Dateien (optional - manche behalten sie, aber besser ignorieren)
+*.gtkw               # GTKWave Konfiguration/Sessions
+*.sav                # Alte Save-Formate
+
+# ==========================================
+# BUILD-ORDNER & ALLGEMEINES
+# ==========================================
+build/
+dist/
+out/
+output/
+sim/
+tmp/
+
+# Backup-Dateien (Ubuntu/Editor)
+*~
+*.bak
+*.swp
+*.tmp
+\#*\#                # Emacs backups
+
+# OS-spezifisch
+.DS_Store            # Falls du mal auf macOS arbeitest
+.directory           # KDE
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# WICHTIG: WAS DU BEHALTEN SOLLTEST (nicht in .gitignore)
+# ==========================================
+# !constraints.pcf   # Pin constraints für nextpnr (Lattice)
+# !Makefile          # Build-Script
+# !*.vhd             # Dein VHDL-Code
+# !*.vhdl
+# !*.xdc             # Falls du später Vivado parallel nutzt
