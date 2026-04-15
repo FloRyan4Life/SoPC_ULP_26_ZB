@@ -24,20 +24,25 @@ architecture addr_master_a of addr_master is
     signal slave_we : std_logic := '0';
     signal slave_d : std_logic := '0';
     signal delay_cnt2 : integer range 0 to 20000 := 0;
-    signal wait_done : std_logic := '0';
-    begin
-
+    signal wait_done1 : std_logic := '0';
+    signal wait_done2 : std_logic := '0';
+begin
+        
     process (clk, rst)
-    begin
+        begin
 
         if rst = '1' then
             state <= START;
             slave_we <= '0';
             slave_d <= '0';
+            wait_done1 <= '0';
+            wait_done2 <= '0';
         elsif rising_edge(clk) then
                 case state is
                     when START =>
                         state <= LON;
+                        wait_done1 <= '0';
+                        wait_done2 <= '0';
                     when LON =>
                         slave_d <= '1';
                         if delay_cnt = 0 then
@@ -46,13 +51,18 @@ architecture addr_master_a of addr_master is
                         elsif delay_cnt = variable_delay then
                             delay_cnt <= 0;
                             slave_d <= '0';
-                            state <= LOFF;
+                            wait_done1 <= '1';
                         elsif delay_cnt = 10 then
                             slave_we <= '0';
                             delay_cnt <= delay_cnt + 1;
                         else
                             delay_cnt <= delay_cnt + 1;
-                        end if;                        
+                        end if;
+                        
+                        if wait_done1 = '1' then
+                            state <= LOFF;
+                            wait_done1 <= '0';
+                        end if;
                     when LOFF =>
                         slave_d <= '0';
                         slave_we <= '1';
@@ -60,12 +70,12 @@ architecture addr_master_a of addr_master is
                         if delay_cnt2 = 10 then
                             delay_cnt2 <= 0;
                             slave_we <= '0';
-                            wait_done <= '1';
+                            wait_done2 <= '1';
                         else
                             delay_cnt2 <= delay_cnt2 + 1;
                         end if; 
                         
-                        if wait_done = '1' then
+                        if wait_done2 = '1' then
                             if adr_reg = "111" then
                                 adr_reg <= "000";
                             else
@@ -73,7 +83,7 @@ architecture addr_master_a of addr_master is
                             end if;
 
                             state <= LON;
-                            wait_done <= '0';
+                            wait_done2 <= '0';
                         end if;
                 end case;
         end if;
