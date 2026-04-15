@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 entity addressing_tb is
     generic (
-        variable_delay : integer := 500000
+        variable_delay : integer := 500
     );
 
     port(

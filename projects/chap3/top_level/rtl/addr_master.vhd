@@ -40,12 +40,16 @@ architecture addr_master_a of addr_master is
                         state <= LON;
                     when LON =>
                         slave_d <= '1';
-                        slave_we <= '1';
-
-                        if delay_cnt = variable_delay then
+                        if delay_cnt = 0 then
+                            slave_we <= '1';
+                            delay_cnt <= delay_cnt + 1;
+                        elsif delay_cnt = variable_delay then
                             delay_cnt <= 0;
                             slave_d <= '0';
                             state <= LOFF;
+                        elsif delay_cnt = 10 then
+                            slave_we <= '0';
+                            delay_cnt <= delay_cnt + 1;
                         else
                             delay_cnt <= delay_cnt + 1;
                         end if;                        
