@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{ieee.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{ieee.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{slave} \PYG{k}{is}
+    \PYG{k}{port}\PYG{p}{(}
+        \PYG{n}{clk\PYGZus{}50MHz} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{res} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{adr} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{);}
+        \PYG{n}{led} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{p}{);}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{slave\PYGZus{}rtl} \PYG{k}{of} \PYG{n+nc}{slave} \PYG{k}{is}
+
+    \PYG{k}{signal} \PYG{n}{led\PYGZus{}reg} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+    
+\PYG{k}{begin}
+    \PYG{k}{process}\PYG{p}{(}\PYG{n}{clk\PYGZus{}50MHz}\PYG{p}{,} \PYG{n}{res}\PYG{p}{)} \PYG{k}{is}
+    \PYG{k}{begin}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{)} \PYG{k}{then}
+            \PYG{n}{led\PYGZus{}reg} \PYG{o}{\PYGZlt{}=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+        \PYG{k}{elsif} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk\PYGZus{}50MHz}\PYG{p}{)} \PYG{k}{then}
+            \PYG{k}{if}\PYG{p}{(}\PYG{n}{we} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{)} \PYG{k}{then}
+                \PYG{n}{led\PYGZus{}reg}\PYG{p}{(}\PYG{n}{to\PYGZus{}integer}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{n}{adr}\PYG{p}{)))} \PYG{o}{\PYGZlt{}=} \PYG{n}{d}\PYG{p}{;}
+            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+
+    \PYG{n}{led} \PYG{o}{\PYGZlt{}=} \PYG{n}{led\PYGZus{}reg}\PYG{p}{;}
+
+\PYG{k}{end} \PYG{k}{architecture}\PYG{p}{;}
+                
+\end{Verbatim}

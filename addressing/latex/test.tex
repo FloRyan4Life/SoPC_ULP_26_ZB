@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\usepackage{minted}        % Für Syntax-Highlighting
+\usepackage{xcolor}        % Für Farben
+
+% Seitenränder
+\geometry{a4paper, margin=2.5cm}
+
+% Minted-Einstellungen
+\setminted{
+    frame=single,
+    bgcolor=gray!5,
+    fontsize=\small,
+    linenos=true,          % Zeilennummern
+    breaklines=true,       % Lange Zeilen umbrechen
+    tabsize=4
+}
+
+\title{Mein erstes LaTeX-Dokument mit VHDL}
+\author{Dein Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Einleitung}
+Das ist mein erstes Dokument. Hier zeige ich VHDL-Code aus einer externen Datei.
+
+\section{Der VHDL-Code}
+
+% So fügst du die externe VHDL-Datei ein:
+% Der Pfad ist relativ zur .tex-Datei!
+\inputminted{vhdl}{../rtl/slave.vhd}
+
+\section{Erklärung}
+Die Entity \texttt{counter} implementiert einen einfachen Zähler. 
+Wichtige Signale sind \mintinline{vhdl}{clk} und \mintinline{vhdl}{reset}.
+
+% Alternativ: Nur bestimmte Zeilen (z.B. Zeile 5-12)
+\subsection{Ausschnitt (nur Entity)}
+\inputminted[firstline=5, lastline=12]{vhdl}{../rtl/slave.vhd}
+
+\end{document}
