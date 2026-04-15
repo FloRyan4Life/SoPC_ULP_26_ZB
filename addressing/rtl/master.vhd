@@ -21,7 +21,7 @@ architecture master_rtl of master is
     signal dir : std_logic;
     signal adr_reg : unsigned (2 downto 0);
 
-    type state_master is (WRITE_ON, WRITE_OFF, IDLE);
+    type state_master is (LED_ON, LED_OFF, IDLE);
     signal state : state_master;
     
 begin
@@ -35,14 +35,14 @@ begin
             state <= IDLE;
         elsif rising_edge(clk_12MHz) then
             if(cnt = 0) then
-                if(state = WRITE_OFF) then
+                if(state = LED_OFF) then
                     if(dir = '1') then
                         adr_reg <= adr_reg + 1;
                     elsif(dir = '0') then
                         adr_reg <= adr_reg - 1;
                     end if;
                 end if;    
-                state <= WRITE_ON;
+                state <= LED_ON;
                 cnt <= cnt + 1;
             elsif(cnt = DELAY_CYCLES) then           
                 if(adr_reg = "000") then
@@ -50,7 +50,7 @@ begin
                 elsif(adr_reg = "111") then
                     dir <= '0';
                 end if;
-                state <= WRITE_OFF;
+                state <= LED_OFF;
                 cnt <= 0;
             else
                 state <= IDLE;
@@ -61,8 +61,8 @@ begin
 
     adr <= std_logic_vector(adr_reg);
 
-    d <= '1' when(state = WRITE_ON) else '0';
+    d <= '1' when(state = LED_ON) else '0';
 
-    we <= '1' when(state = WRITE_ON or state = WRITE_OFF) else '0';
+    we <= '1' when(state = LED_ON or state = LED_OFF) else '0';
 
 end architecture;
