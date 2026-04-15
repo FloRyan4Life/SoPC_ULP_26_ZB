@@ -48,13 +48,12 @@ begin
                         if delay_cnt = 0 then
                             slave_we <= '1';
                             delay_cnt <= delay_cnt + 1;
-                        elsif delay_cnt = variable_delay then
-                            delay_cnt <= 0;
-                            slave_d <= '0';
-                            wait_done1 <= '1';
                         elsif delay_cnt = 10 then
                             slave_we <= '0';
                             delay_cnt <= delay_cnt + 1;
+                        elsif delay_cnt = variable_delay then
+                            delay_cnt <= 0;
+                            wait_done1 <= '1';
                         else
                             delay_cnt <= delay_cnt + 1;
                         end if;

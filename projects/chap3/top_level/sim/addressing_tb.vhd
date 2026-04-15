@@ -59,7 +59,7 @@ architecture addressing_tb_a of addressing_tb is
         clk => clk_12MHz_sim,
         we => slave_we,
         d => slave_d,
-        reset => async_reset, 
+        rst => async_reset, 
         addr => slave_addr,
         leds => leds
     );
