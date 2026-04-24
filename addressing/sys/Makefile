@@ -1,5 +1,5 @@
 # vhdl files
-TOPLEVEL=hello_blinky
+TOPLEVEL=addressing
 FILES = ../rtl/*vhd
 VHDLEX = .vhd
 
