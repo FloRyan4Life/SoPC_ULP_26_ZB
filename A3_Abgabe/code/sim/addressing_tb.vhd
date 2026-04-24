@@ -24,8 +24,8 @@ architecture addressing_tb_a of addressing_tb is
     signal counter : unsigned(7 downto 0) := (others => '0');
     begin
         
-        clk_12MHz_sim <= not clk_12MHz_sim after 41.666666 ns;
-        clk_50MHz_sim <= not clk_50MHz_sim after 10 ns;
+        -- clk_12MHz_sim <= not clk_12MHz_sim after 41.666666 ns;
+        -- clk_50MHz_sim <= not clk_50MHz_sim after 10 ns;
     
         process(clk_12MHz_sim) is
             variable cnt : unsigned(7 downto 0) := (others => '0');
