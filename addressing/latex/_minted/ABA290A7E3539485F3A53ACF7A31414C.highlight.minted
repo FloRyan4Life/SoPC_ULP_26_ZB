@@ -1,0 +1,38 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{library}\PYG{+w}{ }\PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use}\PYG{+w}{ }\PYG{n+nn}{ieee.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use}\PYG{+w}{ }\PYG{n+nn}{ieee.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{slave}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{    }\PYG{k}{port}\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{clk\PYGZus{}50MHz}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{d}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{we}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{res}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{adr}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{led}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{);}
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture}\PYG{+w}{ }\PYG{n+nc}{slave\PYGZus{}rtl}\PYG{+w}{ }\PYG{k}{of}\PYG{+w}{ }\PYG{n+nc}{slave}\PYG{+w}{ }\PYG{k}{is}
+
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{led\PYGZus{}reg}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{others}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{    }
+\PYG{k}{begin}
+\PYG{+w}{    }\PYG{k}{process}\PYG{p}{(}\PYG{n}{clk\PYGZus{}50MHz}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{res}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{    }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{n}{res}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{then}
+\PYG{+w}{            }\PYG{n}{led\PYGZus{}reg}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{others}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{elsif}\PYG{+w}{ }\PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk\PYGZus{}50MHz}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{then}
+\PYG{+w}{            }\PYG{k}{if}\PYG{p}{(}\PYG{n}{we}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{then}
+\PYG{+w}{                }\PYG{n}{led\PYGZus{}reg}\PYG{p}{(}\PYG{n}{to\PYGZus{}integer}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{n}{adr}\PYG{p}{)))}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{process}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{led}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{led\PYGZus{}reg}\PYG{p}{;}
+
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{architecture}\PYG{p}{;}
+\PYG{+w}{                }
+
+\end{MintedVerbatim}

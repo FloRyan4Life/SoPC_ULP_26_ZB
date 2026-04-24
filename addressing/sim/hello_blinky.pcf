@@ -1,0 +1,5 @@
+#set_io clk 21    # 12 MHz: Pin 21
+set_io clk 52    # 50MHz: Pin 52
+set_io reset 122 # button 1
+
+set_io led   112 # LED0
