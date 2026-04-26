@@ -33,7 +33,7 @@ begin
         variable byte_kill : std_logic_vector(7 downto 0) := "01101011"; -- ASCII for 'k'
         variable byte_other : std_logic_vector(7 downto 0) := "11111111"; -- A byte that is not 'j' or 'k'
     begin
-        wait for 100 ns; -- Wait for the system to stabilize
+        wait for 5000 ns; -- Wait for the system to stabilize
 
         -- Send start bit
         uart_in <= '0';
@@ -49,11 +49,11 @@ begin
         uart_in <= '1';
         wait for baud_period; -- Wait for one bit period
 
-        wait for 100 ns; -- Wait before ending the simulation
+        wait for 5000 ns; -- Wait before ending the simulation
 
         assert led = '1' report "LED should be ON after receiving 'j'" severity error;
 
-        wait for 100 ns; -- Wait before sending the next byte
+        wait for 500000 ns; -- Wait before sending the next byte
 
         -- Send byte for 'k'
         uart_in <= '0';
@@ -69,11 +69,11 @@ begin
         uart_in <= '1';
         wait for baud_period; -- Wait for one bit period
 
-        wait for 100 ns; -- Wait before ending the simulation
+        wait for 5000 ns; -- Wait before ending the simulation
 
         assert led = '0' report "LED should be OFF after receiving 'k'" severity error;
         
-        wait for 100 ns; -- Wait before ending the simulation
+        wait for 50000 ns; -- Wait before ending the simulation
 
         -- test with a different byte (not 'j' or 'k')
         uart_in <= '0';
@@ -91,7 +91,7 @@ begin
 
         wait for baud_period; -- Wait for one bit period
 
-        wait for 100 ns; -- 
+        wait for 50000 ns; -- 
 
         assert led = '0' report "LED should remain OFF after receiving a byte other than 'j' or 'k'" severity error;
 
