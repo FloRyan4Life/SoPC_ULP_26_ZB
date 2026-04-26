@@ -31,6 +31,7 @@ begin
     process
         variable byte_jump : std_logic_vector(7 downto 0) := "01101010"; -- ASCII for 'j'
         variable byte_kill : std_logic_vector(7 downto 0) := "01101011"; -- ASCII for 'k'
+        variable byte_other : std_logic_vector(7 downto 0) := "11111111"; -- A byte that is not 'j' or 'k'
     begin
         wait for 100 ns; -- Wait for the system to stabilize
 
@@ -70,9 +71,32 @@ begin
 
         wait for 100 ns; -- Wait before ending the simulation
 
-        assert led = '1' report "LED should be ON after receiving 'k'" severity error;
+        assert led = '0' report "LED should be OFF after receiving 'k'" severity error;
+        
+        wait for 100 ns; -- Wait before ending the simulation
+
+        -- test with a different byte (not 'j' or 'k')
+        uart_in <= '0';
+
+        wait for baud_period; -- Wait for one bit period (1/baud_rate)
+
+        -- Send data bits (LSB first)
+        for i in 0 to 7 loop
+            uart_in <= byte_other(i); -- Send a byte that is not 'j' or 'k'
+            wait for baud_period; -- Wait for one bit period
+        end loop;
+
+        -- Send stop bit
+        uart_in <= '1';
+
+        wait for baud_period; -- Wait for one bit period
+
+        wait for 100 ns; -- 
+
+        assert led = '0' report "LED should remain OFF after receiving a byte other than 'j' or 'k'" severity error;
 
         std.env.stop(0); -- Stop the simulation
+
     end process;
 
 end architecture;
