@@ -1,14 +1,16 @@
 # Fdb version 4
-["pdflatex"] 1777975088.51106 "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" "A4_tx_Abgabe.pdf" "A4_tx_Abgabe" 1777975090.7127 2
-  "A4_tx_Abgabe.aux" 1777975090 1342 eb024f1880fa0aa80967a0bc9dd12a0b "pdflatex"
-  "A4_tx_Abgabe.tex" 1777975085 7248 2d8371ed561ff7ebdd4baeb89285d0e0 ""
+["pdflatex"] 1777975521.71313 "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" "A4_tx_Abgabe.pdf" "A4_tx_Abgabe" 1777975526.8035 0
+  "A4_tx_Abgabe.aux" 1777975526 1354 7c89027fd1e1d4bb7e3624788ecd68ad "pdflatex"
+  "A4_tx_Abgabe.tex" 1777975507 7248 2d8371ed561ff7ebdd4baeb89285d0e0 ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1776270470 82705 9cc9f144eacd499bc23a611703921467 ""
+  "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecit1000.pk" 1776267987 26728 3ac3a1b2b9e9fe188b447e97848444bb ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0600.pk" 1776267989 14880 a1d46384cc4e9a172c6387f152ef2ce2 ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1095.pk" 1776260203 26228 351c6a6b8e3fffe1b482b3d318439991 ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecsx1440.pk" 1776260204 34676 50f74b4697a451ac1a557392cad28e7b ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000.pk" 1776267977 20028 7366c8ed06b7a1cc77dade3d135d0caa ""
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tctt1000.pk" 1776267988 9492 923de0b99e4754dbc57c73524159e5fa ""
   "C:/Users/jakob/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1776256811 13350272 21c839c5954fdae32f652fc6f8f7a926 ""
+  "C:/Users/jakob/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecit1000.tfm" 993062048 1356 26b6ae61ed8e8f2b58dad9f0a3f033b4 ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0600.tfm" 993062116 3160 116e21835795bb29209ae8bb4682382f ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1000.tfm" 993062122 3148 7e594c8240c71e432203f65ab5f95a51 ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1095.tfm" 993062124 3172 eb6efaa83c6c52473a1c403f376eab0f ""
@@ -103,13 +105,15 @@
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/tex/latex/upquote/upquote.sty" 1335534756 1088 517e01cde97c1c0baf72e69d43aa5a2e ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
+  "_minted/3FF91D1AB1FA402BCA66F9CAE2259527.highlight.minted" 1777975514 11044 1fb434e83fa7e081b29cc84d776d7705 ""
+  "_minted/DFDAE7B139D1EBFE7B2F7E00BE51048F.highlight.minted" 1777975514 10658 51d69449fd3ec506621c92f99f36e58c ""
+  "_minted/_A6CD232FA0E2F631666FC08B25B4658B.index.minted" 1777975514 337 ad47b21dcb4012f8f144f7cc35404b04 ""
   "_minted/default.style.minted" 1777970563 6526 e1fb43a91491f41b33310478eee48cdb ""
-  "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" 1777975085 7248 2d8371ed561ff7ebdd4baeb89285d0e0 ""
+  "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" 1777975507 7248 2d8371ed561ff7ebdd4baeb89285d0e0 ""
   "res/A4_tx_blockdiagram.png" 1777973078 32183 0c69937705e70602135fc08aca84d5d1 ""
   "res/A4_tx_statemaschine.png" 1777973373 54523 53fa5318bf03e2b799a4e0c4c467b69e ""
   (generated)
   "A4_tx_Abgabe.aux"
   "A4_tx_Abgabe.log"
   "A4_tx_Abgabe.pdf"
-  "_A6CD232FA0E2F631666FC08B25B4658B.data.minted"
   (rewritten before read)
