@@ -12,7 +12,7 @@ GHDL_CMD = ghdl
 GHDL_FLAGS  = 
 
 SIMDIR = simulation
-STOP_TIME = 10ms
+STOP_TIME = 12ms
 GHDL_SIM_OPT = --stop-time=$(STOP_TIME) --stop-delta=100000
 
 WAVEFORM_VIEWER = gtkwave

@@ -20,6 +20,8 @@ architecture uart_tx_a of uart_tx is
     constant baud_rate : integer := 9600;
     constant clk_speed : integer := 12000000;
     constant bit_period : integer := clk_speed / baud_rate;
+    signal sending_done : std_logic := '0';
+    signal button_detected :std_logic := '0';
 
 begin
     process(clk) is
@@ -33,10 +35,19 @@ begin
                     state <= IDLE;
                     out_bit <= '1';
                 else 
+
+                    if button_detected = '1' then
+                        state <= SENDING;
+                        button_detected <= '0';
+                    elsif sending_done = '1' then
+                        state <= IDLE;
+                        sending_done <= '0';
+                    end if;
+
                     case state is
                         when IDLE =>
                         if we = '1' then
-                            state <= SENDING;
+                            button_detected <= '1';
                         else
                             out_bit <= '1';
                         end if;
@@ -56,7 +67,8 @@ begin
                                 else
                                     cnt_period := 0;
                                     char_bits_done := '0';
-                                    state <= IDLE;
+                                    start_bit_done := '0';
+                                    sending_done <= '1';
                                 end if;
                             else
                                 if symbol_cnt < 8 then
