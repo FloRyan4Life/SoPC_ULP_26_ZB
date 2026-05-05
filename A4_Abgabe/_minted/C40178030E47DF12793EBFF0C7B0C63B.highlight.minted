@@ -1,0 +1,66 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{addressing\PYGZus{}tb}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{    }\PYG{k}{generic}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{variable\PYGZus{}delay}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{integer}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+m+mi}{500}
+\PYG{+w}{    }\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{port}\PYG{p}{(}
+\PYG{+w}{    }\PYG{n}{clk\PYGZus{}12MHz}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{clk\PYGZus{}50MHz}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{leds}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{);}
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture}\PYG{+w}{ }\PYG{n+nc}{addressing\PYGZus{}tb\PYGZus{}a}\PYG{+w}{ }\PYG{k}{of}\PYG{+w}{ }\PYG{n+nc}{addressing\PYGZus{}tb}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{async\PYGZus{}reset}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}we}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}d}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}addr}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}000\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{std\PYGZus{}logic}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{signal}\PYG{+w}{ }\PYG{n}{counter}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{others}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{begin}
+
+\PYG{+w}{        }\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{k}{not}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{k}{after}\PYG{+w}{ }\PYG{l+m+mi}{41}\PYG{p}{.}\PYG{l+m+mi}{666666}\PYG{+w}{ }\PYG{n}{ns}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{k}{not}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim}\PYG{+w}{ }\PYG{k}{after}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{+w}{ }\PYG{n}{ns}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{k}{process}\PYG{p}{(}\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{is}
+\PYG{+w}{            }\PYG{k}{variable}\PYG{+w}{ }\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{+w}{ }\PYG{k}{downto}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{others}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{then}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{+w}{ }\PYG{k}{then}
+\PYG{+w}{                    }\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n}{cnt}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{n}{counter}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{n}{async\PYGZus{}reset}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{else}
+\PYG{+w}{                    }\PYG{n}{counter}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{cnt}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{n}{async\PYGZus{}reset}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{process}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{addr\PYGZus{}master\PYGZus{}instance}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{addr\PYGZus{}master}
+\PYG{+w}{    }\PYG{k}{generic}\PYG{+w}{ }\PYG{k}{map}\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{variable\PYGZus{}delay}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{variable\PYGZus{}delay}
+\PYG{+w}{    }\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{port}\PYG{+w}{ }\PYG{k}{map}\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{clk}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{rst}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{async\PYGZus{}reset}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{adr}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}addr}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{we}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}we}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{d}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}d}
+\PYG{+w}{    }\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{n}{addr\PYGZus{}slave\PYGZus{}instance}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{entity}\PYG{+w}{ }\PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{addr\PYGZus{}slave}
+\PYG{+w}{    }\PYG{k}{port}\PYG{+w}{ }\PYG{k}{map}\PYG{p}{(}
+\PYG{+w}{        }\PYG{n}{clk}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{we}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}we}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{d}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}d}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{rst}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{async\PYGZus{}reset}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{addr}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{slave\PYGZus{}addr}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{leds}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{leds}
+\PYG{+w}{    }\PYG{p}{);}
+
+
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{architecture}\PYG{+w}{ }\PYG{n+nc}{addressing\PYGZus{}tb\PYGZus{}a}\PYG{p}{;}
+\end{MintedVerbatim}
