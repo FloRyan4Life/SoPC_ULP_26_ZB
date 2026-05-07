@@ -1,14 +1,16 @@
-# Fdb version 3
-["pdflatex"] 1778183103 "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.pdf" "A4_tx_Abgabe" 1778183103
-  "/etc/texmf/web2c/texmf.cnf" 1776257065 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.aux" 1778183103 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" 1778183102 6695 31945ac8a9866bbb14135f2fdcf0d9eb ""
-  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
-  "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1776267211 128079 8307b05160bf39a2fd341a004bf1a4b3 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1776273725 5715161 76ca0973451eb45a0777e6e8886cd3f5 ""
-  "A4_tx_Abgabe.tex" 1778183102 6695 31945ac8a9866bbb14135f2fdcf0d9eb ""
+# Fdb version 4
+["pdflatex"] 1778191081.37478 "c:/Users/flori/OneDrive - TH Köln/Desktop/TH/Module/SOPC/ULP/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" "A4_tx_Abgabe.pdf" "A4_tx_Abgabe" 1778191082.40121 2
+  "A4_tx_Abgabe.aux" 1778191073 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "A4_tx_Abgabe.tex" 1778191078 3327 ce5a2a0de6a987a500251f42a532a9ae ""
+  "c:/Users/flori/OneDrive - TH Köln/Desktop/TH/Module/SOPC/ULP/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex" 1778191078 3327 ce5a2a0de6a987a500251f42a532a9ae ""
+  "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1776356084 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1776355176 768 1321e9409b4137d6fb428ac9dc956269 ""
+  "c:/texlive/2026/texmf-dist/web2c/texmf.cnf" 1776353975 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
+  "c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1776360121 5619402 045890036aad9b52b154ef5568e59d3a ""
+  "c:/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1776360222 3648458 11200906378fc78cef8ceaccf75450a1 ""
+  "c:/texlive/2026/texmf.cnf" 1776360097 713 e69b156964470283e0530f5060668171 ""
   (generated)
-  "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.pdf"
-  "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.log"
+  "A4_tx_Abgabe.aux"
   "A4_tx_Abgabe.log"
+  "A4_tx_Abgabe.pdf"
+  (rewritten before read)

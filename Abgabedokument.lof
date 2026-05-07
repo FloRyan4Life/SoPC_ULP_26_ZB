@@ -1,14 +1,13 @@
-\babel@toc {ngerman}{}
-\contentsline {figure}{\numberline {1}{\ignorespaces Simulation des Address-Slave mit Testbench\relax }}{5}{figure.caption.3}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Blockschaltbild des Address-Master und Slave-Anbindung\relax }}{7}{figure.caption.4}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Zustandsdiagramm des Address-Master\relax }}{10}{figure.caption.5}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Simulation des Address-Master mit Slave\relax }}{12}{figure.caption.6}%
-\contentsline {figure}{\numberline {5}{\ignorespaces UART TX Blockdiagramm\relax }}{14}{figure.caption.7}%
-\contentsline {figure}{\numberline {6}{\ignorespaces UART TX Statemaschine\relax }}{15}{figure.caption.8}%
-\contentsline {figure}{\numberline {7}{\ignorespaces UART TX Simulation 1\relax }}{21}{figure.caption.9}%
-\contentsline {figure}{\numberline {8}{\ignorespaces UART TX Simulation 2\relax }}{22}{figure.caption.10}%
-\contentsline {figure}{\numberline {9}{\ignorespaces UART TX Simulation 3\relax }}{22}{figure.caption.11}%
-\contentsline {figure}{\numberline {10}{\ignorespaces UART RX Blockdiagramm\relax }}{23}{figure.caption.12}%
-\contentsline {figure}{\numberline {11}{\ignorespaces UART RX Simulation: Empfang von \texttt {'j'} (LED an)\relax }}{31}{figure.caption.13}%
-\contentsline {figure}{\numberline {12}{\ignorespaces UART RX Simulation: Empfang von \texttt {'k'} (LED aus)\relax }}{32}{figure.caption.14}%
-\contentsline {figure}{\numberline {13}{\ignorespaces UART RX Simulation: Empfang von ungültigem Zeichen (LED unverändert)\relax }}{33}{figure.caption.15}%
+\babel@toc {ngerman}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Simulation des Address-Slave mit Testbench}}{6}{figure.caption.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Blockschaltbild des Address-Master und Slave-Anbindung}}{7}{figure.caption.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Zustandsdiagramm des Address-Master}}{10}{figure.caption.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Simulation des Address-Master mit Slave}}{12}{figure.caption.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces UART TX Blockdiagramm}}{14}{figure.caption.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces UART TX Statemaschine}}{15}{figure.caption.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces UART TX Simulation 1}}{21}{figure.caption.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces UART TX Simulation 2}}{21}{figure.caption.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces UART TX Simulation 3}}{22}{figure.caption.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces UART RX Blockdiagramm}}{23}{figure.caption.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt {state}, \texttt {uart\_in} und \texttt {led}}}{30}{figure.caption.11}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

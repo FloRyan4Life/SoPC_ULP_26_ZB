@@ -1,9 +1,10 @@
-PWD /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe
-INPUT /etc/texmf/web2c/texmf.cnf
-INPUT /usr/share/texmf/web2c/texmf.cnf
-INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
-INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex
-OUTPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.log
-OUTPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.pdf
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+PWD c:/Users/flori/OneDrive - TH Köln/Desktop/TH/Module/SOPC/ULP/SoPC_ULP_26_ZB/A4_Abgabe
+INPUT c:/texlive/2026/texmf.cnf
+INPUT c:/texlive/2026/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/flori/OneDrive - TH Köln/Desktop/TH/Module/SOPC/ULP/SoPC_ULP_26_ZB/A4_Abgabe/A4_tx_Abgabe.tex
+OUTPUT A4_tx_Abgabe.log
+INPUT c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT c:/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+OUTPUT A4_tx_Abgabe.pdf
+INPUT c:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map

@@ -66,31 +66,14 @@ Die Testbench verifiziert die korrekte Funktionalität des UART RX Moduls mit dr
 Alle Testfälle verwenden die korrekte Baudrate von 9600\,Bd (Bitperiode \textasciitilde104,17\,\textmu s) und den 12\,MHz Systemtakt.
 Die Asserts dienen zur automatisierten Fehlererkennung: Schlägt keines fehl, so ist die Grundfunktionalität des Empfängers verifiziert.
 
-Die folgenden Bilder zeigen die Simulationsergebnisse der drei Testfälle.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\textwidth]{rx_simulation1.png}
-  \caption{UART RX Simulation: Empfang von \texttt{'j'} (LED an)}
-  \label{fig:uart-rx-simulation-1}  
+  \includegraphics[width=\textwidth]{uart_rx_tb_sim.png}
+  \caption{GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt{state}, \texttt{uart\_in} und \texttt{led}}
+  \label{fig:uart-rx-simulation-gtkwave}  
 \end{figure}
 
-Im ersten Testfall ist zu erkennen, wie nach dem Empfang von \texttt{'j'} das Signal \texttt{led\_signal} auf \texttt{'1'} wechselt.
+Die Simulation zeigt den vollständigen Ablauf der drei Testfälle. Von oben nach unten sind die Signale \texttt{state} (Zustandsautomat), \texttt{uart\_in} (serieller Dateneingang) und \texttt{led} (Ausgang) dargestellt.
 
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=\textwidth]{rx_simulation2.png}
-  \caption{UART RX Simulation: Empfang von \texttt{'k'} (LED aus)}
-  \label{fig:uart-rx-simulation-2}  
-\end{figure}
-
-Im zweiten Testfall wird nach dem Empfang von \texttt{'k'} die LED zurückgesetzt.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=\textwidth]{rx_simulation3.png}
-  \caption{UART RX Simulation: Empfang von ungültigem Zeichen (LED unverändert)}
-  \label{fig:uart-rx-simulation-3}  
-\end{figure}
-
-Im dritten Testfall bleibt der LED-Zustand trotz Empfang eines ungültigen Zeichens unverändert.
+Im Verlauf von \texttt{uart\_in} sind die drei Übertragungen erkennbar: Zunächst das Zeichen \texttt{'j'} (Startbit, gefolgt von \texttt{01101010}, Stoppbit), anschließend \texttt{'k'} (\texttt{01101011}) und zuletzt \texttt{0xFF} (\texttt{11111111}). Das \texttt{state}-Signal wechselt jeweils von \texttt{IDLE} zu \texttt{READING} während des Empfangs und zurück zu \texttt{IDLE} nach Abschluss. Das \texttt{led}-Signal zeigt den erwarteten Verlauf: Es geht nach Empfang von \texttt{'j'} auf \texttt{'1'}, fällt nach Empfang von \texttt{'k'} auf \texttt{'0'} und bleibt bei ungültigem Zeichen unverändert.
