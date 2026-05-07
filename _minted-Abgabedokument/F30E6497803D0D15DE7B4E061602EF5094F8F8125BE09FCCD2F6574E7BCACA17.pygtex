@@ -1,0 +1,92 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{entity} \PYG{n+nc}{addr\PYGZus{}master} \PYG{k}{is}
+    \PYG{k}{generic} \PYG{p}{(}
+        \PYG{n}{variable\PYGZus{}delay} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{12500000}
+    \PYG{p}{);}
+    \PYG{k}{port}\PYG{p}{(}
+        \PYG{n}{clk} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{rst} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{adr} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{);}
+        \PYG{n}{we} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic}
+    \PYG{p}{);}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}master\PYGZus{}a} \PYG{k}{of} \PYG{n+nc}{addr\PYGZus{}master} \PYG{k}{is}
+    \PYG{k}{type} \PYG{n}{state\PYGZus{}type} \PYG{k}{is} \PYG{p}{(}\PYG{n}{START}\PYG{p}{,} \PYG{n}{LON}\PYG{p}{,} \PYG{n}{LOFF}\PYG{p}{);}
+    \PYG{k}{signal} \PYG{n}{state} \PYG{o}{:} \PYG{n}{state\PYGZus{}type} \PYG{o}{:=} \PYG{n}{START}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{12500000} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{adr\PYGZus{}reg} \PYG{o}{:} \PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{l+s}{\PYGZdq{}000\PYGZdq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{n}{variable\PYGZus{}delay} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{slave\PYGZus{}we} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{slave\PYGZus{}d} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{delay\PYGZus{}cnt2} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{20000} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{wait\PYGZus{}done1} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{wait\PYGZus{}done2} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+\PYG{k}{begin}
+
+    \PYG{k}{process} \PYG{p}{(}\PYG{n}{clk}\PYG{p}{,} \PYG{n}{rst}\PYG{p}{)}
+        \PYG{k}{begin}
+
+        \PYG{k}{if} \PYG{n}{rst} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+            \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{START}\PYG{p}{;}
+            \PYG{n}{slave\PYGZus{}we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+            \PYG{n}{slave\PYGZus{}d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+            \PYG{n}{wait\PYGZus{}done1} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+            \PYG{n}{wait\PYGZus{}done2} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{elsif} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)} \PYG{k}{then}
+                \PYG{k}{case} \PYG{n}{state} \PYG{k}{is}
+                    \PYG{k}{when} \PYG{n}{START} \PYG{o}{=\PYGZgt{}}
+                        \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{LON}\PYG{p}{;}
+                        \PYG{n}{wait\PYGZus{}done1} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                        \PYG{n}{wait\PYGZus{}done2} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                    \PYG{k}{when} \PYG{n}{LON} \PYG{o}{=\PYGZgt{}}
+                        \PYG{n}{slave\PYGZus{}d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{if} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then}
+                            \PYG{n}{slave\PYGZus{}we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                            \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                        \PYG{k}{elsif} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{=} \PYG{l+m+mi}{10} \PYG{k}{then}
+                            \PYG{n}{slave\PYGZus{}we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                            \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                        \PYG{k}{elsif} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{=} \PYG{n}{variable\PYGZus{}delay} \PYG{k}{then}
+                            \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                            \PYG{n}{wait\PYGZus{}done1} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{else}
+                            \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{n}{delay\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                        \PYG{k}{if} \PYG{n}{wait\PYGZus{}done1} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                            \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{LOFF}\PYG{p}{;}
+                            \PYG{n}{wait\PYGZus{}done1} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                    \PYG{k}{when} \PYG{n}{LOFF} \PYG{o}{=\PYGZgt{}}
+                        \PYG{n}{slave\PYGZus{}d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                        \PYG{n}{slave\PYGZus{}we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+
+                        \PYG{k}{if} \PYG{n}{delay\PYGZus{}cnt2} \PYG{o}{=} \PYG{l+m+mi}{10} \PYG{k}{then}
+                            \PYG{n}{delay\PYGZus{}cnt2} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                            \PYG{n}{slave\PYGZus{}we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                            \PYG{n}{wait\PYGZus{}done2} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{else}
+                            \PYG{n}{delay\PYGZus{}cnt2} \PYG{o}{\PYGZlt{}=} \PYG{n}{delay\PYGZus{}cnt2} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                        \PYG{k}{if} \PYG{n}{wait\PYGZus{}done2} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                            \PYG{k}{if} \PYG{n}{adr\PYGZus{}reg} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}111\PYGZdq{}} \PYG{k}{then}
+                                \PYG{n}{adr\PYGZus{}reg} \PYG{o}{\PYGZlt{}=} \PYG{l+s}{\PYGZdq{}000\PYGZdq{}}\PYG{p}{;}
+                            \PYG{k}{else}
+                                \PYG{n}{adr\PYGZus{}reg} \PYG{o}{\PYGZlt{}=} \PYG{n}{adr\PYGZus{}reg} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                            \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{LON}\PYG{p}{;}
+                            \PYG{n}{wait\PYGZus{}done2} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                \PYG{k}{end} \PYG{k}{case}\PYG{p}{;}
+        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+
+    \PYG{n}{adr} \PYG{o}{\PYGZlt{}=} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{n}{adr\PYGZus{}reg}\PYG{p}{);}
+    \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{n}{slave\PYGZus{}d}\PYG{p}{;}
+    \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{n}{slave\PYGZus{}we}\PYG{p}{;}
+\PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}master\PYGZus{}a}\PYG{p}{;}
+\end{Verbatim}

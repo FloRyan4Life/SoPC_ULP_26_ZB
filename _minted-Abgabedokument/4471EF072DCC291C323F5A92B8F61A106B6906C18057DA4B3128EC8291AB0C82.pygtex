@@ -1,0 +1,104 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{uart\PYGZus{}rx\PYGZus{}tb} \PYG{k}{is}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{uart\PYGZus{}rx\PYGZus{}tb\PYGZus{}arch} \PYG{k}{of} \PYG{n+nc}{uart\PYGZus{}rx\PYGZus{}tb} \PYG{k}{is}
+
+    \PYG{k}{signal} \PYG{n}{clk} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{uart\PYGZus{}in} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{led} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+
+    \PYG{k}{constant} \PYG{n}{baud\PYGZus{}rate} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{9600}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{clk\PYGZus{}freq} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{12000000}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{clk\PYGZus{}periode} \PYG{o}{:} \PYG{k+kt}{time} \PYG{o}{:=} \PYG{l+m+mi}{83}\PYG{p}{.}\PYG{l+m+mi}{33} \PYG{n}{ns}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{baud\PYGZus{}period} \PYG{o}{:} \PYG{k+kt}{time} \PYG{o}{:=} \PYG{l+m+mi}{1} \PYG{n}{sec} \PYG{o}{/} \PYG{n}{baud\PYGZus{}rate}\PYG{p}{;}
+
+\PYG{k}{begin}
+
+    \PYG{n}{uart\PYGZus{}rx\PYGZus{}inst} \PYG{o}{:} \PYG{k}{entity} \PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{uart\PYGZus{}rx}
+        \PYG{k}{port} \PYG{k}{map}\PYG{p}{(}
+            \PYG{n}{clk} \PYG{o}{=\PYGZgt{}} \PYG{n}{clk}\PYG{p}{,}
+            \PYG{n}{uart\PYGZus{}in} \PYG{o}{=\PYGZgt{}} \PYG{n}{uart\PYGZus{}in}\PYG{p}{,}
+            \PYG{n}{led} \PYG{o}{=\PYGZgt{}} \PYG{n}{led}
+        \PYG{p}{);}
+
+
+    \PYG{n}{clk} \PYG{o}{\PYGZlt{}=} \PYG{k}{not} \PYG{n}{clk} \PYG{k}{after} \PYG{n}{clk\PYGZus{}periode}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} 12 MHz clock}
+
+    \PYG{k}{process}
+        \PYG{k}{variable} \PYG{n}{byte\PYGZus{}jump} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{l+s}{\PYGZdq{}01101010\PYGZdq{}}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ASCII for \PYGZsq{}j\PYGZsq{}}
+        \PYG{k}{variable} \PYG{n}{byte\PYGZus{}kill} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{l+s}{\PYGZdq{}01101011\PYGZdq{}}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} ASCII for \PYGZsq{}k\PYGZsq{}}
+        \PYG{k}{variable} \PYG{n}{byte\PYGZus{}other} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{l+s}{\PYGZdq{}11111111\PYGZdq{}}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} A byte that is not \PYGZsq{}j\PYGZsq{} or \PYGZsq{}k\PYGZsq{}}
+    \PYG{k}{begin}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{5000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for the system to stabilize}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send start bit}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period (1/baud\PYGZus{}rate)}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send data bits (LSB first)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{k}{in} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{7} \PYG{k}{loop}
+            \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{n}{byte\PYGZus{}jump}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+            \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+        \PYG{k}{end} \PYG{k}{loop}\PYG{p}{;}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send stop bit}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{5000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait before ending the simulation}
+
+        \PYG{k}{assert} \PYG{n}{led} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}LED should be ON after receiving \PYGZsq{}j\PYGZsq{}\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{500000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait before sending the next byte}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send byte for \PYGZsq{}k\PYGZsq{}}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period (1/baud\PYGZus{}rate)}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send data bits (LSB first)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{k}{in} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{7} \PYG{k}{loop}
+            \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{n}{byte\PYGZus{}kill}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+            \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+        \PYG{k}{end} \PYG{k}{loop}\PYG{p}{;}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send stop bit}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{5000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait before ending the simulation}
+
+        \PYG{k}{assert} \PYG{n}{led} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}LED should be OFF after receiving \PYGZsq{}k\PYGZsq{}\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{50000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait before ending the simulation}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} test with a different byte (not \PYGZsq{}j\PYGZsq{} or \PYGZsq{}k\PYGZsq{})}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period (1/baud\PYGZus{}rate)}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send data bits (LSB first)}
+        \PYG{k}{for} \PYG{n}{i} \PYG{k}{in} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{7} \PYG{k}{loop}
+            \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{n}{byte\PYGZus{}other}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send a byte that is not \PYGZsq{}j\PYGZsq{} or \PYGZsq{}k\PYGZsq{}}
+            \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+        \PYG{k}{end} \PYG{k}{loop}\PYG{p}{;}
+
+        \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Send stop bit}
+        \PYG{n}{uart\PYGZus{}in} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{n}{baud\PYGZus{}period}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Wait for one bit period}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{50000} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+
+        \PYG{k}{assert} \PYG{n}{led} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}LED should remain OFF after receiving a byte other than \PYGZsq{}j\PYGZsq{} or \PYGZsq{}k\PYGZsq{}\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+
+        \PYG{k}{assert} \PYG{n}{false} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}Simulation finished successfully\PYGZdq{}} \PYG{k}{severity} \PYG{n}{failure}\PYG{p}{;}
+
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+
+\PYG{k}{end} \PYG{k}{architecture}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,98 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{uart\PYGZus{}tx} \PYG{k}{is}
+        \PYG{k}{port}\PYG{p}{(}
+            \PYG{n}{clk} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+            \PYG{n}{byte\PYGZus{}in} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{);}
+            \PYG{n}{we} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+            \PYG{n}{out\PYGZus{}bit} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+            \PYG{n}{rst} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}
+        \PYG{p}{);}
+    \PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+
+\PYG{k}{architecture} \PYG{n+nc}{uart\PYGZus{}tx\PYGZus{}a} \PYG{k}{of} \PYG{n+nc}{uart\PYGZus{}tx} \PYG{k}{is}
+    \PYG{k}{type} \PYG{n}{state\PYGZus{}type} \PYG{k}{is} \PYG{p}{(}\PYG{n}{IDLE}\PYG{p}{,} \PYG{n}{SENDING}\PYG{p}{);}
+    \PYG{k}{signal} \PYG{n}{state} \PYG{o}{:} \PYG{n}{state\PYGZus{}type} \PYG{o}{:=} \PYG{n}{IDLE}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{symbol\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{baud\PYGZus{}rate} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{9600}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{clk\PYGZus{}speed} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{12000000}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{bit\PYGZus{}period} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{n}{clk\PYGZus{}speed} \PYG{o}{/} \PYG{n}{baud\PYGZus{}rate}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{sending\PYGZus{}done} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{button\PYGZus{}detected} \PYG{o}{:}\PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+
+\PYG{k}{begin}
+    \PYG{k}{process}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)} \PYG{k}{is}
+    \PYG{k}{variable} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{variable} \PYG{n}{start\PYGZus{}bit\PYGZus{}done} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{variable} \PYG{n}{char\PYGZus{}bits\PYGZus{}done} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{begin}
+            \PYG{k}{if} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)} \PYG{k}{then}
+
+                \PYG{k}{if} \PYG{n}{rst} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                    \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{IDLE}\PYG{p}{;}
+                    \PYG{n}{out\PYGZus{}bit} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                \PYG{k}{else} 
+
+                    \PYG{k}{if} \PYG{n}{button\PYGZus{}detected} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                        \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{SENDING}\PYG{p}{;}
+                        \PYG{n}{button\PYGZus{}detected} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                    \PYG{k}{elsif} \PYG{n}{sending\PYGZus{}done} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                        \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{IDLE}\PYG{p}{;}
+                        \PYG{n}{sending\PYGZus{}done} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                    \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                    \PYG{k}{case} \PYG{n}{state} \PYG{k}{is}
+                        \PYG{k}{when} \PYG{n}{IDLE} \PYG{o}{=\PYGZgt{}}
+                        \PYG{k}{if} \PYG{n}{we} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                            \PYG{n}{button\PYGZus{}detected} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{else}
+                            \PYG{n}{out\PYGZus{}bit} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                        \PYG{k}{when} \PYG{n}{SENDING} \PYG{o}{=\PYGZgt{}}
+                            \PYG{k}{if} \PYG{n}{start\PYGZus{}bit\PYGZus{}done} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}} \PYG{k}{then}
+                                \PYG{n}{out\PYGZus{}bit} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                                \PYG{k}{if} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{\PYGZlt{}} \PYG{n}{bit\PYGZus{}period} \PYG{k}{then}
+                                    \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                                \PYG{k}{else}
+                                    \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                                    \PYG{n}{start\PYGZus{}bit\PYGZus{}done} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                            \PYG{k}{elsif} \PYG{n}{char\PYGZus{}bits\PYGZus{}done} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                                \PYG{n}{out\PYGZus{}bit} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                                \PYG{k}{if} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{\PYGZlt{}} \PYG{n}{bit\PYGZus{}period} \PYG{k}{then}
+                                    \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                                \PYG{k}{else}
+                                    \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                                    \PYG{n}{char\PYGZus{}bits\PYGZus{}done} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                                    \PYG{n}{start\PYGZus{}bit\PYGZus{}done} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                                    \PYG{n}{sending\PYGZus{}done} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                            \PYG{k}{else}
+                                \PYG{k}{if} \PYG{n}{symbol\PYGZus{}cnt} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{8} \PYG{k}{then}
+
+                                    \PYG{n}{out\PYGZus{}bit} \PYG{o}{\PYGZlt{}=} \PYG{n}{byte\PYGZus{}in}\PYG{p}{(}\PYG{n}{symbol\PYGZus{}cnt}\PYG{p}{);}
+                                    \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+                                    \PYG{k}{if} \PYG{n}{cnt\PYGZus{}period} \PYG{o}{\PYGZgt{}} \PYG{p}{(}\PYG{n}{bit\PYGZus{}period} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1} \PYG{p}{)} \PYG{k}{then}
+                                        \PYG{n}{symbol\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{n}{symbol\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                                        \PYG{n}{cnt\PYGZus{}period} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                                    \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                                \PYG{k}{else}
+                                    \PYG{n}{symbol\PYGZus{}cnt} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                                    \PYG{n}{char\PYGZus{}bits\PYGZus{}done} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                                
+                    \PYG{k}{end} \PYG{k}{case}\PYG{p}{;}
+                
+                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+\PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{uart\PYGZus{}tx\PYGZus{}a}\PYG{p}{;}
+\end{Verbatim}

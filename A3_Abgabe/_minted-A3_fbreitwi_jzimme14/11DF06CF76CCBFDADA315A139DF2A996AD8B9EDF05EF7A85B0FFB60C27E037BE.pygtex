@@ -1,0 +1,66 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{entity} \PYG{n+nc}{addressing\PYGZus{}tb} \PYG{k}{is}
+    \PYG{k}{generic} \PYG{p}{(}
+        \PYG{n}{variable\PYGZus{}delay} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{500}
+    \PYG{p}{);}
+
+    \PYG{k}{port}\PYG{p}{(}
+    \PYG{n}{clk\PYGZus{}12MHz} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+    \PYG{n}{clk\PYGZus{}50MHz} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+    \PYG{n}{leds} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{p}{);}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{addressing\PYGZus{}tb\PYGZus{}a} \PYG{k}{of} \PYG{n+nc}{addressing\PYGZus{}tb} \PYG{k}{is}
+    \PYG{k}{signal} \PYG{n}{async\PYGZus{}reset} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{slave\PYGZus{}we} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{slave\PYGZus{}d} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{slave\PYGZus{}addr} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{l+s}{\PYGZdq{}000\PYGZdq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{counter} \PYG{o}{:} \PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+    \PYG{k}{begin}
+
+        \PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim} \PYG{o}{\PYGZlt{}=} \PYG{k}{not} \PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim} \PYG{k}{after} \PYG{l+m+mi}{41}\PYG{p}{.}\PYG{l+m+mi}{666666} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim} \PYG{o}{\PYGZlt{}=} \PYG{k}{not} \PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim} \PYG{k}{after} \PYG{l+m+mi}{10} \PYG{n}{ns}\PYG{p}{;}
+
+        \PYG{k}{process}\PYG{p}{(}\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{)} \PYG{k}{is}
+            \PYG{k}{variable} \PYG{n}{cnt} \PYG{o}{:} \PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+        \PYG{k}{begin}
+            \PYG{k}{if} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{)} \PYG{k}{then}
+                \PYG{k}{if} \PYG{n}{cnt} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{255} \PYG{k}{then}
+                    \PYG{n}{cnt} \PYG{o}{:=} \PYG{n}{cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                    \PYG{n}{counter} \PYG{o}{\PYGZlt{}=} \PYG{n}{cnt}\PYG{p}{;}
+                    \PYG{n}{async\PYGZus{}reset} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                \PYG{k}{else}
+                    \PYG{n}{counter} \PYG{o}{\PYGZlt{}=} \PYG{n}{cnt}\PYG{p}{;}
+                    \PYG{n}{async\PYGZus{}reset} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+        \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+
+    \PYG{n}{addr\PYGZus{}master\PYGZus{}instance} \PYG{o}{:} \PYG{k}{entity} \PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{addr\PYGZus{}master}
+    \PYG{k}{generic} \PYG{k}{map}\PYG{p}{(}
+        \PYG{n}{variable\PYGZus{}delay} \PYG{o}{=\PYGZgt{}} \PYG{n}{variable\PYGZus{}delay}
+    \PYG{p}{)}
+    \PYG{k}{port} \PYG{k}{map}\PYG{p}{(}
+        \PYG{n}{clk} \PYG{o}{=\PYGZgt{}} \PYG{n}{clk\PYGZus{}50MHz\PYGZus{}sim}\PYG{p}{,}
+        \PYG{n}{rst} \PYG{o}{=\PYGZgt{}} \PYG{n}{async\PYGZus{}reset}\PYG{p}{,}
+        \PYG{n}{adr} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}addr}\PYG{p}{,}
+        \PYG{n}{we} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}we}\PYG{p}{,}
+        \PYG{n}{d} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}d}
+    \PYG{p}{);}
+
+    \PYG{n}{addr\PYGZus{}slave\PYGZus{}instance} \PYG{o}{:} \PYG{k}{entity} \PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{addr\PYGZus{}slave}
+    \PYG{k}{port} \PYG{k}{map}\PYG{p}{(}
+        \PYG{n}{clk} \PYG{o}{=\PYGZgt{}} \PYG{n}{clk\PYGZus{}12MHz\PYGZus{}sim}\PYG{p}{,}
+        \PYG{n}{we} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}we}\PYG{p}{,}
+        \PYG{n}{d} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}d}\PYG{p}{,}
+        \PYG{n}{rst} \PYG{o}{=\PYGZgt{}} \PYG{n}{async\PYGZus{}reset}\PYG{p}{,}
+        \PYG{n}{addr} \PYG{o}{=\PYGZgt{}} \PYG{n}{slave\PYGZus{}addr}\PYG{p}{,}
+        \PYG{n}{leds} \PYG{o}{=\PYGZgt{}} \PYG{n}{leds}
+    \PYG{p}{);}
+
+
+    \PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{addressing\PYGZus{}tb\PYGZus{}a}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,76 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}tb} \PYG{k}{is}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}tb\PYGZus{}a} \PYG{k}{of} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}tb} \PYG{k}{is}
+    \PYG{k}{signal} \PYG{n}{clk} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{we} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{d} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{reset} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{addr} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+    \PYG{k}{signal} \PYG{n}{leds} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+\PYG{k}{begin}
+    \PYG{n}{clk} \PYG{o}{\PYGZlt{}=} \PYG{k}{not} \PYG{n}{clk} \PYG{k}{after} \PYG{l+m+mi}{10} \PYG{n}{ns}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} 50 MHz}
+
+    \PYG{n}{addr\PYGZus{}slave\PYGZus{}instance} \PYG{o}{:} \PYG{k}{entity} \PYG{n+nc}{work}\PYG{p}{.}\PYG{n}{addr\PYGZus{}slave}
+        \PYG{k}{port} \PYG{k}{map}\PYG{p}{(}
+            \PYG{n}{clk} \PYG{o}{=\PYGZgt{}} \PYG{n}{clk}\PYG{p}{,}
+            \PYG{n}{we} \PYG{o}{=\PYGZgt{}} \PYG{n}{we}\PYG{p}{,}
+            \PYG{n}{d} \PYG{o}{=\PYGZgt{}} \PYG{n}{d}\PYG{p}{,}
+            \PYG{n}{reset} \PYG{o}{=\PYGZgt{}} \PYG{n}{reset}\PYG{p}{,}
+            \PYG{n}{addr} \PYG{o}{=\PYGZgt{}} \PYG{n}{addr}\PYG{p}{,}
+            \PYG{n}{leds} \PYG{o}{=\PYGZgt{}} \PYG{n}{leds}
+        \PYG{p}{);}
+
+    \PYG{k}{process} \PYG{k}{is}
+    \PYG{k}{begin}
+        \PYG{n}{reset} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{30} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{reset} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{n}{addr} \PYG{o}{\PYGZlt{}=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{10} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{80} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{k}{assert} \PYG{p}{(}\PYG{n}{leds} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}00000001\PYGZdq{}}\PYG{p}{)} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R1: LEDS falsch\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        \PYG{k}{assert} \PYG{p}{(}\PYG{n}{addr} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}000\PYGZdq{}}\PYG{p}{)} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R1: b0 falsch\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R1: OK\PYGZdq{}} \PYG{k}{severity} \PYG{n}{note}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{1} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{200} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{addr} \PYG{o}{\PYGZlt{}=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{);}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{10} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{80} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{k}{assert} \PYG{p}{(}\PYG{n}{leds} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}10000001\PYGZdq{}}\PYG{p}{)} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R2: LEDS falsch\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        \PYG{k}{assert} \PYG{p}{(}\PYG{n}{addr} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}111\PYGZdq{}}\PYG{p}{)} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R2: addr falsch\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R2: OK\PYGZdq{}} \PYG{k}{severity} \PYG{n}{note}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{1} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{200} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{addr} \PYG{o}{\PYGZlt{}=} \PYG{l+s}{\PYGZdq{}010\PYGZdq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{10} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{80} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{k}{assert} \PYG{p}{(}\PYG{n}{leds} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}10000101\PYGZdq{}}\PYG{p}{)} \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R3: LEDS falsch\PYGZdq{}} \PYG{k}{severity} \PYG{n}{error}\PYG{p}{;}
+        \PYG{n}{report} \PYG{l+s}{\PYGZdq{}R3: OK\PYGZdq{}} \PYG{k}{severity} \PYG{n}{note}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+        \PYG{k}{wait} \PYG{k}{for} \PYG{l+m+mi}{200} \PYG{n}{ns}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+\PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}tb\PYGZus{}a}\PYG{p}{;}
+\end{Verbatim}

@@ -1,29 +1,11 @@
-\documentclass[11pt,a4paper]{scrartcl}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{caption}
-\usepackage{float}
-\usepackage{minted}
-\usepackage{parskip}
-%\geometry{top=25mm,bottom=25mm,left=25mm,right=25mm}
+\section{Addressierungsbeispiel}
 
-\title{Aufgabe 3: Addressierungsbeispiel}
-\author{Florian Breitwieser \\ \& Jakob Zimmermann}
-\date{\today}
-
-\begin{document}
-\maketitle
-
-\section{Einleitung}
+\subsection{Einleitung}
 Dieses Dokument beschreibt die Umsetzung des Adressierungsbeispiels als Teil der Aufgabe 3. Es fasst die Architektur des Address-Slave und des Address-Master zusammen, dokumentiert die Simulation und beschreibt Metastabilitätseffekte.
 
-\newpage
-\section{Aufgabenstellung}
+\subsection{Aufgabenstellung}
 Ziel ist die Implementierung eines adressierbaren LED-Slave-Moduls für das iceduino-Board und eines synthetisierbaren Masters, der die LEDs in einem Lauflicht ansteuert. Die Abgabenanforderungen umfassen:
+
 \begin{itemize}
   \item Slave Code und erläuternder Text zur Funktion
   \item Slave Testbench Code und erläuternder Text zur Funktion, inklusive asserts und Hinweis auf nicht-synthetisierbaren Testbench-Code
@@ -36,7 +18,7 @@ Ziel ist die Implementierung eines adressierbaren LED-Slave-Moduls für das iced
 \end{itemize}
 
 \newpage
-\section{Addr\_Slave Code}
+\subsection{Addr\_Slave Code}
 Der folgende Code zeigt das Low-Level-Verhalten des Slave-Moduls. Es verarbeitet den Reset, liest die Adresse und schreibt bei gesetztem \texttt{we} das Datensignal \texttt{d} in das entsprechende LED-Register.
 
 \begin{minted}[linenos,breaklines,fontsize=\small]{vhdl}
@@ -73,7 +55,7 @@ end architecture addr_slave_a;
 Bei steigender Flanke des Taktsignals \texttt{clk} und aktivem Reset (\texttt{rst = '1'}) werden alle LEDs gelöscht. Wenn \texttt{we} gesetzt ist, wird das Datenbit \texttt{d} an der Position geschrieben, die durch die Adresse \texttt{addr} bestimmt wird. Die LEDs werden als 8-Bit-Vektor ausgegeben, wobei jedes Bit eine LED repräsentiert.
 
 \newpage
-\section{Addr\_Slave Testbench}
+\subsection{Addr\_Slave Testbench}
 Die Testbench prüft die korrekte Adressierung des Slave-Moduls für mehrere Adressen und enthält Assert-Anweisungen für die LED-Ausgabe.
 
 \begin{minted}[linenos,breaklines,fontsize=\small]{vhdl}
@@ -159,28 +141,26 @@ Alle 'wait' und 'after' Anweisungen sind nicht-synthetisierbar und dienen aussch
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\textwidth]{resources/sim_addrslave.png}
+  \includegraphics[width=\textwidth]{sim_addrslave.png}
   \caption{Simulation des Address-Slave mit Testbench}
-\label{fig:slave-sim}  
+  \label{fig:slave-sim}  
 \end{figure}
 
 Die Simulation zeigt die korrekte Adressierung und LED-Ausgabe für die getesteten Adressen. Bei Adresse '000' leuchtet die erste LED, bei '111' die letzte LED, und bei '010' die dritte LED. Alle Asserts bestätigen die erwarteten Ergebnisse.
 
 \newpage
-\section{Master Architektur und Code}
+\subsection{Master Architektur und Code}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{resources/system_overview.jpeg}
+  \includegraphics[width=\textwidth]{system_overview.jpeg}
   \caption{Blockschaltbild des Address-Master und Slave-Anbindung}
-\label{fig:master-block}  
+  \label{fig:master-block}  
 \end{figure}
 
 Das Bild zeigt die Zusammenschaltung des Address-Master mit dem Address-Slave. Der Master generiert die Signale \texttt{adr}, \texttt{we} und \texttt{d}, die direkt an den Slave weitergegeben werden. Ein Power-On-Reset-Generator sorgt für einen definierten Reset-Zustand nach FPGA-Neustart.
 
 Der \texttt{addr\_master} erzeugt die Steuerungsimpulse für den Slave. Er durchläuft die Adressen \texttt{000} bis \texttt{111} und schaltet jeweils eine LED ein, wartet dann eine definierte Verzögerungszeit, schaltet ab und geht zur nächsten Adresse.
-
-
 
 \begin{minted}[linenos,breaklines,fontsize=\small]{vhdl}
 entity addr_master is
@@ -286,13 +266,13 @@ Das folgende Zustandsdiagramm zeigt die Übergänge zwischen den Zuständen.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[scale=0.1, angle=90]{resources/state_maschine.jpeg}
+  \includegraphics[scale=0.1, angle=90]{state_maschine.jpeg}
   \caption{Zustandsdiagramm des Address-Master}
-\label{fig:master-fsm}
+  \label{fig:master-fsm}   
 \end{figure}
 
 \newpage
-\section{Testbench}
+\subsection{Testbench}
 Die Testbench \texttt{addressing\_tb.vhd} implementiert die Addressing-Simulation mit verkürztem Delay.
 
 \begin{minted}[linenos,breaklines,fontsize=\small]{vhdl}
@@ -364,35 +344,33 @@ architecture addressing_tb_a of addressing_tb is
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\textwidth, angle=0]{resources/sim1.png}
+  \includegraphics[width=\textwidth, angle=0]{sim1.png}
   \caption{Simulation des Address-Master mit Slave}
-\label{fig:master-fsm}
+  \label{fig:master-sim}
 \end{figure}
 Die Simulation zeigt die korrekte Funktionalität des Masters und Slaves. Der Master durchläuft die Adressen von '000' bis '111', schaltet die entsprechenden LEDs ein und aus.
 
 \newpage
-\section{Metastabilität}
+\subsection{Metastabilität}
 Flip-Flops können metastabil werden, wenn asynchrone Eingangssignale sehr nahe an der aktiven Flanke des Taktes wechseln. In diesem Zustand bleibt das Flip-Flop für eine unbestimmte Zeit in einem undefinierten Spannungsbereich, was zu Glitches, Fehlern oder falschen Datenweiterleitungen führen kann.
 
-\subsection{Ursachen}
+\subsubsection{Ursachen}
 \begin{itemize}
   \item asynchrone Signaländerungen nahe am Taktflankenzeitpunkt
   \item nicht eingehaltene Setup- und Hold-Zeiten
   \item fehlende Synchronisation zwischen verschiedenen Taktdomänen
 \end{itemize}
 
-\subsection{Auswirkungen}
+\subsubsection{Auswirkungen}
 \begin{itemize}
   \item fehlerhafte Signalausgabe
   \item unvorhersehbares Verhalten von State Machines
   \item sporadische Systemausfälle
 \end{itemize}
 
-\subsection{Vermeidung}
+\subsubsection{Vermeidung}
 \begin{itemize}
   \item Synchronisationsstufen (z. B. zwei Flip-Flops hintereinander)
   \item ausreichende Setup- und Hold-Zeiten
   \item Verwendung von Taktdomänen-Grenzen und Cross-Clock-Handshake
 \end{itemize}
-
-\end{document}
