@@ -1,6 +1,6 @@
 # vhdl files
-TESTBENCH= uart_tx_tb
-FILES = ../rtl/uart_tx.vhd
+TESTBENCH= uart_rx_tb
+FILES = ../rtl/uart_rx.vhd
 VHDLEX = .vhd
 
 # testbench
@@ -9,7 +9,7 @@ TESTBENCHFILE = ./${TESTBENCH}$(VHDLEX)
 
 #GHDL CONFIG
 GHDL_CMD = ghdl
-GHDL_FLAGS  = 
+GHDL_FLAGS = --std=08
 
 SIMDIR = simulation
 STOP_TIME = 12ms
@@ -30,7 +30,7 @@ compile:
 	@$(GHDL_CMD) -m $(GHDL_FLAGS) --workdir=$(SIMDIR) --work=work $(TESTBENCH)
 
 run:
-	@$(GHDL_CMD) -r --workdir=$(SIMDIR) --work=work $(TESTBENCH) --wave=$(SIMDIR)/$(TESTBENCH).ghw  $(GHDL_SIM_OPT)
+	@$(GHDL_CMD) -r $(GHDL_FLAGS) --workdir=$(SIMDIR) --work=work $(TESTBENCH) --wave=$(SIMDIR)/$(TESTBENCH).ghw $(GHDL_SIM_OPT)
 
 view:
 	$(WAVEFORM_VIEWER) --dump=$(SIMDIR)/$(TESTBENCH).ghw --save ./$(TESTBENCH).gtkw 

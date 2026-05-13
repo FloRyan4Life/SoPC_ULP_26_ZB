@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{addr\PYGZus{}slave} \PYG{k}{is}
+    \PYG{k}{port}\PYG{p}{(}
+        \PYG{n}{clk}\PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{we} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{d} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{rst} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+        \PYG{n}{addr} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{);}
+        \PYG{n}{leds} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{p}{);}
+\PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}a} \PYG{k}{of} \PYG{n+nc}{addr\PYGZus{}slave} \PYG{k}{is}
+\PYG{k}{begin}
+    \PYG{k}{process}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{,} \PYG{n}{rst}\PYG{p}{)} \PYG{k}{is}
+    \PYG{k}{begin}
+        \PYG{k}{if} \PYG{n}{rst} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+            \PYG{n}{leds} \PYG{o}{\PYGZlt{}=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+        \PYG{k}{elsif} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)} \PYG{k}{then}
+            \PYG{k}{if} \PYG{n}{we} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}} \PYG{k}{then}
+                \PYG{n}{leds}\PYG{p}{(}\PYG{n}{to\PYGZus{}integer}\PYG{p}{(}\PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{n}{addr}\PYG{p}{)))} \PYG{o}{\PYGZlt{}=} \PYG{n}{d}\PYG{p}{;}
+            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+\PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{addr\PYGZus{}slave\PYGZus{}a}\PYG{p}{;}
+\end{Verbatim}

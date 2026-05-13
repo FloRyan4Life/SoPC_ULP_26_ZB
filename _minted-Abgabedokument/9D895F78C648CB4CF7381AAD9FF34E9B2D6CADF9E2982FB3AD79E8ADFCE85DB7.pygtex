@@ -1,0 +1,91 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{library} \PYG{n+nn}{ieee}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.std\PYGZus{}logic\PYGZus{}1164.}\PYG{k}{all}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{IEEE.numeric\PYGZus{}std.}\PYG{k}{all}\PYG{p}{;}
+
+\PYG{k}{entity} \PYG{n+nc}{uart\PYGZus{}rx} \PYG{k}{is}
+        \PYG{k}{port}\PYG{p}{(}
+            \PYG{n}{clk} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+            \PYG{n}{uart\PYGZus{}in} \PYG{o}{:} \PYG{k}{in} \PYG{k+kt}{std\PYGZus{}logic}\PYG{p}{;}
+            \PYG{n}{led} \PYG{o}{:} \PYG{k}{out} \PYG{k+kt}{std\PYGZus{}logic}
+        \PYG{p}{);}
+    \PYG{k}{end} \PYG{k}{entity}\PYG{p}{;}
+
+\PYG{k}{architecture} \PYG{n+nc}{uart\PYGZus{}rx\PYGZus{}arch} \PYG{k}{of} \PYG{n+nc}{uart\PYGZus{}rx} \PYG{k}{is}
+
+    \PYG{k}{signal} \PYG{n}{cache} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{7} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+    \PYG{k}{signal} \PYG{n}{led\PYGZus{}signal} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic} \PYG{o}{:=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+    \PYG{k}{signal} \PYG{n}{uart\PYGZus{}sync} \PYG{o}{:} \PYG{k+kt}{std\PYGZus{}logic\PYGZus{}vector}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{:=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{);}
+    \PYG{k}{constant} \PYG{n}{baud\PYGZus{}rate} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{9600}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{clk\PYGZus{}freq} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{l+m+mi}{12000000}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{bit\PYGZus{}period} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{n}{clk\PYGZus{}freq} \PYG{o}{/} \PYG{n}{baud\PYGZus{}rate} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{constant} \PYG{n}{post\PYGZus{}cnt\PYGZus{}max} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{o}{:=} \PYG{p}{(}\PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n}{bit\PYGZus{}period}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{p}{;}
+    \PYG{k}{type} \PYG{n}{state\PYGZus{}type} \PYG{k}{is} \PYG{p}{(}\PYG{n}{IDLE}\PYG{p}{,} \PYG{n}{READING}\PYG{p}{);}
+    \PYG{k}{signal} \PYG{n}{state} \PYG{o}{:} \PYG{n}{state\PYGZus{}type} \PYG{o}{:=} \PYG{n}{IDLE}\PYG{p}{;}
+
+\PYG{k}{begin}
+
+    \PYG{k}{process}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)}
+            \PYG{k}{variable} \PYG{n}{pre\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{n}{bit\PYGZus{}period} \PYG{o}{/} \PYG{l+m+mi}{2} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+            \PYG{k}{variable} \PYG{n}{post\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{p}{(}\PYG{l+m+mi}{3} \PYG{o}{*} \PYG{n}{bit\PYGZus{}period}\PYG{p}{)} \PYG{o}{/} \PYG{l+m+mi}{2} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+            \PYG{k}{variable} \PYG{n}{bit\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{l+m+mi}{8} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+            \PYG{k}{variable} \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{:} \PYG{k+kt}{integer} \PYG{k}{range} \PYG{l+m+mi}{0} \PYG{k}{to} \PYG{n}{bit\PYGZus{}period} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{k}{begin}
+        \PYG{k}{if} \PYG{n}{rising\PYGZus{}edge}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{)} \PYG{k}{then}
+
+            \PYG{n}{uart\PYGZus{}sync} \PYG{o}{\PYGZlt{}=} \PYG{n}{uart\PYGZus{}sync}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{n}{uart\PYGZus{}in}\PYG{p}{;} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Shift in the new bit for synchronization}
+
+            \PYG{k}{if} \PYG{n}{state} \PYG{o}{=} \PYG{n}{IDLE} \PYG{k}{then}
+
+                \PYG{k}{if} \PYG{n}{uart\PYGZus{}sync}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{k}{downto} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}10\PYGZdq{}} \PYG{k}{then} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Detect the falling edge for start bit}
+                    \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{READING}\PYG{p}{;}
+                    \PYG{n}{pre\PYGZus{}cnt} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                    \PYG{n}{post\PYGZus{}cnt} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                    \PYG{n}{bit\PYGZus{}cnt} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                    \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+                    \PYG{n}{cache} \PYG{o}{\PYGZlt{}=} \PYG{p}{(}\PYG{k}{others} \PYG{o}{=\PYGZgt{}} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{);}
+                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+            \PYG{k}{elsif} \PYG{n}{state} \PYG{o}{=} \PYG{n}{READING} \PYG{k}{then}
+
+                \PYG{k}{if} \PYG{n}{pre\PYGZus{}cnt} \PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{bit\PYGZus{}period} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{k}{then}
+
+                    \PYG{n}{pre\PYGZus{}cnt} \PYG{o}{:=} \PYG{n}{pre\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+                \PYG{k}{elsif} \PYG{n}{bit\PYGZus{}cnt} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{8} \PYG{k}{then}
+                    
+                    \PYG{k}{if} \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{\PYGZlt{}} \PYG{n}{bit\PYGZus{}period} \PYG{k}{then}
+
+                        \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{:=} \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+                    \PYG{k}{else}
+
+                        \PYG{n}{cache}\PYG{p}{(}\PYG{n}{bit\PYGZus{}cnt}\PYG{p}{)} \PYG{o}{\PYGZlt{}=} \PYG{n}{uart\PYGZus{}sync}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Sample the bit}
+                        \PYG{n}{bit\PYGZus{}cnt} \PYG{o}{:=} \PYG{n}{bit\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+                        \PYG{n}{clk\PYGZus{}cnt} \PYG{o}{:=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+                    \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+
+                \PYG{k}{elsif} \PYG{n}{post\PYGZus{}cnt} \PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{post\PYGZus{}cnt\PYGZus{}max}\PYG{p}{)} \PYG{k}{then}
+                
+                    \PYG{n}{post\PYGZus{}cnt} \PYG{o}{:=} \PYG{n}{post\PYGZus{}cnt} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{;}
+
+                \PYG{k}{else}
+
+                    \PYG{k}{if} \PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{n}{cache}\PYG{p}{)} \PYG{o}{=} \PYG{l+m+mi}{106} \PYG{k}{then}  \PYG{c+c1}{\PYGZhy{}\PYGZhy{}checks if the received byte is 106 (ASCII for \PYGZsq{}j\PYGZsq{})}
+                        \PYG{n}{led\PYGZus{}signal} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{;}
+                    \PYG{k}{elsif} \PYG{k+kt}{unsigned}\PYG{p}{(}\PYG{n}{cache}\PYG{p}{)} \PYG{o}{=} \PYG{l+m+mi}{107} \PYG{k}{then} \PYG{c+c1}{\PYGZhy{}\PYGZhy{}checks if the received byte is 107 (ASCII for \PYGZsq{}k\PYGZsq{})}
+                        \PYG{n}{led\PYGZus{}signal} \PYG{o}{\PYGZlt{}=} \PYG{l+s+sc}{\PYGZsq{}0\PYGZsq{}}\PYG{p}{;}
+                    \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+                    \PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{n}{IDLE}\PYG{p}{;}
+                    
+                \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+            \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+        \PYG{k}{end} \PYG{k}{if}\PYG{p}{;}
+    \PYG{k}{end} \PYG{k}{process}\PYG{p}{;}
+    
+    \PYG{n}{led} \PYG{o}{\PYGZlt{}=} \PYG{n}{led\PYGZus{}signal}\PYG{p}{;}
+
+\PYG{k}{end} \PYG{k}{architecture} \PYG{n+nc}{uart\PYGZus{}rx\PYGZus{}arch}\PYG{p}{;}      
+\end{Verbatim}

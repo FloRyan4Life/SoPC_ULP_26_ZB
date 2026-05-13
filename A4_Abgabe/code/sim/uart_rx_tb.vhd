@@ -1,6 +1,7 @@
 library ieee;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use std.env.all;
 
 entity uart_rx_tb is
 end entity;
@@ -67,13 +68,14 @@ begin
 
         -- Send stop bit
         uart_in <= '1';
+
         wait for baud_period; -- Wait for one bit period
 
         wait for 5000 ns; -- Wait before ending the simulation
 
         assert led = '0' report "LED should be OFF after receiving 'k'" severity error;
         
-        wait for 50000 ns; -- Wait before ending the simulation
+        wait for 500000 ns; -- Wait before sending the next byte
 
         -- test with a different byte (not 'j' or 'k')
         uart_in <= '0';
@@ -95,8 +97,8 @@ begin
 
         assert led = '0' report "LED should remain OFF after receiving a byte other than 'j' or 'k'" severity error;
 
-        std.env.stop(0); -- Stop the simulation
-
+        report "Simulation finished successfully";
+        stop(0);  -- Clean exit, no error code
     end process;
 
 end architecture;

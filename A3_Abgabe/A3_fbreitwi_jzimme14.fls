@@ -1,0 +1,12 @@
+PWD /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A3_Abgabe
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A3_Abgabe/A3_fbreitwi_jzimme14.tex
+OUTPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A3_Abgabe/A3_fbreitwi_jzimme14.log
+OUTPUT /home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A3_Abgabe/A3_fbreitwi_jzimme14.pdf
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm

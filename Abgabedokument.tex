@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{scrartcl}
+\documentclass[parskip=half,11pt,a4paper]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
@@ -8,14 +8,32 @@
 \usepackage{caption}
 \usepackage{float}
 \usepackage{minted}
-\usepackage{parskip}
+
+% Zentrale Grafikpfade: LaTeX sucht hier automatisch nach Bildern
+\graphicspath{{A3_Abgabe/resources/}{A4_Abgabe/res/}}
+
+\title{SoPC Abgabedokument}
+\author{Florian Breitwieser \& Jakob Zimmermann}
+\date{\today}
 
 \begin{document}
 
-% Aufgabe 3
+\maketitle
+
+\tableofcontents          % Inhaltsverzeichnis
+\listoffigures            % Abbildungsverzeichnis (optional)
+\newpage
+
+% Aufgabe 3 einbinden
 \input{A3_Abgabe/A3_fbreitwi_jzimme14}
 
-% Aufgabe 4
+% Aufgabe 4 TX einbinden
 \input{A4_Abgabe/A4_tx_Abgabe}
+
+% Aufgabe 4 RX einbinden
+\input{A4_Abgabe/A4_rx_Abgabe}
+
+% Aufgabe 5 einbinden
+\input{A5_Abgabe/A5_RiscV_Abgabe}
 
 \end{document}

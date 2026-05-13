@@ -1,0 +1,79 @@
+\section{Aufgabe 4: UART RX}
+
+Das folgende Blockdiagramm zeigt die Struktur des UART RX Moduls. Es besteht aus einem 
+Hauptmodul \texttt{uart\_rx} und einem Testbench-Modul \texttt{uart\_rx\_tb}. 
+Das Hauptmodul implementiert die UART RX Funktionalität: Es empfängt serielle Daten über den \texttt{uart\_in}-Eingang, 
+synchronisiert das eingehende Signal, sampled die Datenbits in der Mitte des Bitfensters und schaltet die LED je nach empfangenem Zeichen ein oder aus.
+Das Testbench-Modul dient zur Simulation und Verifikation der Funktionalität des Hauptmoduls.
+
+Das Modul arbeitet mit einer Baudrate von 9600 bei einem 12\,MHz Systemtakt (8N1-Konfiguration: 8 Datenbits, kein Paritätsbit, 1 Stoppbit).
+Empfängt das Modul das Zeichen \texttt{'j'} (ASCII 106, \texttt{0x6A}), wird die LED eingeschaltet. 
+Empfängt es das Zeichen \texttt{'k'} (ASCII 107, \texttt{0x6B}), wird die LED ausgeschaltet. 
+Alle anderen empfangenen Zeichen werden ignoriert und der LED-Zustand bleibt unverändert.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{uart_rx_blockdiagram.png}
+  \caption{UART RX Blockdiagramm}
+  \label{fig:uart-rx-blockdiagram}  
+\end{figure}
+
+\newpage
+
+Die Statemaschine des UART RX Moduls besteht aus zwei Hauptzuständen: \texttt{IDLE} und \texttt{READING}. Der Automat ist deterministisch.
+
+Im Zustand \texttt{IDLE} wartet das Modul auf eine fallende Flanke am \texttt{uart\_in}-Signal, die das Startbit signalisiert. 
+Durch die Zweiflanken-Synchronisation (\texttt{uart\_sync}) werden metastabile Zustände vermieden.
+Bei erkannter fallender Flanke (\texttt{"10"}) wechselt der Automat in den Zustand \texttt{READING} und initialisiert alle Zähler.
+
+Im Zustand \texttt{READING} wartet das Modul zunächst eine halbe Bitperiode (\texttt{pre\_cnt}), 
+um das Sampling in die Mitte des ersten Datenbits zu verschieben. Anschließend werden 8 Datenbits eingelesen, 
+wobei jeweils nach einer vollen Bitperiode (\texttt{clk\_cnt}) gesampelt wird.
+Nach dem letzten Datenbit wird noch eine halbe Bitperiode gewartet (\texttt{post\_cnt}), um das Stoppbit zu überspringen.
+Danach wird der empfangene Wert im \texttt{cache} mit den ASCII-Codes für \texttt{'j'} und \texttt{'k'} verglichen und die LED entsprechend geschaltet.
+
+\newpage
+
+\inputminted[linenos,breaklines,fontsize=\small]{vhdl}{A4_Abgabe/code/rtl/uart_rx.vhd}
+
+Der VHDL-Code implementiert den beschriebenen Empfänger. Besonders wichtig sind:
+
+\begin{itemize}
+  \item \textbf{Zweiflanken-Synchronisation} (Zeile 30): \texttt{uart\_sync <= uart\_sync(0) \& uart\_in} verhindert Metastabilität durch asynchrone Eingangssignale.
+  \item \textbf{Startbiterkennung} (Zeile 34): Die fallende Flanke \texttt{"10"} am synchronisierten Signal löst den Empfang aus.
+  \item \textbf{Bit-Sampling in der Mitte des Fensters}: \texttt{pre\_cnt} verschiebt das erste Sampling um eine halbe Bitperiode, \texttt{clk\_cnt} sorgt für die korrekte Timing der folgenden Bits.
+  \item \textbf{Zeichenerkennung} (Zeile 56--59): Nach vollständigem Empfang wird der \texttt{cache} mit 106 (\texttt{'j'}) und 107 (\texttt{'k'}) verglichen.
+\end{itemize}
+
+\newpage
+
+\inputminted[linenos,breaklines,fontsize=\small]{vhdl}{A4_Abgabe/code/sim/uart_rx_tb.vhd}
+
+Die Testbench verifiziert die korrekte Funktionalität des UART RX Moduls mit drei Testfällen:
+
+\begin{enumerate}
+  \item \textbf{Testfall 1 -- LED einschalten}: Es wird das Zeichen \texttt{'j'} (ASCII 106, \texttt{01101010}) gesendet. 
+  Das Startbit (\texttt{0}), gefolgt von den 8 Datenbits (LSB first) und dem Stoppbit (\texttt{1}) werden seriell über \texttt{uart\_in} übertragen.
+  Nach Abschluss des Empfangs wird mit einem Assert geprüft, ob \texttt{led = '1'} ist.
+
+  \item \textbf{Testfall 2 -- LED ausschalten}: Es wird das Zeichen \texttt{'k'} (ASCII 107, \texttt{01101011}) gesendet.
+  Der Ablauf ist identisch zu Testfall 1. Das Assert prüft, ob \texttt{led = '0'} ist.
+
+  \item \textbf{Testfall 3 -- Ungültiges Zeichen}: Es wird das Zeichen \texttt{0xFF} (\texttt{11111111}) gesendet, 
+  das weder \texttt{'j'} noch \texttt{'k'} entspricht. Das Assert prüft, dass die LED ihren vorherigen Zustand (\texttt{'0'}) beibehält.
+\end{enumerate}
+
+Alle Testfälle verwenden die korrekte Baudrate von 9600\,Bd (Bitperiode \textasciitilde104,17\,\textmu s) und den 12\,MHz Systemtakt.
+Die Asserts dienen zur automatisierten Fehlererkennung: Schlägt keines fehl, so ist die Grundfunktionalität des Empfängers verifiziert.
+
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{uart_rx_tb_sim.png}
+  \caption{GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt{state}, \texttt{uart\_in} und \texttt{led}}
+  \label{fig:uart-rx-simulation-gtkwave}  
+\end{figure}
+
+Die Simulation zeigt den vollständigen Ablauf der drei Testfälle. Von oben nach unten sind die Signale \texttt{state} (Zustandsautomat), \texttt{uart\_in} (serieller Dateneingang) und \texttt{led} (Ausgang) dargestellt.
+
+Im Verlauf von \texttt{uart\_in} sind die drei Übertragungen erkennbar: Zunächst das Zeichen \texttt{'j'} (Startbit, gefolgt von \texttt{01101010}, Stoppbit), anschließend \texttt{'k'} (\texttt{01101011}) und zuletzt \texttt{0xFF} (\texttt{11111111}). Das \texttt{state}-Signal wechselt jeweils von \texttt{IDLE} zu \texttt{READING} während des Empfangs und zurück zu \texttt{IDLE} nach Abschluss. Das \texttt{led}-Signal zeigt den erwarteten Verlauf: Es geht nach Empfang von \texttt{'j'} auf \texttt{'1'}, fällt nach Empfang von \texttt{'k'} auf \texttt{'0'} und bleibt bei ungültigem Zeichen unverändert.
