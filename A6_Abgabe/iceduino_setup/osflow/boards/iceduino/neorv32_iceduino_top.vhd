@@ -137,6 +137,8 @@ signal spi_resp : slave_resp_t := slave_resp_default;
 signal i2c_resp : slave_resp_t := slave_resp_default;
 signal adc_resp : slave_resp_t := slave_resp_default;
 
+signal sevensegment_resp : slave_resp_t := slave_resp_default;
+
 -- internal IO connection --
 -- signal con_gpio : std_ulogic_vector(63 downto 0);
 signal con_spi_csn  : std_ulogic_vector(07 downto 0);
@@ -224,6 +226,10 @@ begin
                         active_slave_resp.rdata_i <= adc_resp.rdata_i; 
                         active_slave_resp.ack_i <= adc_resp.ack_i;
                         active_slave_resp.err_i <= adc_resp.err_i;
+                when x"80" =>
+                        active_slave_resp.rdata_i <= sevensegment_resp.rdata_i; 
+                        active_slave_resp.ack_i <= sevensegment_resp.ack_i;
+                        active_slave_resp.err_i <= sevensegment_resp.err_i;
                 when others =>
                         active_slave_resp.rdata_i <= (others => '0');
                         active_slave_resp.ack_i <= '0';
