@@ -14,6 +14,8 @@
 #include "iceduino_i2c.h"
 #include "iceduino_adc.h"
 
+#include "iceduino_sevensegment.h"
+
 //#memory mapped io#
 //LED base address
 #define ICEDUINO_LED_BASE (0xF0000000UL) 
@@ -77,5 +79,9 @@
 #define ICEDUINO_ADC_BASE (0xF0000070UL) 
 //ARDUINO ADC input port 8-bit (r/w) */
 #define ICEDUINO_ADC (*((volatile uint8_t*) (ICEDUINO_ADC_BASE)))
+
+//Seven Segment address
+#define ICEDUINO_SEVENSEGMENT_BASE (0xF0000080UL)
+#define ICEDUINO_SEVENSEGMENT (*((volatile uint8_t*)(ICEDUINO_SEVENSEGMENT_BASE)))
 
 #endif // iceduino_neorv32_h

@@ -425,6 +425,25 @@ begin
         err_o       =>  led_resp.err_i,
         led_o       =>  led      
     );
+
+    -- module instance sevensegment --
+    iceduino_sevensegment_inst: entity iceduino.iceduino_sevensegment
+    generic map (
+        sevensegment_addr        =>  x"F0000080"
+    )
+    port map (
+        clk_i  		=>  clk_50mhz,
+        rstn_i 		=>  external_rstn,       
+        adr_i		=>	master_bus.adr_o,
+        dat_i	    =>  master_bus.dat_o,
+        dat_o	    =>  sevensegment_resp.rdata_i,
+        we_i        =>  master_bus.we_o,
+        stb_i		=>	master_bus.stb_o,
+        cyc_i       =>  master_bus.cyc_o,
+        ack_o       =>  sevensegment_resp.ack_i,
+        err_o       =>  sevensegment_resp.err_i,
+        sevensegment_o       =>  sevensegment      
+    );
     
     -- module instance switch --
     iceduino_switch_inst: entity iceduino.iceduino_switch
