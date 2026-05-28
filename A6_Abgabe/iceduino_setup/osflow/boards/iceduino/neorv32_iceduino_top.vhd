@@ -56,6 +56,9 @@ port (
     btn : in std_ulogic_vector(4 downto 0);
     sw  : in std_ulogic_vector(1 downto 0);
 
+    -- Seven Segment Display --
+    sevensegment : out std_ulogic_vector(7 downto 0);
+
     -- -- PMOD --
     -- pmod_pwr_en : out std_ulogic;
     pmod1 : inout std_logic_vector(7 downto 0);
@@ -159,7 +162,7 @@ begin
     end process;
 
     -- external bus multiplexer --
-    bus_multiplexer: process(master_bus, led_resp,switch_resp,button_resp)
+    bus_multiplexer: process(master_bus, led_resp,switch_resp,button_resp, sevensegment_resp)
     begin
         active_slave_resp.rdata_i <= (others => '0');
         active_slave_resp.ack_i <= '0';
@@ -243,7 +246,7 @@ begin
 		-- General --
 		CLOCK_FREQUENCY              => f_clock_c,           -- clock frequency of clk_i in Hz
 		HW_THREAD_ID                 => 0,      -- hardware thread id (32-bit)
-		INT_BOOTLOADER_EN            => true,  -- boot configuration: true = boot explicit bootloader, false = boot from int/ext (I)MEM
+		INT_BOOTLOADER_EN            => false,  -- boot configuration: true = boot explicit bootloader, false = boot from int/ext (I)MEM
 
 		-- On-Chip Debugger (OCD) --
 		ON_CHIP_DEBUGGER_EN          => false,  -- implement on-chip debugger

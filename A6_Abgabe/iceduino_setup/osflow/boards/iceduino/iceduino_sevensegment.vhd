@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity iceduino_led is
+entity iceduino_sevensegment is
   generic (
     sevensegment_addr : std_ulogic_vector(31 downto 0)
   );
@@ -22,21 +22,23 @@ entity iceduino_led is
   );
 end entity;
 
-architecture iceduino_led_rtl of iceduino_led  is
+architecture iceduino_sevensegment_rtl of iceduino_sevensegment  is
   
   signal module_active : std_ulogic;
   signal module_addr   : std_ulogic_vector(31 downto 0);
   signal reg_sevensegment : std_ulogic_vector(7 downto 0);
+  signal seg_pattern : std_ulogic_vector(6 downto 0);
   signal point_status : std_ulogic := '0';
 
 begin
   -- module active
-  module_active <= '1' when ((adr_i = led_addr) and (cyc_i = '1' and stb_i = '1')) else '0';
+  module_active <= '1' when ((adr_i = sevensegment_addr) and (cyc_i = '1' and stb_i = '1')) else '0';
   module_addr   <= adr_i;
   
   w_access: process(clk_i)
   begin
-    if rising_edge(clk_i) then    
+    if rising_edge(clk_i) then
+          
       -- handshake
       err_o <= '0';
       if (module_active = '1') then
@@ -56,30 +58,24 @@ begin
     end if;
   end process w_access;
   
-  -- output
-  case reg_sevensegment is
-    when 0 =>
-        sevensegment_o <= "1111110" & point_status;
-    when 1 =>
-        sevensegment_o <= "0110000" & point_status;
-    when 2 =>
-        sevensegment_o <= "1101101" & point_status;
-    when 3 =>
-        sevensegment_o <= "1111001" & point_status;
-    when 4 =>
-        sevensegment_o <= "0110011" & point_status;
-    when 5 =>
-        sevensegment_o <= "1011011" & point_status;
-    when 6 =>
-        sevensegment_o <= "1011111" & point_status;
-    when 7 =>
-        sevensegment_o <= "1110000" & point_status;
-    when 8 =>
-        sevensegment_o <= "1111111" & point_status;
-    when 9 =>
-        sevensegment_o <= "1111011" & point_status;
-    when others =>
-        sevensegment_o <= "0000000" & point_status;
-end case;
-  
+
+  -- KOMBINATORISCHER 7-SEGMENT-DEKODER
+  -- Common-Anode: Segment leuchtet bei '0' (LOW)
+
+  seg_pattern <= 
+    "0000001" when reg_sevensegment(3 downto 0) = x"0" else   -- 0: a,b,c,d,e,f an, g aus
+    "1001111" when reg_sevensegment(3 downto 0) = x"1" else   -- 1: b,c an
+    "0010010" when reg_sevensegment(3 downto 0) = x"2" else   -- 2: a,b,d,e,g an
+    "0000110" when reg_sevensegment(3 downto 0) = x"3" else   -- 3: a,b,c,d an
+    "1001100" when reg_sevensegment(3 downto 0) = x"4" else   -- 4: b,c,f,g an
+    "0100100" when reg_sevensegment(3 downto 0) = x"5" else   -- 5: a,c,d,f,g an
+    "0100000" when reg_sevensegment(3 downto 0) = x"6" else   -- 6: a,c,d,e,f,g an
+    "0001111" when reg_sevensegment(3 downto 0) = x"7" else   -- 7: a,b,c an
+    "0000000" when reg_sevensegment(3 downto 0) = x"8" else   -- 8: alle an
+    "0000100" when reg_sevensegment(3 downto 0) = x"9" else   -- 9: a,b,c,d,f,g an
+    "1111111"; -- alle aus
+
+  -- Zuweisung der Segmentmuster an die Ausgänge, Berücksichtigung des Dezimalpunkts
+  sevensegment_o <= (not point_status) & seg_pattern;
+
 end architecture ;
