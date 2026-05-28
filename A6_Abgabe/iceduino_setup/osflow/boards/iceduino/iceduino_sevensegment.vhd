@@ -26,8 +26,8 @@ architecture iceduino_sevensegment_rtl of iceduino_sevensegment  is
   
   signal module_active : std_ulogic;
   signal module_addr   : std_ulogic_vector(31 downto 0);
-  signal reg_sevensegment : std_ulogic_vector(7 downto 0);
-  signal seg_pattern : std_ulogic_vector(6 downto 0);
+  signal reg_sevensegment : std_ulogic_vector(7 downto 0) := (others => '0');
+  signal seg_pattern : std_ulogic_vector(6 downto 0) := (others => '1'); -- initial all segments off (common anode)
   signal point_status : std_ulogic := '0';
 
 begin
@@ -76,6 +76,6 @@ begin
     "1111111"; -- alle aus
 
   -- Zuweisung der Segmentmuster an die Ausgänge, Berücksichtigung des Dezimalpunkts
-  sevensegment_o <= (not point_status) & seg_pattern;
+  sevensegment_o <= seg_pattern & (not point_status);
 
 end architecture ;

@@ -139,7 +139,6 @@ signal uart_resp : slave_resp_t := slave_resp_default;
 signal spi_resp : slave_resp_t := slave_resp_default;
 signal i2c_resp : slave_resp_t := slave_resp_default;
 signal adc_resp : slave_resp_t := slave_resp_default;
-
 signal sevensegment_resp : slave_resp_t := slave_resp_default;
 
 -- internal IO connection --

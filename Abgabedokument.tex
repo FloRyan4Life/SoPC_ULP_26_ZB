@@ -1,6 +1,7 @@
 \documentclass[parskip=half,11pt,a4paper]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}  % skalierbare Latin-Modern-Fonts
 \usepackage[ngerman]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -8,6 +9,9 @@
 \usepackage{caption}
 \usepackage{float}
 \usepackage{minted}
+\usepackage{microtype}
+\usepackage{graphicx}
+
 
 % Zentrale Grafikpfade: LaTeX sucht hier automatisch nach Bildern
 \graphicspath{{A3_Abgabe/resources/}{A4_Abgabe/res/}}
@@ -19,6 +23,8 @@
 \begin{document}
 
 \maketitle
+
+\begin{sloppypar}
 
 \tableofcontents          % Inhaltsverzeichnis
 \listoffigures            % Abbildungsverzeichnis (optional)
@@ -38,5 +44,7 @@
 
 % Aufgabe 6 einbinden
 \input{A6_Abgabe/A6_Abgabe}
+
+\end{sloppypar}
 
 \end{document}
