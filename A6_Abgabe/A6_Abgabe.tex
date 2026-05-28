@@ -20,7 +20,7 @@ Dieses Vorgehen entspricht der im Script (Kapitel 6) vorgestellten Integration w
 
 Das Modul implementiert einen Wishbone-Slave mit kombinatorischem 7-Segment-Dekoder. Der Schreibzugriff erfolgt taktflankengesteuert, die Segmentdekodierung rein kombinatorisch (keine Taktflanke, keine Register), wie in der Aufgabenstellung gefordert.
 
-Der Dekoder arbeitet auf dem unteren Nibble (Bit 3..0) des 8-Bit-Registers, da die Hex-Literale \texttt{x"0"} bis \texttt{x"9"} nur 4 Bit breit sind und ein Vergleich mit 8-Bit-Vektoren in VHDL eine Längen-Diskrepanz erzeugen würde. Bit 7 des Registers ist für die spätere Steuerung des Dezimalpunkts (DP) vorgesehen, wird aktuell jedoch nicht genutzt (\texttt{point\_status} ist auf '0' initialisiert).
+Der Dekoder arbeitet auf dem unteren unteren 4 Bits des 8-Bit-Registers, da die Hex-Werte \texttt{x"0"} bis \texttt{x"9"} nur 4 Bit breit sind und ein Vergleich mit 8-Bit-Vektoren in VHDL eine Fehler erzeugen würde. Bit 7 des Registers ist für die spätere Steuerung des Dezimalpunkts (DP) vorgesehen, wird aktuell jedoch nicht genutzt (\texttt{point\_status} ist auf '0' initialisiert).
 
 Der Ausgang \texttt{sevensegment\_o} ist als \textbf{Common-Anode} ausgelegt: Ein Segment leuchtet, wenn der entsprechende Ausgang auf \texttt{'0'} (LOW) liegt. Die Zuordnung der Segmente erfolgt gemäß Datenblatt des Kingbright SC03-12EWA (vgl. Script S. 22):
 
@@ -132,15 +132,15 @@ Die Implementation nutzt den in \texttt{neorv32\_iceduino.h} definierten Memory-
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A6_Abgabe/iceduino_setup/sw/lib/source/iceduino_sevensegment.c}
 
-Das Schlüsselwort \texttt{volatile} ist zwingend erforderlich, um Compiler-Optimierungen bei Hardware-Zugriffen zu verhindern (vgl. Script S. 21). Ohne \texttt{volatile} könnte der Compiler aufeinanderfolgende Schreibzugriffe auf dieselbe Adresse als redundant erachten und nur den ersten ausführen.
 
 \newpage
 \subsubsection{Memory-Mapped-I/O-Adresse}
 
+
 Die Basisadresse und der Zugriffs-Pointer werden zentral in \texttt{neorv32\_iceduino.h} definiert:
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=45,lastline=50]{c}{A6_Abgabe/iceduino_setup/sw/lib/include/neorv32_iceduino.h}
-
+Das Schlüsselwort \texttt{volatile} ist zwingend erforderlich, um Compiler-Optimierungen bei Hardware-Zugriffen zu verhindern (vgl. Script S. 21). Ohne \texttt{volatile} könnte der Compiler aufeinanderfolgende Schreibzugriffe auf dieselbe Adresse als redundant erachten und nur den ersten ausführen.
 \subsubsection{Anwendungsprogramm: \texttt{main.c}}
 
 Das Testprogramm zählt zyklisch von 0 bis 9 und schreibt den aktuellen Wert in das Seven-Segment-Register. Durch den Verzicht auf Delays ändert sich der Wert mit maximaler Geschwindigkeit, was in der Simulation gut beobachtbar ist:
@@ -179,7 +179,7 @@ Das Signal \texttt{reg\_sevensegment} ändert sich zyklisch mit einem Abstand vo
 \label{fig:sim_sevensegment}
 \end{figure}
 
-Die Simulation bestätigt die korrekte Funktion des Wishbone-Handshakes, der Adressdekodierung und des kombinatorischen Dekoders. Die Ausgänge \texttt{sevensegment\_o} zeigen die in Tabelle~\ref{tab:decoder_values} spezifizierten Muster, wobei die Common-Anode-Logik (aktiv-LOW) berücksichtigt werden muss.
+Die Simulation bestätigt die korrekte Funktion der Adressdekodierung und des kombinatorischen Dekoders. Die Ausgänge \texttt{sevensegment\_o} zeigen die in Tabelle~\ref{tab:decoder_values} spezifizierten Muster, wobei die Common-Anode-Logik (aktiv-LOW) berücksichtigt werden muss.
 
 %--------------------------------------------------------------------
 \subsection{Pin-Zuweisung und Hardware-Aufbau}
@@ -189,6 +189,3 @@ Die Simulation bestätigt die korrekte Funktion des Wishbone-Handshakes, der Adr
 Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Anode wird an 5 V gelegt, die einzelnen Segmente über die aktiven-LOW-Ausgänge des FPGA geschaltet.
 
 %--------------------------------------------------------------------
-\subsection{Ergebnisse im Portfolio}
-
-Die Umsetzung der Sieben-Segment-Ansteuerung demonstriert den vollständigen Entwicklungszyklus eines SoPC-Moduls: Von der VHDL-Implementation über die Bus-Integration und Software-HAL bis zur Simulation und Inbetriebnahme an der realen Hardware. Die konsequente Nutzung des Wishbone-Bus-Protokolls ermöglicht eine modulare Erweiterung des Systems um weitere Peripherie, wie sie im weiteren Kursverlauf (WS2812-Display, Game of Life) erforderlich ist.
