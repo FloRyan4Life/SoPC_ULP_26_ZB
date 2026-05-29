@@ -56,9 +56,6 @@ port (
     btn : in std_ulogic_vector(4 downto 0);
     sw  : in std_ulogic_vector(1 downto 0);
 
-    -- Seven Segment Display --
-    sevensegment : out std_ulogic_vector(7 downto 0);
-
     -- -- PMOD --
     -- pmod_pwr_en : out std_ulogic;
     pmod1 : inout std_logic_vector(7 downto 0);
@@ -450,9 +447,11 @@ begin
         cyc_i       =>  master_bus.cyc_o,
         ack_o       =>  sevensegment_resp.ack_i,
         err_o       =>  sevensegment_resp.err_i,
-        sevensegment_o       =>  sevensegment      
+        sevensegment_o   =>  io_d,
+        oe_enable => oe_j6,
+        oe_enable2 => oe_j5
     );
-    
+
     -- module instance switch --
     iceduino_switch_inst: entity iceduino.iceduino_switch
     generic map (
@@ -552,24 +551,24 @@ begin
     );
     
 	-- module instance arduino gpio --
-    iceduino_arduino_gpio_inst: entity iceduino.iceduino_arduino_gpio
-    generic map (
-        gpio_addr_o => x"F0000048",
-        gpio_addr_i => x"F0000050"
-    )
-    port map (
-        clk_i  		=>  clk_50mhz,
-        rstn_i 		=>  external_rstn,
-        adr_i		=>	master_bus.adr_o,
-        dat_i	    =>  master_bus.dat_o,
-        dat_o	    =>  gpio_resp.rdata_i,
-        we_i        =>  master_bus.we_o,
-        stb_i		=>	master_bus.stb_o,
-        cyc_i       =>  master_bus.cyc_o,
-        ack_o       =>  gpio_resp.ack_i,
-        err_o       =>  gpio_resp.err_i,
-        io       	=>  io_d --io
-    );
+    -- iceduino_arduino_gpio_inst: entity iceduino.iceduino_arduino_gpio
+    -- generic map (
+    --     gpio_addr_o => x"F0000048",
+    --     gpio_addr_i => x"F0000050"
+    -- )
+    -- port map (
+    --     clk_i  		=>  clk_50mhz,
+    --     rstn_i 		=>  external_rstn,
+    --     adr_i		=>	master_bus.adr_o,
+    --     dat_i	    =>  master_bus.dat_o,
+    --     dat_o	    =>  gpio_resp.rdata_i,
+    --     we_i        =>  master_bus.we_o,
+    --     stb_i		=>	master_bus.stb_o,
+    --     cyc_i       =>  master_bus.cyc_o,
+    --     ack_o       =>  gpio_resp.ack_i,
+    --     err_o       =>  gpio_resp.err_i,
+    --     io       	=>  io_d --io
+    -- );
 
     -- module instance arduino uart --
     iceduino_arduino_uart_inst: entity iceduino.iceduino_arduino_uart

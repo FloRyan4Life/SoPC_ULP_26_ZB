@@ -101,6 +101,250 @@ Warning: unmatched constraint 'sram_io[4]' (on line 133)
 Warning: unmatched constraint 'sram_io[5]' (on line 134)
 Warning: unmatched constraint 'sram_io[6]' (on line 135)
 Warning: unmatched constraint 'sram_io[7]' (on line 136)
-ERROR: IO 'sevensegment[7]' is unconstrained in PCF (override this error with --pcf-allow-unconstrained)
-ERROR: Loading PCF failed.
-35 warnings, 2 errors
+
+Info: Packing constants..
+Info: Packing IOs..
+Info: Packing LUT-FFs..
+Info:     1837 LCs used as LUT4 only
+Info:      889 LCs used as LUT4 and DFF
+Info: Packing non-LUT FFs..
+Info:      683 LCs used as DFF only
+Info: Packing carries..
+Info:      343 LCs used as CARRY only
+Info: Packing RAMs..
+Info: Placing PLLs..
+Info: Packing special functions..
+Info: Packing PLLs..
+Info: Promoting globals..
+Info: promoting clk_50mhz$SB_IO_IN (fanout 1604)
+Info: promoting neorv32_inst.sys_rstn_SB_LUT4_I3_O [reset] (fanout 836)
+Info: promoting neorv32_inst.neorv32_sysinfo_inst:1057_SB_DFFSR_Q_4_D_SB_LUT4_O_I1_SB_LUT4_I1_O[1] [reset] (fanout 32)
+Info: promoting uart_rts_SB_DFFSR_Q_D_SB_LUT4_O_I0_SB_DFFESR_Q_E_SB_LUT4_O_I2[2] [reset] (fanout 24)
+Info: promoting neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst:949_SB_DFFSR_Q_3_D_SB_LUT4_I3_3_O_SB_LUT4_I0_O[3] [reset] (fanout 21)
+Info: promoting neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst:1588[36] [cen] (fanout 64)
+Info: promoting neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.imm_i_SB_DFFR_Q_D_SB_LUT4_O_I0_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_I1_O[1] [cen] (fanout 63)
+Info: promoting neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2282.S[0] [cen] (fanout 41)
+Info: Constraining chains...
+Info:      252 LCs used to legalise carry chains.
+Info: Checksum: 0xe7983c81
+
+Info: Annotating ports with timing budgets for target frequency 50.00 MHz
+Info: Checksum: 0x73d0601a
+
+Info: Device utilisation:
+Info: 	         ICESTORM_LC:  4006/ 7680    52%
+Info: 	        ICESTORM_RAM:    24/   32    75%
+Info: 	               SB_IO:    68/  256    26%
+Info: 	               SB_GB:     8/    8   100%
+Info: 	        ICESTORM_PLL:     0/    2     0%
+Info: 	         SB_WARMBOOT:     0/    1     0%
+
+Info: Placed 68 cells based on constraints.
+Info: Creating initial analytic placement for 3339 cells, random placement wirelen = 111037.
+Info:     at initial placer iter 0, wirelen = 2959
+Info:     at initial placer iter 1, wirelen = 2964
+Info:     at initial placer iter 2, wirelen = 2922
+Info:     at initial placer iter 3, wirelen = 2919
+Info: Running main analytical placer.
+Info:     at iteration #1, type ALL: wirelen solved = 2928, spread = 34841, legal = 50331; time = 0.22s
+Info:     at iteration #2, type ALL: wirelen solved = 3460, spread = 32714, legal = 45679; time = 0.18s
+Info:     at iteration #3, type ALL: wirelen solved = 3877, spread = 31777, legal = 46062; time = 0.18s
+Info:     at iteration #4, type ALL: wirelen solved = 4441, spread = 30376, legal = 45442; time = 0.20s
+Info:     at iteration #5, type ALL: wirelen solved = 4973, spread = 30352, legal = 44308; time = 0.18s
+Info:     at iteration #6, type ALL: wirelen solved = 6552, spread = 28573, legal = 42465; time = 0.19s
+Info:     at iteration #7, type ALL: wirelen solved = 7826, spread = 27700, legal = 39672; time = 0.15s
+Info:     at iteration #8, type ALL: wirelen solved = 9172, spread = 27227, legal = 37684; time = 0.15s
+Info:     at iteration #9, type ALL: wirelen solved = 9631, spread = 27416, legal = 36290; time = 0.43s
+Info:     at iteration #10, type ALL: wirelen solved = 11105, spread = 25327, legal = 35684; time = 0.13s
+Info:     at iteration #11, type ALL: wirelen solved = 11076, spread = 24617, legal = 37112; time = 0.14s
+Info:     at iteration #12, type ALL: wirelen solved = 12464, spread = 23939, legal = 37272; time = 0.15s
+Info:     at iteration #13, type ALL: wirelen solved = 12494, spread = 23845, legal = 36451; time = 0.15s
+Info:     at iteration #14, type ALL: wirelen solved = 13831, spread = 22811, legal = 37500; time = 0.70s
+Info:     at iteration #15, type ALL: wirelen solved = 14219, spread = 22746, legal = 36776; time = 0.15s
+Info: HeAP Placer Time: 3.87s
+Info:   of which solving equations: 0.91s
+Info:   of which spreading cells: 0.16s
+Info:   of which strict legalisation: 2.35s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 565, wirelen = 35684
+Info:   at iteration #5: temp = 0.000000, timing cost = 375, wirelen = 29131
+Info:   at iteration #10: temp = 0.000000, timing cost = 338, wirelen = 26779
+Info:   at iteration #15: temp = 0.000000, timing cost = 326, wirelen = 25581
+Info:   at iteration #20: temp = 0.000000, timing cost = 353, wirelen = 24881
+Info:   at iteration #25: temp = 0.000000, timing cost = 343, wirelen = 24460
+Info:   at iteration #30: temp = 0.000000, timing cost = 339, wirelen = 24333
+Info:   at iteration #34: temp = 0.000000, timing cost = 336, wirelen = 24279 
+Info: SA placement time 5.31s
+
+Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 53.22 MHz (PASS at 50.00 MHz)
+
+Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 2.76 ns
+Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 5.58 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 13 endpoint(s)
+Info:          + represents [1,13) endpoint(s)
+Info: [  1210,   2097) |**+
+Info: [  2097,   2984) |****+
+Info: [  2984,   3871) |*********+
+Info: [  3871,   4758) |*******+
+Info: [  4758,   5645) |**+
+Info: [  5645,   6532) |******+
+Info: [  6532,   7419) |********+
+Info: [  7419,   8306) |*************+
+Info: [  8306,   9193) |********************+
+Info: [  9193,  10080) |************+
+Info: [ 10080,  10967) |******************************+
+Info: [ 10967,  11854) |*****************************************************+
+Info: [ 11854,  12741) |**********************************************+
+Info: [ 12741,  13628) |**********************************+
+Info: [ 13628,  14515) |******************+
+Info: [ 14515,  15402) |************************+
+Info: [ 15402,  16289) |**************************+
+Info: [ 16289,  17176) |********************************+
+Info: [ 17176,  18063) |************************************************************ 
+Info: [ 18063,  18950) |************************************************+
+Info: Checksum: 0x3ef25d43
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 12741 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       15        785 |   15   785 |     11757|       0.14       0.14|
+Info:       2000 |       58       1742 |   43   957 |     10804|       0.21       0.35|
+Info:       3000 |      113       2687 |   55   945 |      9868|       0.26       0.61|
+Info:       4000 |      249       3551 |  136   864 |      9044|       0.20       0.81|
+Info:       5000 |      323       4477 |   74   926 |      8158|       0.19       0.99|
+Info:       6000 |      440       5360 |  117   883 |      7323|       0.31       1.31|
+Info:       7000 |      563       6237 |  123   877 |      6501|       0.34       1.65|
+Info:       8000 |      829       6971 |  266   734 |      5897|       0.35       2.00|
+Info:       9000 |     1076       7724 |  247   753 |      5289|       0.33       2.33|
+Info:      10000 |     1419       8381 |  343   657 |      4843|       0.51       2.84|
+Info:      11000 |     1785       9015 |  366   634 |      4481|       0.44       3.27|
+Info:      12000 |     2106       9694 |  321   679 |      4009|       0.40       3.67|
+Info:      13000 |     2577      10223 |  471   529 |      3748|       0.50       4.17|
+Info:      14000 |     3062      10738 |  485   515 |      3493|       0.52       4.69|
+Info:      15000 |     3547      11253 |  485   515 |      3312|       0.49       5.18|
+Info:      16000 |     4018      11782 |  471   529 |      3039|       0.47       5.65|
+Info:      17000 |     4539      12261 |  521   479 |      2923|       0.65       6.30|
+Info:      18000 |     5061      12739 |  522   478 |      2781|       0.71       7.01|
+Info:      19000 |     5581      13219 |  520   480 |      2684|       0.62       7.63|
+Info:      20000 |     6164      13636 |  583   417 |      2617|       0.66       8.29|
+Info:      21000 |     6712      14088 |  548   452 |      2546|       0.63       8.92|
+Info:      22000 |     7208      14592 |  496   504 |      2363|       0.60       9.52|
+Info:      23000 |     7756      15044 |  548   452 |      2252|       0.67      10.19|
+Info:      24000 |     8264      15536 |  508   492 |      2143|       0.59      10.78|
+Info:      25000 |     8810      15990 |  546   454 |      2018|       0.59      11.37|
+Info:      26000 |     9343      16457 |  533   467 |      1856|       0.64      12.01|
+Info:      27000 |     9701      17099 |  358   642 |      1335|       0.30      12.31|
+Info:      28000 |     9969      17831 |  268   732 |       678|       0.55      12.86|
+Info:      29000 |    10263      18472 |  294   641 |       159|       0.72      13.58|
+Info:      29159 |    10264      18489 |    1    17 |         0|       0.02      13.61|
+Info: Routing complete.
+Info: Router1 time 13.61s
+Info: Checksum: 0xcb967b87
+
+Info: Critical path report for clock 'clk_50mhz$SB_IO_IN_$glb_clk' (posedge -> posedge):
+Info: curr total
+Info:  0.5  0.5  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.instr_prefetch_buffer:3672_SB_LUT4_O_19_LC.O
+Info:  2.2  2.7    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst:1588[31] budget 1.556000 ns (20,3) -> (4,15)
+Info:                Sink neorv32_inst.neorv32_bus_keeper_inst.wren_i_SB_LUT4_O_I0_SB_LUT4_O_LC.I1
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4  3.1  Source neorv32_inst.neorv32_bus_keeper_inst.wren_i_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  0.6  3.7    Net neorv32_inst.neorv32_bus_keeper_inst.wren_i_SB_LUT4_O_I0[2] budget 1.556000 ns (4,15) -> (3,16)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst.ca_wr_req_buf_SB_LUT4_I2_O_SB_LUT4_O_1_LC.I2
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4  4.1  Source neorv32_inst.neorv32_busswitch_inst.ca_wr_req_buf_SB_LUT4_I2_O_SB_LUT4_O_1_LC.O
+Info:  2.3  6.4    Net neorv32_inst.neorv32_busswitch_inst.ca_wr_req_buf_SB_LUT4_I2_O[2] budget 1.556000 ns (3,16) -> (9,24)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst.ca_wr_req_buf_SB_LUT4_I2_O_SB_LUT4_I0_LC.I2
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4  6.8  Source neorv32_inst.neorv32_busswitch_inst.ca_wr_req_buf_SB_LUT4_I2_O_SB_LUT4_I0_LC.O
+Info:  1.6  8.4    Net neorv32_inst.neorv32_bus_keeper_inst.err_o_SB_LUT4_I2_I3[0] budget 1.556000 ns (9,24) -> (7,17)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst:611_SB_LUT4_O_1_I3_SB_LUT4_O_LC.I3
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.3  8.7  Source neorv32_inst.neorv32_busswitch_inst:611_SB_LUT4_O_1_I3_SB_LUT4_O_LC.O
+Info:  0.6  9.3    Net neorv32_inst.neorv32_busswitch_inst:611_SB_LUT4_O_1_I3[0] budget 1.556000 ns (7,17) -> (7,16)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_O_I2_SB_LUT4_O_LC.I0
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4  9.8  Source neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_O_I2_SB_LUT4_O_LC.O
+Info:  1.3 11.0    Net neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_O_I2[1] budget 1.556000 ns (7,16) -> (10,15)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_O_LC.I3
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.3 11.4  Source neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_O_LC.O
+Info:  1.0 12.3    Net neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O[1] budget 1.556000 ns (10,15) -> (10,14)
+Info:                Sink neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_I1_LC.I2
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4 12.7  Source neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_I1_LC.O
+Info:  2.0 14.7    Net neorv32_inst.neorv32_busswitch_inst.ca_rd_req_buf_SB_LUT4_I3_O_SB_LUT4_I2_O_SB_LUT4_I1_O[3] budget 1.566000 ns (10,14) -> (12,7)
+Info:                Sink neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_R_SB_LUT4_O_LC.I2
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4 15.1  Source neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_R_SB_LUT4_O_LC.O
+Info:  2.0 17.1    Net neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_R[0] budget 1.566000 ns (12,7) -> (7,17)
+Info:                Sink neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_31_R_SB_LUT4_O_LC.I0
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4 17.6  Source neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_31_R_SB_LUT4_O_LC.O
+Info:  1.7 19.3    Net neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_31_R budget 1.566000 ns (7,17) -> (15,17)
+Info:                Sink neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_25_DFFLC.SR
+Info:  0.1 19.4  Setup neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1022_SB_DFFSR_Q_25_DFFLC.SR
+Info: 4.1 ns logic, 15.3 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge clk_50mhz$SB_IO_IN_$glb_clk':
+Info: curr total
+Info:  0.0  0.0  Source flash_sdi$sb_io.D_IN_0
+Info:  2.6  2.6    Net flash_sdi$SB_IO_IN budget 19.532000 ns (30,0) -> (16,5)
+Info:                Sink neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.spi_sdi_ff0_SB_DFF_Q_DFFLC.I0
+Info:  0.5  3.1  Setup neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.spi_sdi_ff0_SB_DFF_Q_DFFLC.I0
+Info: 0.5 ns logic, 2.6 ns routing
+
+Info: Critical path report for cross-domain path 'posedge clk_50mhz$SB_IO_IN_$glb_clk' -> '<async>':
+Info: curr total
+Info:  0.5  0.5  Source iceduino_sevensegment_inst.reg_sevensegment_SB_DFFE_Q_5_DFFLC.O
+Info:  3.1  3.7    Net iceduino_sevensegment_inst.reg_sevensegment[2] budget 9.506000 ns (2,24) -> (12,1)
+Info:                Sink io_d_SB_LUT4_O_2_LC.I3
+Info:  0.3  4.0  Source io_d_SB_LUT4_O_2_LC.O
+Info:  1.3  5.3    Net $io_d[5]$iobuf_i budget 9.506000 ns (12,1) -> (15,0)
+Info:                Sink io_d[5]$sb_io.D_OUT_0
+Info: 0.9 ns logic, 4.4 ns routing
+
+Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 51.58 MHz (PASS at 50.00 MHz)
+
+Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 3.07 ns
+Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 5.30 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 18 endpoint(s)
+Info:          + represents [1,18) endpoint(s)
+Info: [   611,   1528) |*+
+Info: [  1528,   2445) |**+
+Info: [  2445,   3362) |*******+
+Info: [  3362,   4279) |******+
+Info: [  4279,   5196) |*+
+Info: [  5196,   6113) |*****+
+Info: [  6113,   7030) |******+
+Info: [  7030,   7947) |******+
+Info: [  7947,   8864) |***************+
+Info: [  8864,   9781) |**************+
+Info: [  9781,  10698) |***************+
+Info: [ 10698,  11615) |*****************+
+Info: [ 11615,  12532) |*****************+
+Info: [ 12532,  13449) |***********************+
+Info: [ 13449,  14366) |************************************************************ 
+Info: [ 14366,  15283) |******************+
+Info: [ 15283,  16200) |*********************+
+Info: [ 16200,  17117) |****************************+
+Info: [ 17117,  18034) |***************************************+
+Info: [ 18034,  18951) |****************************************+
+35 warnings, 0 errors
+
+Info: Program finished normally.

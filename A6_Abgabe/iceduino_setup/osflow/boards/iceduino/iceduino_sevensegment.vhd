@@ -18,7 +18,9 @@ entity iceduino_sevensegment is
     ack_o  	: out  std_ulogic;
     err_o  	: out  std_ulogic;
     -- parallel io --
-    sevensegment_o : out std_ulogic_vector(7 downto 0)
+    sevensegment_o : out std_ulogic_vector(7 downto 0);
+    oe_enable : out std_ulogic;
+    oe_enable2 :out std_ulogic
   );
 end entity;
 
@@ -34,6 +36,9 @@ begin
   -- module active
   module_active <= '1' when ((adr_i = sevensegment_addr) and (cyc_i = '1' and stb_i = '1')) else '0';
   module_addr   <= adr_i;
+
+  oe_enable <= '1';
+  oe_enable2 <= '1';
   
   w_access: process(clk_i)
   begin
@@ -63,19 +68,20 @@ begin
   -- Common-Anode: Segment leuchtet bei '0' (LOW)
 
   seg_pattern <= 
-    "0000001" when reg_sevensegment(3 downto 0) = x"0" else   -- 0: a,b,c,d,e,f an, g aus
-    "1001111" when reg_sevensegment(3 downto 0) = x"1" else   -- 1: b,c an
-    "0010010" when reg_sevensegment(3 downto 0) = x"2" else   -- 2: a,b,d,e,g an
-    "0000110" when reg_sevensegment(3 downto 0) = x"3" else   -- 3: a,b,c,d an
-    "1001100" when reg_sevensegment(3 downto 0) = x"4" else   -- 4: b,c,f,g an
-    "0100100" when reg_sevensegment(3 downto 0) = x"5" else   -- 5: a,c,d,f,g an
-    "0100000" when reg_sevensegment(3 downto 0) = x"6" else   -- 6: a,c,d,e,f,g an
-    "0001111" when reg_sevensegment(3 downto 0) = x"7" else   -- 7: a,b,c an
-    "0000000" when reg_sevensegment(3 downto 0) = x"8" else   -- 8: alle an
-    "0000100" when reg_sevensegment(3 downto 0) = x"9" else   -- 9: a,b,c,d,f,g an
-    "1111111"; -- alle aus
+    "1111110" when reg_sevensegment(3 downto 0) = x"0" else   -- 0: a,b,c,d,e,f an, g aus
+    "0110000" when reg_sevensegment(3 downto 0) = x"1" else   -- 1: b,c an
+    "1101101" when reg_sevensegment(3 downto 0) = x"2" else   -- 2: a,b,d,e,g an
+    "1111001" when reg_sevensegment(3 downto 0) = x"3" else   -- 3: a,b,c,d an
+    "0110011" when reg_sevensegment(3 downto 0) = x"4" else   -- 4: b,c,f,g an
+    "1011011" when reg_sevensegment(3 downto 0) = x"5" else   -- 5: a,c,d,f,g an
+    "1011111" when reg_sevensegment(3 downto 0) = x"6" else   -- 6: a,c,d,e,f,g an
+    "1110000" when reg_sevensegment(3 downto 0) = x"7" else   -- 7: a,b,c an
+    "1111111" when reg_sevensegment(3 downto 0) = x"8" else   -- 8: alle an
+    "1111011" when reg_sevensegment(3 downto 0) = x"9" else   -- 9: a,b,c,d,f,g an
+    "0000000"; -- alle aus
 
   -- Zuweisung der Segmentmuster an die Ausgänge, Berücksichtigung des Dezimalpunkts
-  sevensegment_o <= seg_pattern & (not point_status);
+  sevensegment_o <= seg_pattern & ( point_status);
+
 
 end architecture ;
