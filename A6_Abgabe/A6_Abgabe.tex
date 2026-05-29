@@ -22,7 +22,7 @@ Das Modul implementiert einen Wishbone-Slave mit kombinatorischem 7-Segment-Deko
 
 Der Dekoder arbeitet auf dem unteren unteren 4 Bits des 8-Bit-Registers, da die Hex-Werte \texttt{x"0"} bis \texttt{x"9"} nur 4 Bit breit sind und ein Vergleich mit 8-Bit-Vektoren in VHDL eine Fehler erzeugen würde. Bit 7 des Registers ist für die spätere Steuerung des Dezimalpunkts (DP) vorgesehen, wird aktuell jedoch nicht genutzt (\texttt{point\_status} ist auf '0' initialisiert).
 
-Der Ausgang \texttt{sevensegment\_o} ist als \textbf{Common-Anode} ausgelegt: Ein Segment leuchtet, wenn der entsprechende Ausgang auf \texttt{'0'} (LOW) liegt. Die Zuordnung der Segmente erfolgt gemäß Datenblatt des Kingbright SC03-12EWA (vgl. Script S. 22):
+Der Ausgang \texttt{sevensegment\_o} ist als \textbf{Common-Kathode} ausgelegt: Ein Segment leuchtet, wenn der entsprechende Ausgang auf \texttt{'0'} (LOW) liegt. Die Zuordnung der Segmente erfolgt gemäß Datenblatt des Kingbright SC03-12EWA (vgl. Script S. 22):
 
 \begin{table}[H]
 \centering
@@ -48,7 +48,7 @@ Die Dekodierung der Ziffern 0--9 ist in Tabelle~\ref{tab:decoder_values} dargest
 
 \begin{table}[H]
 \centering
-\caption{7-Segment-Dekodierung für Ziffern 0--9 (Common-Anode, aktiv-LOW)}
+\caption{7-Segment-Dekodierung für Ziffern 0--9 (Common-Kathode, aktiv-LOW)}
 \label{tab:decoder_values}
 \begin{tabular}{|c|cccccccccc|}
 \hline
@@ -74,7 +74,7 @@ DP & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
 \hline
 \end{tabular}
 \\[4pt]
-{\small Anmerkung: DP = 1 bedeutet \textit{aus} (Common-Anode, \texttt{not point\_status} mit \texttt{point\_status = '0'})}
+{\small Anmerkung: DP = 1 bedeutet \textit{aus} (Common-Kathode, \texttt{not point\_status} mit \texttt{point\_status = '0'})}
 \end{table}
 
 
@@ -88,7 +88,7 @@ Wesentliche Design-Entscheidungen im VHDL-Code:
     \item \textbf{Zeile 48--50:} Der Bus-Handshake (\texttt{ack\_o}) wird bedingungslos im nächsten Takt erzeugt, sobald \texttt{module\_active = '1'}. Dies entspricht der im Script (Listing 5, S. 20) gezeigten Methode für schnelle Wishbone-Slaves ohne Wartezyklen.
     \item \textbf{Zeile 52--54:} Der Schreibzugriff übernimmt nur die unteren 8 Bit des 32-Bit-Datenbusses (\texttt{dat\_i(7 downto 0)}), da das Register 8-Bit-breit ist.
     \item \textbf{Zeile 63--73:} Der kombinatorische Dekoder nutzt \texttt{reg\_sevensegment(3 downto 0)} für den Vergleich, um die Längen-Diskrepanz zwischen 8-Bit-Register und 4-Bit-Hex-Literalen zu vermeiden.
-    \item \textbf{Zeile 76:} Der Ausgang wird zu \texttt{seg\_pattern \& (not point\_status)} zusammengesetzt. Aktuell ist \texttt{point\_status} konstant '0', sodass DP immer ausgeschaltet bleibt (für Common-Anode: \texttt{not '0' = '1'} = aus).
+    \item \textbf{Zeile 76:} Der Ausgang wird zu \texttt{seg\_pattern \& (not point\_status)} zusammengesetzt. Aktuell ist \texttt{point\_status} konstant '0', sodass DP immer ausgeschaltet bleibt (für Common-Kathode: \texttt{not '0' = '1'} = aus).
 \end{itemize}
 
 %--------------------------------------------------------------------
@@ -179,13 +179,25 @@ Das Signal \texttt{reg\_sevensegment} ändert sich zyklisch mit einem Abstand vo
 \label{fig:sim_sevensegment}
 \end{figure}
 
-Die Simulation bestätigt die korrekte Funktion der Adressdekodierung und des kombinatorischen Dekoders. Die Ausgänge \texttt{sevensegment\_o} zeigen die in Tabelle~\ref{tab:decoder_values} spezifizierten Muster, wobei die Common-Anode-Logik (aktiv-LOW) berücksichtigt werden muss.
+Die Simulation bestätigt die korrekte Funktion der Adressdekodierung und des kombinatorischen Dekoders. Die Ausgänge \texttt{sevensegment\_o} zeigen die in Tabelle~\ref{tab:decoder_values} spezifizierten Muster, wobei die Common-Kathode-Logik (aktiv-LOW) berücksichtigt werden muss.
 
 %--------------------------------------------------------------------
 \subsection{Pin-Zuweisung und Hardware-Aufbau}
 
-[TODO: PCF-Einträge ergänzen und Foto des Aufbaus einfügen]
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A6_Abgabe/resources/IMG_1899.jpeg}
+\caption{Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.}
+\label{fig:hardware_photo}
+\end{figure}
 
-Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Anode wird an 5 V gelegt, die einzelnen Segmente über die aktiven-LOW-Ausgänge des FPGA geschaltet.
+Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- 
+oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright 
+SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die
+ FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Kathode
+ wird an 0V/GND gelegt, die einzelnen Segmente über die aktiven-HIGH-Ausgänge des FPGA geschaltet.
+ Zur Ansteuerung wurden die Arduino-Header Pins genutzt. Um die Header zu aktivieren, mussten die zwei $OE5J$
+ und $OE6J$ Signale auf HIGH gezogen
+  werden.
 
 %--------------------------------------------------------------------
