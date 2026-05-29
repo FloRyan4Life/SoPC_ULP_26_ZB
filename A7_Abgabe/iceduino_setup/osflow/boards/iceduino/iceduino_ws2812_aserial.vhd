@@ -13,3 +13,17 @@ port(
 );
 
 end ws2812_aserial;
+
+
+architecture ws2812_aserial_a of ws2812_aserial is
+    
+begin
+    
+    process(clk)
+    begin
+        if rising_edge(clk) then
+
+        end if;
+    end process;
+    
+end architecture ws2812_aserial_a;
