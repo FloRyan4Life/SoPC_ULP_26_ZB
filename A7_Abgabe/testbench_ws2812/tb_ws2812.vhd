@@ -63,7 +63,7 @@ begin
             wait until rising_edge(clk);
             
             -- Nächstes Bit anlegen und Senden starten
-            data_in <= data_vector(i);
+            data_in <= data_vector(3-i);
             wnr     <= '1';
             
             -- Warten bis Modul die Übertragung beginnt (run = '1')
