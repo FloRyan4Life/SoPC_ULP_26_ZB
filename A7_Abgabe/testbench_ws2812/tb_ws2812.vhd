@@ -76,7 +76,7 @@ begin
         end loop;
         
         -- 4. Senden beenden
-        wait until rising_edge(clk);
+        --wait until rising_edge(clk);
         wnr <= '0';
         
         -- 5. Zeit für die letzten Flanken lassen (Reset-Code > 50 us)
