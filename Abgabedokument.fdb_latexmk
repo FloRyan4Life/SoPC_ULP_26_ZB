@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1780400570.67999 "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/Abgabedokument.tex" "Abgabedokument.pdf" "Abgabedokument" 1780400586.06152 0
+["pdflatex"] 1780402286.44586 "c:/Users/jakob/OneDrive/Dokumente/GitHub/SoPC_ULP_26_ZB/Abgabedokument.tex" "Abgabedokument.pdf" "Abgabedokument" 1780402300.70121 0
   "A3_Abgabe/A3_fbreitwi_jzimme14.tex" 1778675264 13366 4a69ae63572388387c28ae73bf711571 ""
   "A3_Abgabe/resources/sim1.png" 1777970563 32097 c892abaa1d23a7a2e374dba30d8c72a3 ""
   "A3_Abgabe/resources/sim_addrslave.png" 1777970563 26094 a79316cf27578ed2d2eb8137b74a17d2 ""
@@ -30,16 +30,16 @@
   "A6_Abgabe/iceduino_setup/sw/programs/iceduino_led/main.c" 1780057664 365 03a792a76ca59b91a6b737f9802a9bca ""
   "A6_Abgabe/resources/IMG_1899.jpeg" 1780057636 5710039 e46a5d88112971eb6ae4e2a9fd1e7731 ""
   "A6_Abgabe/resources/simulation_sevensegment.png" 1780010159 29428 abebbc8999363dc28e27e2b56d244d42 ""
-  "A7_Abgabe/A7_Abgabe.tex" 1780400581 1101 5345d74a161df2d68c8f16ff56b087e8 ""
+  "A7_Abgabe/A7_Abgabe.tex" 1780402285 1159 52c41ca6fcb76e6efacf3387a975dd35 ""
   "A7_Abgabe/resources/drittesBit.png" 1780399602 19760 b3cdfaedf137d5b2d187a1bca611b1d5 ""
   "A7_Abgabe/resources/erstesBit.png" 1780399602 18987 e66a5c17fdc672dc6db7ec911a5fa259 ""
   "A7_Abgabe/resources/ganzeSimulation.png" 1780399602 8997 704254b0a0671de850f679cc0d7c75c1 ""
   "A7_Abgabe/resources/viertesBit.png" 1780399602 19295 93e7149a2a505ae420a90948023b9f44 ""
   "A7_Abgabe/resources/zweitesBit.png" 1780399602 19138 5cd6584041afffb38a523a65b70868ea ""
-  "Abgabedokument.aux" 1780400585 24574 7742bc99ce21ffffa0426e4eb07221ef "pdflatex"
-  "Abgabedokument.lof" 1780400585 2478 0a062853ebd0a1d19edceb535f7c8746 "pdflatex"
+  "Abgabedokument.aux" 1780402299 24574 7742bc99ce21ffffa0426e4eb07221ef "pdflatex"
+  "Abgabedokument.lof" 1780402300 2478 0a062853ebd0a1d19edceb535f7c8746 "pdflatex"
   "Abgabedokument.tex" 1780400019 1403 ce1370995b39fb543d40f60076e78620 ""
-  "Abgabedokument.toc" 1780400585 3657 beef3ae9265df68de5ddc9a35437175b "pdflatex"
+  "Abgabedokument.toc" 1780402300 3657 beef3ae9265df68de5ddc9a35437175b "pdflatex"
   "C:/Users/jakob/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1780010193 82705 9cc9f144eacd499bc23a611703921467 ""
   "C:/Users/jakob/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1776256811 13350272 21c839c5954fdae32f652fc6f8f7a926 ""
   "C:/Users/jakob/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
