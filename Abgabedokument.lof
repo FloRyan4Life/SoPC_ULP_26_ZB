@@ -12,9 +12,9 @@
 \contentsline {figure}{\numberline {11}{\ignorespaces GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt {state}, \texttt {uart\_in} und \texttt {led}}}{30}{figure.caption.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces GTKWave-Simulation: Zeitlicher Verlauf von \texttt {reg\_sevensegment} mit Zählsequenz 0--9. Die Änderungen beginnen nach ca. 170 µs, der Zyklus beträgt ca. 720 ns.}}{43}{figure.caption.18}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.}}{44}{figure.caption.19}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Simulation des Aserial Moduls. Die Bitfolge 1010 wird in LSB-First Reihenfolge gesendet.}}{46}{figure.caption.20}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Timing des ersten Bits}}{46}{figure.caption.21}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Timing des zweiten Bits}}{46}{figure.caption.22}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Timing des dritten Bits}}{47}{figure.caption.23}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Timing des vierten Bits}}{47}{figure.caption.24}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Simulation des Aserial Moduls. Die Bitfolge 1010 wird in MSB-First Reihenfolge gesendet.}}{49}{figure.caption.20}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Timing des ersten Bits}}{50}{figure.caption.21}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Timing des zweiten Bits}}{50}{figure.caption.22}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Timing des dritten Bits}}{50}{figure.caption.23}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Timing des vierten Bits}}{51}{figure.caption.24}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
