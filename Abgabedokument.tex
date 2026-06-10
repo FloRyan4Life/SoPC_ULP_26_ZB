@@ -1,0 +1,63 @@
+\documentclass[parskip=half,11pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}  % skalierbare Latin-Modern-Fonts
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{minted}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+% Zentrale Grafikpfade: LaTeX sucht hier automatisch nach Bildern
+\graphicspath{{A3_Abgabe/resources/}{A4_Abgabe/res/}}
+
+\title{SoPC Abgabedokument}
+\author{Florian Breitwieser \& Jakob Zimmermann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{sloppypar}
+
+\tableofcontents          % Inhaltsverzeichnis
+\listoffigures            % Abbildungsverzeichnis (optional)
+\newpage
+
+% Aufgabe 3 einbinden
+\input{A3_Abgabe/A3_fbreitwi_jzimme14}
+
+% Aufgabe 4 TX einbinden
+\input{A4_Abgabe/A4_tx_Abgabe}
+
+% Aufgabe 4 RX einbinden
+\input{A4_Abgabe/A4_rx_Abgabe}
+
+% Aufgabe 5 einbinden
+\input{A5_Abgabe/A5_RiscV_Abgabe}
+
+% Aufgabe 6 einbinden
+\input{A6_Abgabe/A6_Abgabe}
+
+% Aufgabe 7 einbinden -- WS2812 1
+\input{A7_Abgabe/A7_Abgabe}
+
+% % Aufgabe 8 einbinden -- WS2812 2
+% \input{A8_Abgabe/A8_Abgabe}
+
+% % Aufgabe 9 einbinden -- WS2812 3
+% \input{A9_Abgabe/A9_Abgabe}
+
+% % Aufgabe 10 einbinden -- Game of Life Implementation
+% \input{A10_Abgabe/A10_Abgabe}
+
+\end{sloppypar}
+
+\end{document}

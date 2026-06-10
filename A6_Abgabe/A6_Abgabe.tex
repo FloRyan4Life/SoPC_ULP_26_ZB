@@ -1,0 +1,203 @@
+\newpage
+\section{Seven-Segment-Anzeige (Aufgabe 6)}
+
+\subsection{Grundsätzlicher Aufbau}
+
+Die Ansteuerung der Sieben-Segment-Anzeige folgt dem im Kurs etablierten Muster der Memory-Mapped-I/O über den Wishbone-Bus. Die Datenflusskette ist wie folgt:
+
+\begin{enumerate}
+    \item Die Software (\texttt{main.c}) ruft eine Funktion der Hardware-Abstraction-Layer (HAL) auf
+    \item Die HAL (\texttt{iceduino\_sevensegment.c}) schreibt über einen \texttt{volatile uint8\_t}-Pointer in den Speicher
+    \item Das VHDL-Top-Level leitet den Buszugriff über den Wishbone-Multiplexer an das \texttt{iceduino\_sevensegment}-Modul weiter
+    \item Das Modul speichert das Datenbyte in einem Register und dekodiert es kombinatorisch auf die 7-Segment-Ausgänge
+\end{enumerate}
+
+Dieses Vorgehen entspricht der im Script (Kapitel 6) vorgestellten Integration weiterer Peripherie am Beispiel der LED-Ansteuerung. Die Adressierung erfolgt im Bereich \texttt{0xF00000xx}, wobei das Seven-Segment-Modul die Basisadresse \texttt{0xF0000080} erhält.
+
+%--------------------------------------------------------------------
+\subsection{VHDL-Modul: \texttt{iceduino\_sevensegment.vhd}}
+
+
+Das Modul implementiert einen Wishbone-Slave mit kombinatorischem 7-Segment-Dekoder. Der Schreibzugriff erfolgt taktflankengesteuert, die Segmentdekodierung rein kombinatorisch (keine Taktflanke, keine Register), wie in der Aufgabenstellung gefordert.
+
+Der Dekoder arbeitet auf dem unteren unteren 4 Bits des 8-Bit-Registers, da die Hex-Werte \texttt{x"0"} bis \texttt{x"9"} nur 4 Bit breit sind und ein Vergleich mit 8-Bit-Vektoren in VHDL eine Fehler erzeugen würde. Bit 7 des Registers ist für die spätere Steuerung des Dezimalpunkts (DP) vorgesehen, wird aktuell jedoch nicht genutzt (\texttt{point\_status} ist auf '0' initialisiert).
+
+Der Ausgang \texttt{sevensegment\_o} ist als \textbf{Common-Kathode} ausgelegt: Ein Segment leuchtet, wenn der entsprechende Ausgang auf \texttt{'0'} (LOW) liegt. Die Zuordnung der Segmente erfolgt gemäß Datenblatt des Kingbright SC03-12EWA (vgl. Script S. 22):
+
+\begin{table}[H]
+\centering
+\caption{Segmentzuordnung der Ausgänge \texttt{sevensegment\_o(7 downto 0)}}
+\label{tab:segment_mapping}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Bit-Position} & \textbf{Segment} & \textbf{Logik} & \textbf{Beschreibung} \\
+\hline
+7 & a & \texttt{seg\_pattern(0)} & Oben (MSB) \\
+6 & b & \texttt{seg\_pattern(1)} & Oben rechts \\
+5 & c & \texttt{seg\_pattern(2)} & Unten rechts \\
+4 & d & \texttt{seg\_pattern(3)} & Unten \\
+3 & e & \texttt{seg\_pattern(4)} & Unten links \\
+2 & f & \texttt{seg\_pattern(5)} & Oben links \\
+1 & g & \texttt{seg\_pattern(6)} & Mittleres Segment \\
+0 & DP & \texttt{not point\_status} & Dezimalpunkt (LSB) \\
+\hline
+\end{tabular}
+\end{table}
+
+Die Dekodierung der Ziffern 0--9 ist in Tabelle~\ref{tab:decoder_values} dargestellt. Die Werte entsprechen der kombinatorischen \texttt{when}-Selektion im VHDL-Code.
+
+\begin{table}[H]
+\centering
+\caption{7-Segment-Dekodierung für Ziffern 0--9 (Common-Kathode, aktiv-LOW)}
+\label{tab:decoder_values}
+\begin{tabular}{|c|cccccccccc|}
+\hline
+\textbf{Ziffer} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\
+\hline
+\textbf{Hex} & \texttt{0x01} & \texttt{0x79} & \texttt{0x24} & \texttt{0x30} & \texttt{0x19} & \texttt{0x12} & \texttt{0x02} & \texttt{0x78} & \texttt{0x00} & \texttt{0x10} \\
+\hline
+a & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+b & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+\hline
+c & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+d & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+\hline
+e & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 1 \\
+\hline
+f & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+\hline
+g & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+\hline
+DP & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\\[4pt]
+{\small Anmerkung: DP = 1 bedeutet \textit{aus} (Common-Kathode, \texttt{not point\_status} mit \texttt{point\_status = '0'})}
+\end{table}
+
+
+\captionof{listing}{VHDL-Modul: \texttt{iceduino\_sevensegment.vhd} -- Wishbone-Slave mit kombinatorischem 7-Segment-Dekoder}
+\label{code:sevensegment_vhd}
+\inputminted[linenos,frame=single,fontsize=\footnotesize, breaklines, breakindent=12pt]{vhdl}{A6_Abgabe/iceduino_setup/osflow/boards/iceduino/iceduino_sevensegment.vhd}
+
+
+Wesentliche Design-Entscheidungen im VHDL-Code:
+\begin{itemize}
+    \item \textbf{Zeile 48--50:} Der Bus-Handshake (\texttt{ack\_o}) wird bedingungslos im nächsten Takt erzeugt, sobald \texttt{module\_active = '1'}. Dies entspricht der im Script (Listing 5, S. 20) gezeigten Methode für schnelle Wishbone-Slaves ohne Wartezyklen.
+    \item \textbf{Zeile 52--54:} Der Schreibzugriff übernimmt nur die unteren 8 Bit des 32-Bit-Datenbusses (\texttt{dat\_i(7 downto 0)}), da das Register 8-Bit-breit ist.
+    \item \textbf{Zeile 63--73:} Der kombinatorische Dekoder nutzt \texttt{reg\_sevensegment(3 downto 0)} für den Vergleich, um die Längen-Diskrepanz zwischen 8-Bit-Register und 4-Bit-Hex-Literalen zu vermeiden.
+    \item \textbf{Zeile 76:} Der Ausgang wird zu \texttt{seg\_pattern \& (not point\_status)} zusammengesetzt. Aktuell ist \texttt{point\_status} konstant '0', sodass DP immer ausgeschaltet bleibt (für Common-Kathode: \texttt{not '0' = '1'} = aus).
+\end{itemize}
+
+%--------------------------------------------------------------------
+\subsection{Integration in das Top-Level}
+
+Die Einbindung des Moduls erfordert vier Änderungen in \texttt{neorv32\_iceduino\_top.vhd}, die im Folgenden erläutert werden.
+
+\subsubsection{Neues Slave-Response-Signal}
+
+Für jedes Wishbone-Slave-Modul muss ein individuelles \texttt{slave\_resp\_t}-Record angelegt werden, damit der Multiplexer die Rückgabedaten korrekt verteilen kann (vgl. Script Listing 8, S. 21):
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=140,lastline=142]{vhdl}{A6_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv32_iceduino_top.vhd}
+
+\subsubsection{Instanziierung des Seven-Segment-Moduls}
+
+Das Modul wird mit der generischen Adresse \texttt{0xF0000080} instanziiert und an den globalen Wishbone-Bus sowie den Reset angeschlossen:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=436,lastline=455]{vhdl}{A6_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv32_iceduino_top.vhd}
+
+Die Port-Zuweisung folgt dem im Script (Listing 7, S. 20/21) etablierten Schema: Alle \texttt{master\_bus.*}-Signale sind für alle Module identisch, die individuellen Response-Signale (\texttt{sevensegment\_resp}) werden vom Multiplexer verteilt.
+
+\subsubsection{Erweiterung des Bus-Multiplexers}
+
+Der Multiplexer wurde um den Zweig \texttt{when x"80"} erweitert, der die Response-Signale des Seven-Segment-Moduls auf den aktiven Slave-Response-Record schaltet. Die Sensitivity-Liste des Prozesses enthält zusätzlich \texttt{sevensegment\_resp}:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=231,lastline=234]{vhdl}{A6_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv32_iceduino_top.vhd}
+
+\textbf{Wichtig:} Die Basisadresse wird an \textbf{zwei} Stellen festgelegt: Einmal als generischer Wert bei der Instanz (für die interne \texttt{module\_active}-Erkennung) und einmal im Multiplexer (für die Rückführung der Response-Signale). Eine Diskrepanz zwischen diesen beiden Stellen führt zu einem hängenden Buszugriff, da die CPU dann ewig auf \texttt{ack\_i} wartet.
+
+
+%--------------------------------------------------------------------
+\subsection{Software-Integration}
+
+\subsubsection{HAL: \texttt{iceduino\_sevensegment.h} und \texttt{iceduino\_sevensegment.c}}
+
+Die Header-Datei definiert die öffentliche Schnittstelle der Seven-Segment-HAL:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A6_Abgabe/iceduino_setup/sw/lib/include/iceduino_sevensegment.h}
+
+Die Implementation nutzt den in \texttt{neorv32\_iceduino.h} definierten Memory-Mapped-I/O-Pointer:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A6_Abgabe/iceduino_setup/sw/lib/source/iceduino_sevensegment.c}
+
+
+\newpage
+\subsubsection{Memory-Mapped-I/O-Adresse}
+
+
+Die Basisadresse und der Zugriffs-Pointer werden zentral in \texttt{neorv32\_iceduino.h} definiert:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=45,lastline=50]{c}{A6_Abgabe/iceduino_setup/sw/lib/include/neorv32_iceduino.h}
+Das Schlüsselwort \texttt{volatile} ist zwingend erforderlich, um Compiler-Optimierungen bei Hardware-Zugriffen zu verhindern (vgl. Script S. 21). Ohne \texttt{volatile} könnte der Compiler aufeinanderfolgende Schreibzugriffe auf dieselbe Adresse als redundant erachten und nur den ersten ausführen.
+\subsubsection{Anwendungsprogramm: \texttt{main.c}}
+
+Das Testprogramm zählt zyklisch von 0 bis 9 und schreibt den aktuellen Wert in das Seven-Segment-Register. Durch den Verzicht auf Delays ändert sich der Wert mit maximaler Geschwindigkeit, was in der Simulation gut beobachtbar ist:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A6_Abgabe/iceduino_setup/sw/programs/iceduino_led/main.c}
+
+
+%--------------------------------------------------------------------
+\subsection{Build-System-Anpassungen}
+
+Damit die neuen Dateien bei Synthese und Simulation berücksichtigt werden, müssen zwei Makefiles angepasst werden.
+
+\subsubsection{\texttt{osflow/boards/iceduino/Makefile}}
+
+Die VHDL-Quelle des Seven-Segment-Moduls wird der \texttt{ICEDUINO\_SRC}-Liste hinzugefügt:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=62,lastline=73]{makefile}{A6_Abgabe/iceduino_setup/osflow/boards/iceduino/Makefile}
+
+\subsubsection{\texttt{simulation/Makefile}}
+
+Analog wird die VHDL-Datei für die GHDL-Simulation ergänzt:
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize,firstline=49,lastline=62]{makefile}{A6_Abgabe/iceduino_setup/simulation/Makefile}
+
+%--------------------------------------------------------------------
+\subsection{Simulation}
+
+Die Simulation wurde mit dem Bare-Metal-Testprogramm durchgeführt (\texttt{INT\_BOOTLOADER\_EN => false}). Nach dem Power-On-Reset (ca. 5 µs) durchläuft die CPU den Startup-Code \texttt{crt0.S} (ca. 250 µs) und springt anschließend in die \texttt{main()}-Funktion. Ab ca. \textbf{170 µs} sind die ersten Schreibzugriffe auf die Seven-Segment-Adresse \texttt{0xF0000080} im Wishbone-Bus sichtbar.
+
+Das Signal \texttt{reg\_sevensegment} ändert sich zyklisch mit einem Abstand von ca. \textbf{720 ns}, was der Ausführungszeit der Schleifeniteration in \texttt{main.c} entspricht (mehrere CPU-Instruktionen pro Schleifendurchlauf bei 50 MHz Takt). Die Zählsequenz 0--9 ist im Trace eindeutig erkennbar, wobei der Wert im Register direkt mit dem unteren Nibble des Dekoders korreliert.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A6_Abgabe/resources/simulation_sevensegment.png}
+\caption{GTKWave-Simulation: Zeitlicher Verlauf von \texttt{reg\_sevensegment} mit Zählsequenz 0--9. Die Änderungen beginnen nach ca. 170 µs, der Zyklus beträgt ca. 720 ns.}
+\label{fig:sim_sevensegment}
+\end{figure}
+
+Die Simulation bestätigt die korrekte Funktion der Adressdekodierung und des kombinatorischen Dekoders. Die Ausgänge \texttt{sevensegment\_o} zeigen die in Tabelle~\ref{tab:decoder_values} spezifizierten Muster, wobei die Common-Kathode-Logik (aktiv-LOW) berücksichtigt werden muss.
+
+%--------------------------------------------------------------------
+\subsection{Pin-Zuweisung und Hardware-Aufbau}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A6_Abgabe/resources/IMG_1899.jpeg}
+\caption{Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.}
+\label{fig:hardware_photo}
+\end{figure}
+
+Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- 
+oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright 
+SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die
+ FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Kathode
+ wird an 0V/GND gelegt, die einzelnen Segmente über die aktiven-HIGH-Ausgänge des FPGA geschaltet.
+ Zur Ansteuerung wurden die Arduino-Header Pins genutzt. Um die Header zu aktivieren, mussten die zwei $OE5J$
+ und $OE6J$ Signale auf HIGH gezogen
+  werden.
+
+%--------------------------------------------------------------------

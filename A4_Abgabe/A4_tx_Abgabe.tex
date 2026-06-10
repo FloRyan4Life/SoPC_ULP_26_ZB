@@ -1,0 +1,73 @@
+\newpage
+\section{UART TX}
+
+Das folgende Blockdiagramm zeigt die Struktur des UART TX Moduls. Es besteht aus einem 
+Hauptmodul \texttt{uart\_tx} und einem Testbench-Modul \texttt{uart\_tx\_tb}. 
+Das Hauptmodul implementiert die UART TX Funktionalität, während das Testbench-Modul zur Simulation und Verifikation der Funktionalität des Hauptmoduls dient.
+Der clk-extern Eingang zeigt den tatsächlichen Clock-Eingang, falls eine externe Clock verwendet werden würde. Da wir jedoch die simulierte Clock
+der Testbench verwenden, ist dieser Eingang nur symbolisch. 
+Die Signale rst, clk \(12MHz\), byte\_in und we werden von der Testbench erzeugt, um die Funktionalität des UART TX Moduls zu testen.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{A4_tx_blockdiagram.png}
+  \caption{UART TX Blockdiagramm}
+  \label{fig:uart-tx-blockdiagram}  
+\end{figure}
+
+\newpage
+
+Die Statemaschine des UART TX Moduls besteht aus zwei Hauptzuständen: \texttt{IDLE} und \texttt{SENDING}. Der Automat ist deterministisch.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{A4_tx_statemaschine.png}
+  \caption{UART TX Statemaschine}
+  \label{fig:uart-tx-statemaschine}  
+\end{figure}
+
+\newpage
+
+\inputminted[linenos,breaklines,fontsize=\small]{vhdl}{A4_Abgabe/code/rtl/uart_tx.vhd}
+
+Vor dem Case-Statement wird geprüft ob eine der Zustandsübergangskriterien erfüllt ist. Wenn der we-Eingang aktiv ist, wird das 
+Zustandsübergangssignal button\_detected auf '1' gesetzt, wodurch der Übergang von IDLE zu SENDING ausgelöst wird.
+Sobald das Senden abgeschlossen ist, wird das Zustandsübergangssignal sending\_done auf '1' gesetzt, wodurch der Übergang von SENDING zu IDLE ausgelöst wird.
+
+\newpage
+
+\inputminted[linenos,breaklines,fontsize=\small]{vhdl}{A4_Abgabe/code/sim/uart_tx_tb.vhd}
+
+Die Testbench testet fünf mal die Funktionsalität des TX Moduls. Es werden jeweils verschiedene Byte-Werte gesendet.
+Nach jedem Senden wird überprüft, ob das Startbit korrekt erkannt wurde und ob die Leitung nach dem Senden wieder auf den Idle-Zustand zurückkehrt.
+Die Asserts dienen zur Fehlererkennung. Schlägt keines der Asserts fehl, so wird am Ende der Simulation eine Erfolgsmeldung ausgegeben.
+Die folgenden drei Bilder zeigen drei der Tests aus der Simulation. 
+Zu sehen ist, dass die Variable symbol\_cnt von 0 bis 7 hochzählt und, dabei die entsprechenden Bits des byte\_in-Signals auf das out\_bit-Signal überträgt. 
+Auch die Funktionalität der Start- und Stoppbits ist gut zu erkennen.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{tx_simulation1.png}
+  \caption{UART TX Simulation 1}
+  \label{fig:uart-tx-simulation-1}  
+\end{figure}
+
+Testcase 2 zeigt die Übertragung des Byte-Werts ''10101010''.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{tx_simulation2.png}
+  \caption{UART TX Simulation 2}
+  \label{fig:uart-tx-simulation-2}  
+\end{figure}
+
+Testcase 3 zeigt die Übertragung des Byte-Werts ''11110000''.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{tx_simulation3.png}
+  \caption{UART TX Simulation 3}
+  \label{fig:uart-tx-simulation-3}  
+\end{figure}
+
+Testcase 4 zeigt die Übertragung des Byte-Werts ''00001111''.

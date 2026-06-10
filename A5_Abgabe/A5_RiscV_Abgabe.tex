@@ -1,0 +1,109 @@
+\section{Aufgabe 5.2: Adressierungsarten und Alignment}
+
+Die Aufgabe untersucht, wie der RISC-V Cross-Compiler unterschiedliche Speicherzugriffe auf ein \texttt{uint8\_t}-Array übersetzt, wenn dieses über einen \texttt{uint32\_t}-Pointer gelesen wird. Dabei wird das Phänomen des \emph{Data Structure Alignment} anhand des erzeugten Assemblercodes analysiert.
+
+Das C-Programm definiert ein Byte-Array \texttt{Values[120]} und liest aus drei verschiedenen Positionen jeweils ein 32-Bit-Wort:
+
+\begin{minted}[linenos,breaklines,fontsize=\small]{c}
+uint8_t  Values[COUNT_VALUES];
+uint32_t *value_ad1, *value_ad2, *value_ad3;
+uint32_t value1, value2, value3;
+
+value_ad1 = (uint32_t*)(&(Values[0]));      // Zeile 11
+value_ad2 = (uint32_t*)(&(Values[8+2]));      // Zeile 12
+value_ad3 = (uint32_t*)(&(Values[12+1]));     // Zeile 13
+
+value1 = *(value_ad1);                        // Zeile 14
+value2 = *(value_ad2);                        // Zeile 15
+value3 = *(value_ad3);                        // Zeile 16
+\end{minted}
+
+Die Adressen der drei Zugriffe weisen unterschiedliche Alignments auf:
+
+\begin{center}
+\begin{tabular}{|l|c|c|l|}
+\hline
+\textbf{Variable} & \textbf{Offset} & \textbf{Alignment (mod 4)} & \textbf{Status} \\
+\hline
+\texttt{Values[0]}  & 0  & 0 & 4-Byte-aligned \\
+\texttt{Values[10]} & 10 & 2 & nicht 4-Byte-aligned \\
+\texttt{Values[13]} & 13 & 1 & nicht 4-Byte-aligned \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Assemblercode der drei Zuweisungen}
+
+Aus dem Disassembly (\texttt{main.asm}) wurden die Instruktionen extrahiert, die den Zeilen 14, 15 und 16 des C-Codes entsprechen. Die Basisadresse des Arrays \texttt{Values} liegt im Register \texttt{a5} (\texttt{0x80000018}).
+
+\paragraph{Zeile 14: \texttt{value1 = *(value\_ad1);} -- Aligned-Zugriff (Offset 0)}
+
+\begin{minted}[linenos,breaklines,fontsize=\small]{asm}
+164:  0007a683    lw  a3, 0(a5)    # Load Word (32 Bit): value1 = *(Values+0), aligned
+168:  80000737    lui a4, 0x80000  # Lade obere 20 Bit der Zieladresse
+16c:  00d72023    sw  a3, 0(a4)    # Speichere value1 an Adresse 0x80000000
+\end{minted}
+
+Der Zugriff auf \texttt{Values[0]} ist an einer durch 4 teilbaren Adresse. Der Compiler verwendet einen einzigen \texttt{lw}-Befehl (\emph{Load Word}), der das komplette 32-Bit-Wort in einem Taktzyklus über den 32-Bit-Wishbone-Bus lädt.
+
+\paragraph{Zeile 15: \texttt{value2 = *(value\_ad2);} -- Unaligned-Zugriff (Offset 10)}
+
+\begin{minted}[linenos,breaklines,fontsize=\small]{asm}
+170:  00c7d703    lhu a4, 12(a5)   # Load Half Unsigned: untere 16 Bit (Bytes 12,13)
+174:  00a7d683    lhu a3, 10(a5)   # Load Half Unsigned: obere 16 Bit (Bytes 10,11)
+178:  01071713    slli a4, a4, 16  # Schiebe Bytes 12,13 an Bit-Position 16..31
+17c:  00d76733    or  a4, a4, a3   # Kombiniere zu 32-Bit-Wort: value2 = Bytes[10..13]
+180:  80e1a223    sw  a4, -2044(gp) # Speichere value2 an globale Variable
+\end{minted}
+
+Der Zugriff auf \texttt{Values[10]} ist nicht 4-Byte-aligned (\texttt{10 mod 4 = 2}). Ein \texttt{lw} würde einen Alignment-Trap auslösen. Der Compiler lädt deshalb zwei 16-Bit-Halfwords (\texttt{lhu}) und setzt diese per \texttt{slli} (Shift) und \texttt{or} zu einem 32-Bit-Wert zusammen.
+
+\paragraph{Zeile 16: \texttt{value3 = *(value\_ad3);} -- Unaligned-Zugriff (Offset 13)}
+
+\begin{minted}[linenos,breaklines,fontsize=\small]{asm}
+184:  00e7c703    lbu a4, 14(a5)   # Load Byte Unsigned: Byte 14
+188:  00d7c683    lbu a3, 13(a5)   # Load Byte Unsigned: Byte 13
+18c:  00871713    slli a4, a4, 8   # Schiebe Byte 14 an Position 8..15
+190:  00d766b3    or  a3, a4, a3   # Kombiniere Bytes 13,14
+194:  00f7c703    lbu a4, 15(a5)   # Load Byte Unsigned: Byte 15
+198:  0107c783    lbu a5, 16(a5)   # Load Byte Unsigned: Byte 16
+19c:  01071713    slli a4, a4, 16  # Schiebe Byte 15 an Position 16..23
+1a0:  00d76733    or  a4, a4, a3   # Kombiniere Bytes 13..15
+1a4:  01879793    slli a5, a5, 24  # Schiebe Byte 16 an Position 24..31
+1a8:  00e7e7b3    or  a5, a5, a4   # Komplettes 32-Bit-Wort: value3 = Bytes[13..16]
+1ac:  80f1a423    sw  a5, -2040(gp) # Speichere value3 an globale Variable
+\end{minted}
+
+Der Zugriff auf \texttt{Values[13]} ist völlig unaligned (\texttt{13 mod 4 = 1}). Der Compiler muss vier einzelne Bytes (\texttt{lbu}) laden und durch drei Shift-Operationen (\texttt{slli}) sowie drei OR-Operationen (\texttt{or}) manuell zu einem 32-Bit-Wort zusammensetzen.
+
+\newpage
+
+\subsection{Analyse: Unterschiede und Erklärung}
+
+Die drei scheinbar identischen C-Zuweisungen \texttt{valueX = *(pointer)} werden vom Compiler in fundamental unterschiedliche Assembler-Sequenzen übersetzt:
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Zuweisung} & \textbf{Anzahl Befehle} & \textbf{Zugriffsart} \\
+\hline
+\texttt{value1} (Offset 0)  & 3  & Einzelnes \texttt{lw} (32-Bit aligned) \\
+\texttt{value2} (Offset 10) & 5  & Zwei \texttt{lhu} + Shift/Or (16-Bit kombiniert) \\
+\texttt{value3} (Offset 13) & 10 & Vier \texttt{lbu} + Shift/Or (8-Bit kombiniert) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Beobachtung:} Der aligned Zugriff (\texttt{value1}) ist um den Faktor 3 schneller und benötigt nur ein Drittel des Codespeichers im Vergleich zum völlig unaligned Zugriff (\texttt{value3}).
+
+\textbf{Erklärung -- Data Structure Alignment:}
+
+Die NEORV32 ist eine 32-Bit-RISC-V-CPU mit einem 32-Bit-Wishbone-Bus. Der Befehlssatz erlaubt einen \texttt{lw} (\emph{Load Word}) nur an Adressen, die durch 4 teilbar sind (\emph{4-Byte-Alignment}). Diese Einschränkung resultiert aus der Busarchitektur: Der Speicher liefert in einem Taktzyklus exakt 32 Bit (4 Bytes) an einer Wortgrenze.
+
+Wenn ein \texttt{uint32\_t}-Pointer auf ein \texttt{uint8\_t}-Array zeigt, garantiert das C-Standard nicht, dass die Zieladresse für 32-Bit-Zugriffe geeignet ist. Der Datentyp \texttt{uint8\_t} hat ein Alignment von 1 Byte (er darf an jeder Adresse liegen), während \texttt{uint32\_t} ein Alignment von 4 Byte erfordert.
+
+Bei unaligned Zugriffen muss der Compiler den 32-Bit-Wert aus mehreren, kleineren, erlaubten Ladungen (\texttt{lhu} für 16 Bit, \texttt{lbu} für 8 Bit) manuell zusammensetzen. Dies erfordert zusätzliche Schiebe- und Verknüpfungsoperationen, was zu längerer Ausführungszeit und größerem Code führt. Auf Systemen ohne Hardware-Unterstützung für unaligned Zugriffe (wie der NEORV32 im Standard-Konfiguration) würde ein direktes \texttt{lw} auf \texttt{Values[10]} oder \texttt{Values[13]} sogar einen \emph{Alignment-Trap} (Laufzeitfehler) auslösen.
+
+\textbf{Fazit:} Die Wahl der Datenstrukturen und die Berücksichtigung von Alignment-Regeln sind in eingebetteten Systemen mit RISC-V-Architektur entscheidend für Code-Effizienz und Laufzeit. Ein \texttt{uint32\_t}-Array anstelle des \texttt{uint8\_t}-Arrays hätte alle Zugriffe aligned gemacht und den Overhead vermieden.

@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Fri May 29 14:28:25 2026
+[*]
+[dumpfile] "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A7_Abgabe/testbench_ws2812/simulation/tb_ws2812.ghw"
+[dumpfile_mtime] "Fri May 29 14:27:24 2026"
+[dumpfile_size] 707907
+[savefile] "/home/thk/Desktop/SoPC/SoPC_ULP_26_ZB/A7_Abgabe/testbench_ws2812/tb_ws2812.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-33.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[sst_width] 233
+[signals_width] 110
+[sst_expanded] 1
+[sst_vpaned_height] 144
+@28
+top.tb_ws2812.clk
+top.tb_ws2812.reset
+top.tb_ws2812.wnr
+@29
+top.tb_ws2812.run
+@28
+top.tb_ws2812.data_in
+top.tb_ws2812.ws2812_out
+[pattern_trace] 1
+[pattern_trace] 0
