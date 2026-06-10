@@ -1,11 +1,11 @@
-libary ieee;
+library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity shiftregister is
     port(
         clk : in std_logic;
-        sfr_din : in std_logic_vector(7 downto 0);
+        sfr_din : in std_ulogic_vector(7 downto 0);
         sfr_rst : in std_logic;
         sfr_shift : in std_logic;
         sfr_load : in std_logic;
@@ -16,7 +16,7 @@ end shiftregister;
 
 architecture shiftregister_a of shiftregister is
     
-    signal shift_reg : std_logic_vector(7 downto 0) := (others => '0');
+    signal shift_reg : std_ulogic_vector(7 downto 0) := (others => '0');
 
 begin
 

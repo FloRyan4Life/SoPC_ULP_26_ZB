@@ -21,34 +21,35 @@ entity fsm is
         sfr_shift : out std_logic;
         sfr_load : out std_logic;
         -- to ws2812 aserial
-        aserial_wnr : out std_logic;
+        aserial_wnr : out std_logic
     );
 end fsm;
 
-architecture fsm_a is
+architecture fsm_a of fsm is
     type state_type is (LOAD_DATA, SENDING, IDLE);
     signal state : state_type := IDLE;
-    variable address_inc_done : std_logic := '0';
-    variable last_run : std_logic := '0';
-    variable first_addr : std_logic := '1';
+
     begin
 
         process(clk)
+        variable addr_inc_done : std_logic := '0';
+        variable last_run : std_logic := '0';
+        variable first_addr : std_logic := '1';
         begin
             if rising_edge(clk) then
                 case state is
                     when LOAD_DATA =>
                         if first_addr = '1' then
                             sfr_load <= '1';
-                            first_addr <= '0';
+                            first_addr := '0';
                             state <= SENDING;
                         else 
                             if addr_inc_done = '0' then
                                 acnt_inc <= '1';
-                                addr_inc_done <= '1';
+                                addr_inc_done := '1';
                             else  
                                 acnt_inc <= '0';
-                                addr_inc_done <= '0';
+                                addr_inc_done := '0';
                                 sfr_load <= '1';
                                 aserial_wnr <= '1';
                                 state <= SENDING;
@@ -71,7 +72,7 @@ architecture fsm_a is
                         end if;  
                     when IDLE =>
                         if start_send = '1' then
-                            first_addr <= '1';
+                            first_addr := '1';
                             state <= LOAD_DATA;
                             acnt_rst <= '0';
                             sfr_rst <= '0';                            

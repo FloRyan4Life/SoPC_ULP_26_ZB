@@ -2,16 +2,19 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity fsm is
-    port(
-    );
-end fsm;
+library work;
+use work.const_image.all;
 
-architecture fsm_a is
+entity RAMtoWS2812 is
+end RAMtoWS2812;
+
+architecture RAMtoWS2812_a of RAMtoWS2812 is
+    signal clk : std_logic := '0';
+
     -- top level signals
     signal ws2812_out : std_logic := '0';
-    signal raddr : std_logic_vector(7 downto 0):= "00000000";
-    signal dout : std_logic_vector(7 downto 0) := "00000000";
+    signal raddr : std_ulogic_vector(7 downto 0):= "00000000";
+    signal dout : std_ulogic_vector(7 downto 0) := "00000000";
     signal start_send : std_logic := '0';
 
     -- intern signals
@@ -79,10 +82,13 @@ architecture fsm_a is
             ws2812_out => ws2812_out,
             run => aserial_run
         );
+        
 
         process
         begin
+            -- command to put data from the array into the dut
+            dout <= rom_image1(to_integer(unsigned(raddr)));
             
         end process;
 
-end architecture fsm_a;
+end architecture RAMtoWS2812_a;
