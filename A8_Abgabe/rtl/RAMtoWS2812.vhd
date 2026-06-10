@@ -6,16 +6,23 @@ library work;
 use work.const_image.all;
 
 entity RAMtoWS2812 is
+    port(
+        clk : in std_logic;
+        ws2812_out : out std_logic;
+        dout : in std_ulogic_vector(7 downto 0);
+        raddr : out std_ulogic_vector(7 downto 0);
+        start_send : in std_logic
+    );
 end RAMtoWS2812;
 
 architecture RAMtoWS2812_a of RAMtoWS2812 is
-    signal clk : std_logic := '0';
+    --signal clk : std_logic := '0';
 
     -- top level signals
-    signal ws2812_out : std_logic := '0';
-    signal raddr : std_ulogic_vector(7 downto 0):= "00000000";
-    signal dout : std_ulogic_vector(7 downto 0) := "00000000";
-    signal start_send : std_logic := '0';
+    --signal ws2812_out : std_logic := '0';
+    --signal raddr : std_ulogic_vector(7 downto 0):= "00000000";
+    --signal dout : std_ulogic_vector(7 downto 0) := "00000000";
+    --signal start_send : std_logic := '0';
 
     -- intern signals
     signal aserial_run : std_logic := '0';
@@ -36,7 +43,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
         
     begin
 
-        clk <= not clk after 10 ns;
+        --clk <= not clk after 10 ns;
 
         fsm : entity work.fsm
         port map(
@@ -83,27 +90,5 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             run => aserial_run
         );
         
-
-        process
-        begin
-
-            wait for 100 ns;
-            dout <= x"ff";
-            start_send <= '1';
-
-            -- for i in 0 to 1000 loop
-
-            --     wait for 5 ns;
-            -- end loop;
-
-            -- command to put data from the array into the dut
-            
-            
-            --dout <= rom_image1(to_integer(unsigned(raddr)));
-            wait for 10000 ns;
-            dout <= x"66";
-
-            wait for 10000 ns;
-        end process;
 
 end architecture RAMtoWS2812_a;

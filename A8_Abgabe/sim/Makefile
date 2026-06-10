@@ -1,6 +1,6 @@
 # vhdl files
-TESTBENCH=RAMtoWS2812
-FILES = ./*vhd
+TESTBENCH=RAMtoWS2812_tb
+FILES = ../rtl/*vhd
 VHDLEX = .vhd
 
 # testbench
@@ -12,7 +12,7 @@ GHDL_CMD = ghdl
 GHDL_FLAGS  = 
 
 SIMDIR = simulation
-STOP_TIME = 1ms
+STOP_TIME = 10ms
 GHDL_SIM_OPT = --stop-time=$(STOP_TIME) --stop-delta=100000
 
 WAVEFORM_VIEWER = gtkwave
