@@ -8,7 +8,7 @@ entity addresscounter is
         acnt_rst : in std_logic;
         acnt_inc : in std_logic;
         acnt_eq191  : out std_logic;
-        address : out std_logic_vector(7 downto 0)
+        address : inout std_logic_vector(7 downto 0)
     );
 end addresscounter;
 
