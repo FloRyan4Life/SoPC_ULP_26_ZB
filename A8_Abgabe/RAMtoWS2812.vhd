@@ -1,0 +1,88 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity fsm is
+    port(
+    );
+end fsm;
+
+architecture fsm_a is
+    -- top level signals
+    signal ws2812_out : std_logic := '0';
+    signal raddr : std_logic_vector(7 downto 0):= "00000000";
+    signal dout : std_logic_vector(7 downto 0) := "00000000";
+    signal start_send : std_logic := '0';
+
+    -- intern signals
+    signal aserial_run : std_logic := '0';
+    signal acnt_eq191 : std_logic := '0';
+    signal sfr_done : std_logic := '0';
+
+    signal sfr_rst : std_logic := '0';
+    signal sfr_shift : std_logic := '0';
+    signal sfr_load : std_logic := '0';
+    signal aserial_wnr : std_logic := '0';
+    signal acnt_rst : std_logic := '0';
+    signal acnt_inc : std_logic := '0';
+
+    signal sfr_serout : std_logic := '0';
+
+    signal aserial_rst : std_logic := '0';
+
+        
+    begin
+
+        clk <= not clk after 10 ns;
+
+        fsm : entity work.fsm
+        port map(
+            clk => clk,
+            start_send => start_send,
+            aserial_run => aserial_run,
+            acnt_eq191 => acnt_eq191,
+            sfr_done => sfr_done,
+            acnt_rst => acnt_rst,
+            acnt_inc => acnt_inc,
+            sfr_rst => sfr_rst,
+            sfr_shift => sfr_shift,
+            sfr_load => sfr_load,
+            aserial_wnr => aserial_wnr
+        );
+
+        addr_counter : entity work.addresscounter
+        port map(
+            clk => clk,
+            acnt_rst => acnt_rst,
+            acnt_inc => acnt_inc,
+            address => raddr,
+            acnt_eq191 => acnt_eq191
+        );
+
+        sfr : entity work.shiftregister
+        port map(
+            clk => clk,
+            sfr_din => dout,
+            sfr_rst => sfr_rst,
+            sfr_shift => sfr_shift,
+            sfr_load => sfr_load,
+            sfr_done => sfr_done,
+            sfr_serout => sfr_serout
+        );
+
+        ws2812_aserial : entity work.ws2812_aserial
+        port map (
+            reset => aserial_rst,
+            clk => clk,
+            data_in => sfr_serout,
+            wnr => aserial_wnr,
+            ws2812_out => ws2812_out,
+            run => aserial_run
+        );
+
+        process
+        begin
+            
+        end process;
+
+end architecture fsm_a;
