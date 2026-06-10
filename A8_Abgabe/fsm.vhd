@@ -32,9 +32,10 @@ architecture fsm_a of fsm is
     begin
 
         process(clk)
-        variable addr_inc_done : std_logic := '0';
-        variable last_run : std_logic := '0';
+        --variable addr_inc_done : std_logic := '0';
+        --variable last_run : std_logic := '0';
         variable first_addr : std_logic := '1';
+        variable load_steps : integer := 0;
         begin
             if rising_edge(clk) then
                 case state is
@@ -44,14 +45,18 @@ architecture fsm_a of fsm is
                             first_addr := '0';
                             state <= SENDING;
                         else 
-                            if addr_inc_done = '0' then
+                            if load_steps = 0 then
                                 acnt_inc <= '1';
-                                addr_inc_done := '1';
-                            else  
+                                --addr_inc_done := '1';
+                                load_steps := load_steps + 1;
+                            elsif load_steps = 1 then
                                 acnt_inc <= '0';
-                                addr_inc_done := '0';
+                                --addr_inc_done := '0';
                                 sfr_load <= '1';
+                                load_steps := load_steps +1;
+                            else
                                 aserial_wnr <= '1';
+                                load_steps := 0;
                                 state <= SENDING;
                             end if;
                         end if;

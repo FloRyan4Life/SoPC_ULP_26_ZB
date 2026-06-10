@@ -21,7 +21,7 @@ architecture shiftregister_a of shiftregister is
 begin
 
     process(clk)
-        variable shift_cnt : integer range 0 to 7 := 0;
+        variable shift_cnt : integer range 0 to 8 := 0;
     begin
         if rising_edge(clk) then
             -- sfr_serout <= shift_reg(7);
@@ -38,10 +38,13 @@ begin
                 sfr_done <= '0';
 
             elsif sfr_shift = '1' then
+                if shift_cnt < 8 then
                 shift_reg <= shift_reg(6 downto 0) & '0';
                 shift_cnt := shift_cnt + 1;
-                if shift_cnt = 7 then
+                if shift_cnt > 6 then
                     sfr_done <= '1';
+                end if;
+
                 end if;
 
             end if;
