@@ -88,6 +88,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
         begin
 
             wait for 100 ns;
+            dout <= x"ff";
             start_send <= '1';
 
             -- for i in 0 to 1000 loop
@@ -96,8 +97,13 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             -- end loop;
 
             -- command to put data from the array into the dut
-            dout <= rom_image1(to_integer(unsigned(raddr)));
             
+            
+            --dout <= rom_image1(to_integer(unsigned(raddr)));
+            wait for 10000 ns;
+            dout <= x"66";
+
+            wait for 10000 ns;
         end process;
 
 end architecture RAMtoWS2812_a;

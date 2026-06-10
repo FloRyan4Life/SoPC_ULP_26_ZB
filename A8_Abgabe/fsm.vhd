@@ -41,9 +41,19 @@ architecture fsm_a of fsm is
                 case state is
                     when LOAD_DATA =>
                         if first_addr = '1' then
-                            sfr_load <= '1';
-                            first_addr := '0';
-                            state <= SENDING;
+                            if load_steps = 0 then
+
+                                sfr_load <= '1';
+                                load_steps := load_steps + 1;
+                            elsif load_steps = 1 then
+                                aserial_wnr <= '1';
+                                load_steps := 0;
+                                first_addr := '0';
+                                load_steps := load_steps + 1;
+                            else
+                                state <= SENDING;
+                            end if;
+
                         else 
                             if load_steps = 0 then
                                 acnt_inc <= '1';
@@ -65,11 +75,15 @@ architecture fsm_a of fsm is
                     when SENDING =>
                         sfr_load <= '0';
                         if sfr_done = '0' then
+                            sfr_shift <= '0';
                             if aserial_run = '0' then                    
                                 sfr_shift <= '1';
                             end if; 
                         else 
-                            state <= LOAD_DATA;                           
+                            if aserial_run = '0' then
+
+                                state <= LOAD_DATA;  
+                            end if;                        
                         end if;
 
                         if acnt_eq191 = '1' then
@@ -78,12 +92,16 @@ architecture fsm_a of fsm is
                     when IDLE =>
                         if start_send = '1' then
                             first_addr := '1';
-                            state <= LOAD_DATA;
                             acnt_rst <= '0';
-                            sfr_rst <= '0';                            
+                            sfr_rst <= '0'; 
+                            sfr_shift <= '0';
+                            sfr_load <= '0';                          
+                            state <= LOAD_DATA;
                         else 
                             acnt_rst <= '1';
                             sfr_rst <= '1';
+                            sfr_shift <= '0';
+                            sfr_load <= '0';
                         end if;
 
                 end case;
