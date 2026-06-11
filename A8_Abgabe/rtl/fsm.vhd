@@ -87,6 +87,9 @@ architecture fsm_a of fsm is
                         end if;
 
                         if acnt_eq191 = '1' then
+                            aserial_wnr <= '0';
+                            sfr_shift <= '0';
+                            sfr_load <= '0';
                             state <= IDLE;
                         end if;  
                     when IDLE =>
