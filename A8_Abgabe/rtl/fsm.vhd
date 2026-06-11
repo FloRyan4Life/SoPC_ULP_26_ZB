@@ -36,41 +36,48 @@ architecture fsm_a of fsm is
         --variable last_run : std_logic := '0';
         variable first_addr : std_logic := '1';
         variable load_steps : integer := 0;
+        variable loading_finished : std_logic := '0';
         begin
             if rising_edge(clk) then
                 case state is
                     when LOAD_DATA =>
-                        if first_addr = '1' then
-                            if load_steps = 0 then
 
-                                sfr_load <= '1';
-                                load_steps := load_steps + 1;
+                    
+                    if first_addr = '1' then
+                        if load_steps = 0 then
+                            
+                            sfr_load <= '1';
+                            load_steps := load_steps + 1;
                             elsif load_steps = 1 then
                                 aserial_wnr <= '1';
                                 load_steps := 0;
                                 first_addr := '0';
                                 load_steps := load_steps + 1;
-                            else
-                                state <= SENDING;
-                            end if;
-
-                        else 
-                            if load_steps = 0 then
-                                acnt_inc <= '1';
-                                --addr_inc_done := '1';
-                                load_steps := load_steps + 1;
-                            elsif load_steps = 1 then
-                                acnt_inc <= '0';
-                                --addr_inc_done := '0';
-                                sfr_load <= '1';
-                                load_steps := load_steps +1;
-                            else
-                                aserial_wnr <= '1';
-                                load_steps := 0;
-                                state <= SENDING;
-                            end if;
-                        end if;
-
+                                else
+                                loading_finished := '1';
+                                end if;
+                                
+                                else 
+                                if load_steps = 0 then
+                                    acnt_inc <= '1';
+                                    --addr_inc_done := '1';
+                                    load_steps := load_steps + 1;
+                                    elsif load_steps = 1 then
+                                        acnt_inc <= '0';
+                                        --addr_inc_done := '0';
+                                        sfr_load <= '1';
+                                        load_steps := load_steps +1;
+                                        else
+                                        aserial_wnr <= '1';
+                                        load_steps := 0;
+                                        loading_finished := '1';
+                                        end if;
+                                end if;
+                                        
+                                if loading_finished = '1' then
+                                    loading_finished := '0';
+                                    state <= SENDING;
+                                end if;
 
                     when SENDING =>
                         sfr_load <= '0';
