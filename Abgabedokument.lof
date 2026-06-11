@@ -19,6 +19,11 @@
 \contentsline {figure}{\numberline {18}{\ignorespaces Timing des vierten Bits}}{52}{figure.caption.24}%
 \contentsline {figure}{\numberline {19}{\ignorespaces Blockschaltbild des RAMtoWS2812 Moduls}}{53}{figure.caption.25}%
 \contentsline {figure}{\numberline {20}{\ignorespaces Zustandsüberführungsdiagramm der FSM des WS2812-to-RAM Moduls}}{54}{figure.caption.26}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Darstellung des ersten ROM Images auf der WS2812 LED Matrix}}{64}{figure.caption.27}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Darstellung des zweiten ROM Images auf der WS2812 LED Matrix}}{65}{figure.caption.28}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Ausschnitt der Simulation über den Sendevorgang von 5 Bytes}}{63}{figure.caption.27}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Simulation des FSM-Zustandsübergangs IDLE $\rightarrow $ LOAD\_DATA}}{63}{figure.caption.28}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow $ SENDING}}{63}{figure.caption.29}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ LOAD\_DATA}}{64}{figure.caption.30}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ IDLE}}{64}{figure.caption.31}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Darstellung des ersten ROM Images auf der WS2812 LED Matrix}}{66}{figure.caption.32}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Darstellung des zweiten ROM Images auf der WS2812 LED Matrix}}{67}{figure.caption.33}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

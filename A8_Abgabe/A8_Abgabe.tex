@@ -52,11 +52,55 @@ Ein wesentlicher Aspekt der Protokollsteuerung ist das Handshaking zwischen FSM,
 
 \subsection{Simulation des WS2812-to-RAM Moduls}
 
-Um die Funktionalität des \texttt{RAMtoWS2812}-Moduls zu überprüfen, wurde eine Testbench erstellt, die den RAM durch einen ROM mit vordefinierten RGB-Werten ersetzt und die Ausgabe an die WS2812-Kette simuliert. In der Testbench wird 
+Zur Verifikation der RAMtoWS2812-Komponente wurde eine VHDL-Testbench erstellt, die den vollständigen Datenfluss vom ROM bis zur seriellen Ausgabe überprüft. Die Testbench instanziiert das Top-Level-Modul und erzeugt den 50-MHz-Takt sowie das Start-Signal, das den Sendevorgang auslöst.
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A8_Abgabe/sim/RAMtoWS2812_tb.vhd}
 
-% Platzhalter für die Simulationsergebnisse, die gleich noch eingefügt werden.
+Zur Überprüfung der korrekten Funktion des Moduls und insbesondere der FSM wurden die relevanten Signale wie \texttt{acnt\_eq191}, \texttt{aserial\_run}, \texttt{start\_send}, \texttt{loading\_finished} und \texttt{sfr\_done} im Simulationsverlauf beobachtet. Die Simulationsergebnisse zeigten, dass die FSM die erwarteten Zustandsübergänge durchläuft, die Adressierung korrekt erfolgt, und die seriellen Signale entsprechend dem WS2812-Protokoll generiert werden. Alle 192 Byte wurden erfolgreich übertragen, was die korrekte Implementierung des RAMtoWS2812-Moduls bestätigt.
+DEr Folgende Screenshot aus der Simulation zeigt das Senden von 5 Bytes an die WS2812-Matrix über den Pin \texttt{ws2812\_out}. Je gesendetem Byte wird das Shiftregister siebenmal verschoben, was gut an dem Signalverlauf von \texttt{sfr\_shift} zu erkennen ist.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A8_Abgabe/res/einigeAblaeufe.png}
+\caption{Ausschnitt der Simulation über den Sendevorgang von 5 Bytes}
+\label{fig:SIM-Run}
+\end{figure}
+
+Die nächsten Screenshots aus der Simulation zeigen die vier möglichen Zustandsübergänge der FSM.
+
+\begin{itemize}[leftmargin=3cm]
+    \item IDLE $\rightarrow$ LOAD\_DATA
+    \item LOAD\_DATA $\rightarrow$ SENDING
+    \item SENDING $\rightarrow$ LOAD\_DATA
+    \item SENDING $\rightarrow$ IDLE
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A8_Abgabe/res/idle_to_load.png}
+\caption{Simulation des FSM-Zustandsübergangs IDLE $\rightarrow$ LOAD\_DATA}
+\label{fig:SIM-Transition1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A8_Abgabe/res/load_to_sending.png}
+\caption{Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow$ SENDING}
+\label{fig:SIM-Transition2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A8_Abgabe/res/sending_to_load.png}
+\caption{Simulation des FSM-Zustandsübergangs  SENDING $\rightarrow$ LOAD\_DATA}
+\label{fig:SIM-Transition3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{A8_Abgabe/res/sending_to_idle.png}
+\caption{Simulation des FSM-Zustandsübergangs  SENDING $\rightarrow$ IDLE}
+\label{fig:SIM-Transition4}
+\end{figure}
 
 \subsection{Synthese und Test des WS2812-to-RAM Moduls}
 
@@ -85,4 +129,5 @@ Nach erfolgreicher Simulation wurde das Design synthetisiert und auf dem Iceduin
 \label{fig:RAMtoWS2812_test2}
 \end{figure}
 
-Es ist zu erkennen, dass die Bilder korrekt auf der LED-Matrix dargestellt werden. Das erste Bild zeigt ein einen kleinen Dinosaurier, das zweite Bild stellt ein Smiley-Gesicht dar. Diese Ergebnisse bestätigen die erfolgreiche Implementierung und Funktionalität des \texttt{RAMtoWS2812}-Moduls.
+Es ist zu erkennen, dass die Bilder korrekt auf der LED-Matrix dargestellt werden. Das erste Bild zeigt 
+ einen kleinen Dinosaurier, das zweite Bild stellt ein Smiley-Gesicht dar. Diese Ergebnisse bestätigen die erfolgreiche Implementierung und Funktionalität des \texttt{RAMtoWS2812}-Moduls.
