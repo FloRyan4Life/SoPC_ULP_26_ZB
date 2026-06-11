@@ -1,5 +1,5 @@
 # vhdl files
-TOPLEVEL=RAMtoWS2812
+TOPLEVEL=top
 FILES = ../rtl/*vhd
 VHDLEX = .vhd
 
