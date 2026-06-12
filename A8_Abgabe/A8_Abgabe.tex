@@ -57,7 +57,7 @@ Zur Verifikation der RAMtoWS2812-Komponente wurde eine VHDL-Testbench erstellt, 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A8_Abgabe/sim/RAMtoWS2812_tb.vhd}
 
 Zur Überprüfung der korrekten Funktion des Moduls und insbesondere der FSM wurden die relevanten Signale wie \texttt{acnt\_eq191}, \texttt{aserial\_run}, \texttt{start\_send}, \texttt{loading\_finished} und \texttt{sfr\_done} im Simulationsverlauf beobachtet. Die Simulationsergebnisse zeigten, dass die FSM die erwarteten Zustandsübergänge durchläuft, die Adressierung korrekt erfolgt, und die seriellen Signale entsprechend dem WS2812-Protokoll generiert werden. Alle 192 Byte wurden erfolgreich übertragen, was die korrekte Implementierung des RAMtoWS2812-Moduls bestätigt.
-DEr Folgende Screenshot aus der Simulation zeigt das Senden von 5 Bytes an die WS2812-Matrix über den Pin \texttt{ws2812\_out}. Je gesendetem Byte wird das Shiftregister siebenmal verschoben, was gut an dem Signalverlauf von \texttt{sfr\_shift} zu erkennen ist.
+Der Folgende Screenshot aus der Simulation zeigt das Senden von 5 Bytes an die WS2812-Matrix über den Pin \texttt{ws2812\_out}. Je gesendetem Byte wird das Shiftregister siebenmal verschoben, was gut an dem Signalverlauf von \texttt{sfr\_shift} zu erkennen ist.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{A8_Abgabe/res/einigeAblaeufe.png}
@@ -112,8 +112,11 @@ Diese ROM-Images wurden in einer separaten Entität definiert, um die Übersicht
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A8_Abgabe/rtl/rom.vhd}
 
+Dieses ROM-Image wurde zusammen mit der Hauptkomponente \texttt{ramtows2812} in einer der übergeordneten Entität \texttt{top} instanziiert und anschließend synthetisiert.
 
-Nach erfolgreicher Simulation wurde das Design synthetisiert und auf dem Iceduino-Board getestet. Der Ausgang \texttt{ws2812\_out} wurde dabei auf Pin~3 des PMOD3-Headers gelegt, der mit FPGA-Pin~8 verbunden ist. Die WS2812-Matrix wurde mit 5~V und GND über die Arduino-Header versorgt. Die Darstellung der vordefinierten ROM-Bilder bestätigte die korrekte Umsetzung des seriellen Protokolls und die zeitgerechte Ansteuerung aller 64 LEDs.
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A8_Abgabe/rtl/top.vhd}
+
+Nach erfolgreicher Synthese wurde das Iceduino-Board programmiert. Der Ausgang \texttt{ws2812\_out} wurde dabei auf Pin~3 des PMOD3-Headers gelegt, der mit FPGA-Pin~8 verbunden ist. Die WS2812-Matrix wurde mit 5~V und GND über die Arduino-Header versorgt. Die Darstellung der vordefinierten ROM-Bilder bestätigte die korrekte Umsetzung des seriellen Protokolls und die zeitgerechte Ansteuerung aller 64 LEDs.
 
 \begin{figure}[H]
 \centering

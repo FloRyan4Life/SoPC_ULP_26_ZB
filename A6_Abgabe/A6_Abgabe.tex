@@ -184,20 +184,20 @@ Die Simulation bestätigt die korrekte Funktion der Adressdekodierung und des ko
 %--------------------------------------------------------------------
 \subsection{Pin-Zuweisung und Hardware-Aufbau}
 
+
+
+Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- 
+oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright 
+SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die
+FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Kathode
+wird an 0V/GND gelegt, die einzelnen Segmente über die aktiven-HIGH-Ausgänge des FPGA geschaltet.
+Zur Ansteuerung wurden die Arduino-Header Pins genutzt. Um die Header zu aktivieren, mussten die zwei $OE5J$
+und $OE6J$ Signale auf HIGH gezogen
+werden.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth, angle=-90]{A6_Abgabe/resources/IMG_1899.jpeg}
 \caption{Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.}
 \label{fig:hardware_photo}
 \end{figure}
-
-Die Pin-Zuweisung erfolgt über die \texttt{iceduino.pcf} für freie PMOD- 
-oder Arduino-Header-Pins. Die Sieben-Segment-Anzeige vom Typ Kingbright 
-SC03-12EWA wird mit Vorwiderständen (ca. 220--330 Ohm pro Segment) an die
- FPGA-Ausgänge angeschlossen, um den Strom zu begrenzen. Die Common-Kathode
- wird an 0V/GND gelegt, die einzelnen Segmente über die aktiven-HIGH-Ausgänge des FPGA geschaltet.
- Zur Ansteuerung wurden die Arduino-Header Pins genutzt. Um die Header zu aktivieren, mussten die zwei $OE5J$
- und $OE6J$ Signale auf HIGH gezogen
-  werden.
-
-%--------------------------------------------------------------------
