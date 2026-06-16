@@ -6,11 +6,15 @@ use ieee.numeric_std.all;
 -- use work.const_image.all;
 
 entity RAMtoWS2812 is
+    generic(
+        ADDR_WIDTH : natural := 8;
+        DATA_WIDTH : natural := 8
+    );
     port(
         clk : in std_logic;
         ws2812_out : out std_logic;
-        dout : in std_ulogic_vector(7 downto 0);
-        raddr : out std_ulogic_vector(7 downto 0);
+        dout : in std_ulogic_vector((DATA_WIDTH-1) downto 0);
+        raddr : out std_ulogic_vector((ADDR_WIDTH-1) downto 0);
         start_send : in std_logic
     );
 end RAMtoWS2812;
@@ -70,6 +74,10 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
         );
 
         sfr : entity work.shiftregister
+        generic map(
+            DATA_WIDTH => DATA_WIDTH,
+            ADDR_WIDTH => ADDR_WIDTH
+        )
         port map(
             clk => clk,
             sfr_din => dout,
