@@ -23,6 +23,12 @@ architecture RAMtoWS2812_tb_a of RAMtoWS2812_tb is
         clk <= not clk after 10 ns;
 
         rantows2812 : entity work.RAMtoWS2812
+        generic map(
+            ADDR_WIDTH => 8,
+            DATA_WIDTH => 8,
+            UNUSED_BITS => 0,
+            MAX_ADDR => 191
+        )
         port map(
             clk => clk,
             start_send => start_send,

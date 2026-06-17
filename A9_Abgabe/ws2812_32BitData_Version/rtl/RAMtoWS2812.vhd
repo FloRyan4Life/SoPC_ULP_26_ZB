@@ -8,7 +8,9 @@ use ieee.numeric_std.all;
 entity RAMtoWS2812 is
     generic(
         ADDR_WIDTH : natural := 8;
-        DATA_WIDTH : natural := 32
+        DATA_WIDTH : natural := 8;
+        UNUSED_BITS : natural := 0;
+        MAX_ADDR : natural := 191
     );
     port(
         clk : in std_logic;
@@ -30,7 +32,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
 
     -- intern signals
     signal aserial_run : std_logic := '0';
-    signal acnt_eq63 : std_logic := '0';
+    signal acnt_eq_max : std_logic := '0';
     signal sfr_done : std_logic := '0';
 
     signal sfr_rst : std_logic := '0';
@@ -54,7 +56,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             clk => clk,
             start_send => start_send,
             aserial_run => aserial_run,
-            acnt_eq63 => acnt_eq63,
+            acnt_eq_max => acnt_eq_max,
             sfr_done => sfr_done,
             acnt_rst => acnt_rst,
             acnt_inc => acnt_inc,
@@ -65,18 +67,22 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
         );
 
         addr_counter : entity work.addresscounter
+            generic map(
+                ADDR_WIDTH => ADDR_WIDTH,
+                MAX_ADDR => MAX_ADDR
+            )
         port map(
             clk => clk,
             acnt_rst => acnt_rst,
             acnt_inc => acnt_inc,
             address => raddr,
-            acnt_eq63 => acnt_eq63
+            acnt_eq_max => acnt_eq_max
         );
 
         sfr : entity work.shiftregister
         generic map(
             DATA_WIDTH => DATA_WIDTH,
-            ADDR_WIDTH => ADDR_WIDTH
+            UNUSED_BITS => UNUSED_BITS
         )
         port map(
             clk => clk,

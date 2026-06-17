@@ -3,6 +3,12 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity top is
+    generic(
+        ADDR_WIDTH : natural := 8;
+        DATA_WIDTH : natural := 8;
+        UNUSED_BITS : natural := 0;
+        MAX_ADDR : natural := 191
+    );
     port(
         clk : in std_logic;
         start_send : inout std_logic;
@@ -22,6 +28,12 @@ architecture top_a of top is
         );
 
         ramtows2812_inst : entity work.ramtows2812
+        generic map(
+            ADDR_WIDTH => ADDR_WIDTH,
+            DATA_WIDTH => DATA_WIDTH,
+            UNUSED_BITS => UNUSED_BITS,
+            MAX_ADDR => MAX_ADDR
+        )
         port map(
             clk => clk,
             start_send => start_send,

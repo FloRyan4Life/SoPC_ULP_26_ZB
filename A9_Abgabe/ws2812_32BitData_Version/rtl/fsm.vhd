@@ -10,7 +10,7 @@ entity fsm is
         -- from ws2812 aserial
         aserial_run : in std_logic;
         -- from addresscounter
-        acnt_eq63 : in std_logic;
+        acnt_eq_max : in std_logic;
         -- from shiftregister
         sfr_done : in std_logic;
         -- to addresscounter
@@ -93,7 +93,7 @@ architecture fsm_a of fsm is
                             end if;                        
                         end if;
 
-                        if acnt_eq63 = '1' then
+                        if acnt_eq_max = '1' then
                             aserial_wnr <= '0';
                             sfr_shift <= '0';
                             sfr_load <= '0';
