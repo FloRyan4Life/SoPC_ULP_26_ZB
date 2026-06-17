@@ -12,7 +12,7 @@ entity addresscounter is
         acnt_rst : in std_logic;
         acnt_inc : in std_logic;
         acnt_eq_max  : out std_logic;
-        address : out std_ulogic_vector(ADDR_WIDTH-1 downto 0)
+        address : out std_ulogic_vector((ADDR_WIDTH-1) downto 0)
     );
 end addresscounter;
 
@@ -22,7 +22,7 @@ architecture addresscounter_a of addresscounter is
 begin
     
     process(clk)
-    variable addr_cnt : unsigned(ADDR_WIDTH-1 downto 0);
+    variable addr_cnt : unsigned((ADDR_WIDTH-1) downto 0);
     variable HasToBeReset : std_logic;
     
     begin

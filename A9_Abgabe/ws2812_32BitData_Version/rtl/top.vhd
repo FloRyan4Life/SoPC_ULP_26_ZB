@@ -19,6 +19,7 @@ end top;
 architecture top_a of top is
     signal raddr : std_ulogic_vector(7 downto 0);
     signal dout : std_ulogic_vector(7 downto 0);
+    --signal start_send : std_logic := '0';
 
     begin
         rom_inst : entity work.rom
@@ -27,7 +28,7 @@ architecture top_a of top is
             dout => dout
         );
 
-        ramtows2812_inst : entity work.ramtows2812
+        ramtows2812_inst : entity work.RAMtoWS2812
         generic map(
             ADDR_WIDTH => ADDR_WIDTH,
             DATA_WIDTH => DATA_WIDTH,
