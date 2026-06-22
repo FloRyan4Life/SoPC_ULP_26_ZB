@@ -64,7 +64,8 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             sfr_rst => sfr_rst,
             sfr_shift => sfr_shift,
             sfr_load => sfr_load,
-            aserial_wnr => aserial_wnr
+            aserial_wnr => aserial_wnr,
+            aserial_rst => aserial_rst
         );
 
         addr_counter : entity work.addresscounter

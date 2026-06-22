@@ -21,7 +21,8 @@ entity fsm is
         sfr_shift : out std_logic;
         sfr_load : out std_logic;
         -- to ws2812 aserial
-        aserial_wnr : out std_logic
+        aserial_wnr : out std_logic;
+        aserial_rst : out std_logic
     );
 end fsm;
 
@@ -104,12 +105,14 @@ architecture fsm_a of fsm is
                             first_addr := '1';
                             acnt_rst <= '0';
                             sfr_rst <= '0'; 
+                            aserial_rst <= '0';
                             sfr_shift <= '0';
                             sfr_load <= '0';                          
                             state <= LOAD_DATA;
                         else 
                             acnt_rst <= '1';
                             sfr_rst <= '1';
+                            aserial_rst <= '1';
                             sfr_shift <= '0';
                             sfr_load <= '0';
                         end if;

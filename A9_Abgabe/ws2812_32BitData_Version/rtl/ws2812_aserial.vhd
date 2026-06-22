@@ -4,12 +4,12 @@ use ieee.std_logic_1164.all;
 entity ws2812_aserial is
 
 port(
-    reset : in std_ulogic;
-    clk : in std_ulogic;
-    wnr : in std_ulogic;
-    data_in : in std_ulogic;
-    ws2812_out : out std_ulogic;
-    run : inout std_ulogic
+    reset : in std_logic;
+    clk : in std_logic;
+    wnr : in std_logic;
+    data_in : in std_logic;
+    ws2812_out : out std_logic;
+    run : inout std_logic
 );
 
 end ws2812_aserial;

@@ -25,11 +25,11 @@ architecture shiftregister_a of shiftregister is
 
     signal shift_reg : std_ulogic_vector((REG_WIDTH - 1) downto 0) := (others => '0');
 
-
 begin
 
     process(clk)
         variable shift_cnt : integer range 0 to REG_WIDTH := 0;
+        variable shift_max : integer := REG_WIDTH - 1;
     begin
         if rising_edge(clk) then
             if sfr_rst = '1' then
@@ -38,7 +38,7 @@ begin
                 sfr_done <= '0';
 
             elsif sfr_load = '1' then
-                shift_reg <= sfr_din(REG_WIDTH - 1 downto 0);
+                shift_reg <= sfr_din((REG_WIDTH - 1) downto 0);
                 shift_cnt := 0;
                 sfr_done <= '0';
 
@@ -46,7 +46,7 @@ begin
                 if shift_cnt < SHIFT_MAX then
                     shift_reg <= shift_reg((REG_WIDTH - 2) downto 0) & '0';
                     shift_cnt := shift_cnt + 1;
-                    if shift_cnt = SHIFT_MAX then
+                    if shift_cnt = shift_max then
                         sfr_done <= '1';
                     end if;
                 end if;
