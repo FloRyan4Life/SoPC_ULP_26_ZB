@@ -1,0 +1,3 @@
+RAMtoWS2812.vhd Z. 27:
+ Portname prüfen
+

@@ -15,6 +15,7 @@ entity RAMtoWS2812 is
     port(
         clk : in std_logic;
         ws2812_out : out std_logic;
+        -- sollte es hier nicht heißen din ?? Es ist ja der dateneingang des moduls.
         dout : in std_ulogic_vector((DATA_WIDTH-1) downto 0);
         raddr : out std_ulogic_vector((ADDR_WIDTH-1) downto 0);
         start_send : in std_logic

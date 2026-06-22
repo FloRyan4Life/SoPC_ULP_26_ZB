@@ -11,10 +11,15 @@ end RAMtoWS2812_tb;
 architecture RAMtoWS2812_tb_a of RAMtoWS2812_tb is
     signal clk : std_logic := '0';
 
+    constant ADDR_WIDTH : natural := 6;
+    constant DATA_WIDTH : natural := 32;
+    constant UNUSED_BITS : natural := 8;
+    constant MAX_ADDR : natural := 63;
+
     -- top level signals
     signal ws2812_out : std_logic := '0';
-    signal raddr : std_ulogic_vector(7 downto 0):= "00000000";
-    signal dout : std_ulogic_vector(7 downto 0) := "00000000";
+    signal raddr : std_ulogic_vector(ADDR_WIDTH - 1 downto 0):= (others => '0');
+    signal dout : std_ulogic_vector(DATA_WIDTH - 1 downto 0) := (others => '0');
     signal start_send : std_logic := '0';
 
         
@@ -24,10 +29,10 @@ architecture RAMtoWS2812_tb_a of RAMtoWS2812_tb is
 
         rantows2812 : entity work.RAMtoWS2812
         generic map(
-            ADDR_WIDTH => 8,
-            DATA_WIDTH => 8,
-            UNUSED_BITS => 0,
-            MAX_ADDR => 191
+            ADDR_WIDTH => ADDR_WIDTH,
+            DATA_WIDTH => DATA_WIDTH,
+            UNUSED_BITS => UNUSED_BITS,
+            MAX_ADDR => MAX_ADDR
         )
         port map(
             clk => clk,
@@ -39,7 +44,7 @@ architecture RAMtoWS2812_tb_a of RAMtoWS2812_tb is
 
         process(raddr)
         begin
-            dout <= rom_image1(to_integer(unsigned(raddr)));
+            dout <= rom32_image1(to_integer(unsigned(raddr)));
         end process;
 
 
