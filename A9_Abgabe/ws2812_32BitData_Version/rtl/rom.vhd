@@ -18,5 +18,5 @@ end rom;
 
 architecture rom_a of rom is
     begin
-        dout <= rom32_image3(to_integer(unsigned(raddr)));
+        dout <= rom32_image5(to_integer(unsigned(raddr)));
 end architecture rom_a;

@@ -14,6 +14,8 @@
 #include "iceduino_i2c.h"
 #include "iceduino_adc.h"
 
+#include "ws2812.h"
+
 //#memory mapped io#
 //LED base address
 #define ICEDUINO_LED_BASE (0xF0000000UL) 
