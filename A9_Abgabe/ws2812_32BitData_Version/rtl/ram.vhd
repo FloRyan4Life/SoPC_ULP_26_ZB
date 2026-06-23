@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity ram is
     generic (
         ADDR_WIDTH : natural := 6;
-        DATA_WIDTH : natural := 32;
+        DATA_WIDTH : natural := 32
     );
     port (
         write_en : in std_logic;

@@ -18,11 +18,12 @@ end addresscounter;
 
 architecture addresscounter_a of addresscounter is
 
+    constant addr_w : natural := ADDR_WIDTH;
 
 begin
     
     process(clk)
-    variable addr_cnt : unsigned((ADDR_WIDTH-1) downto 0);
+    variable addr_cnt : unsigned((addr_w-1) downto 0);
     variable HasToBeReset : std_logic;
     
     begin

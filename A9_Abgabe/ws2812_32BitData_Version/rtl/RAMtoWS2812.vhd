@@ -7,10 +7,10 @@ use ieee.numeric_std.all;
 
 entity RAMtoWS2812 is
     generic(
-        ADDR_WIDTH : natural := 8;
-        DATA_WIDTH : natural := 8;
-        UNUSED_BITS : natural := 0;
-        MAX_ADDR : natural := 191
+        ADDR_WIDTH : natural := 6;
+        DATA_WIDTH : natural := 32;
+        UNUSED_BITS : natural := 8;
+        MAX_ADDR : natural := 63
     );
     port(
         clk : in std_logic;

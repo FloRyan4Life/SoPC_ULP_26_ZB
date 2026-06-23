@@ -4,10 +4,10 @@ use IEEE.numeric_std.all;
 
 entity top is
     generic(
-        ADDR_WIDTH : natural := 8;
-        DATA_WIDTH : natural := 8;
-        UNUSED_BITS : natural := 0;
-        MAX_ADDR : natural := 191
+        ADDR_WIDTH : natural := 6;
+        DATA_WIDTH : natural := 32;
+        UNUSED_BITS : natural := 8;
+        MAX_ADDR : natural := 63
     );
     port(
         clk : in std_logic;
@@ -17,12 +17,16 @@ entity top is
 end top;
 
 architecture top_a of top is
-    signal raddr : std_ulogic_vector(7 downto 0);
-    signal dout : std_ulogic_vector(7 downto 0);
+    signal raddr : std_ulogic_vector((ADDR_WIDTH-1) downto 0);
+    signal dout : std_ulogic_vector((DATA_WIDTH-1) downto 0);
     --signal start_send : std_logic := '0';
 
     begin
         rom_inst : entity work.rom
+        generic map(
+            ADDR_WIDTH => ADDR_WIDTH,
+            DATA_WIDTH => DATA_WIDTH
+        )
         port map(
             raddr => raddr,
             dout => dout
