@@ -80,4 +80,10 @@
 //ARDUINO ADC input port 8-bit (r/w) */
 #define ICEDUINO_ADC (*((volatile uint8_t*) (ICEDUINO_ADC_BASE)))
 
+//ARDUINO ADC address
+#define WS2812_BASE (0xF0000088UL) 
+//ARDUINO ADC input port 8-bit (r/w) */
+#define WS2812 (*((volatile uint8_t*) (WS2812_BASE)))
+
+
 #endif // iceduino_neorv32_h

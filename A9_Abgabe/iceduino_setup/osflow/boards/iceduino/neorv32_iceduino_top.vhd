@@ -136,6 +136,7 @@ signal uart_resp : slave_resp_t := slave_resp_default;
 signal spi_resp : slave_resp_t := slave_resp_default;
 signal i2c_resp : slave_resp_t := slave_resp_default;
 signal adc_resp : slave_resp_t := slave_resp_default;
+signal ws2812_resp : slave_resp_t := slave_resp_default;
 
 -- internal IO connection --
 -- signal con_gpio : std_ulogic_vector(63 downto 0);
@@ -224,6 +225,10 @@ begin
                         active_slave_resp.rdata_i <= adc_resp.rdata_i; 
                         active_slave_resp.ack_i <= adc_resp.ack_i;
                         active_slave_resp.err_i <= adc_resp.err_i;
+                when x"88" =>
+                        active_slave_resp.rdata_i <= ws2812_resp.rdata_i; 
+                        active_slave_resp.ack_i <= ws2812_resp.ack_i;
+                        active_slave_resp.err_i <= ws2812_resp.err_i;
                 when others =>
                         active_slave_resp.rdata_i <= (others => '0');
                         active_slave_resp.ack_i <= '0';
@@ -410,7 +415,7 @@ begin
 
     ram_bus_bridge_instance : entity iceduino.ram_bus_bridge
     generic map(
-        ram_bus_bridge_addr => x"F0000000",
+        ram_bus_bridge_addr => x"F0000088",
             ADDR_WIDTH => 6,
             DATA_WIDTH => 32,
             UNUSED_BITS => 8,
@@ -419,7 +424,16 @@ begin
     port map(
             clk_i => clk_50mhz,
             ws2812_out => pmod3[2],
-            start_send => btn[0]
+            start_send => btn[0],
+            rstn_i 		=>  external_rstn,       
+            adr_i		=>	master_bus.adr_o,
+            dat_i	    =>  master_bus.dat_o,
+            dat_o	    =>  ws2812_resp.rdata_i,
+            we_i        =>  master_bus.we_o,
+            stb_i		=>	master_bus.stb_o,
+            cyc_i       =>  master_bus.cyc_o,
+            ack_o       =>  ws2812_resp.ack_i,
+            err_o       =>  ws2812_resp.err_i
     );
 
 	-- module instance led --

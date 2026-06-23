@@ -39,13 +39,16 @@ entity ram_bus_bridge is
         
         signal ram_we : std_ulogic := '0';
 
-        signal module_active : std_ulogic := '0';
+        signal module_active : std_ulogic := '1';
 
 
     begin
 
+        dat_o <= (others => '0');
+
         ram_waddr <= adr_i[(ADDR_WIDTH-1) downto 0];
-        ram_wdata <= dat_i;
+
+        ram_we <= module_active and we_i;
 
     ramtows2812_instance : entity iceduino.ramtows2812
     generic map(
@@ -82,23 +85,22 @@ entity ram_bus_bridge is
         begin
             if rising_edge(clk_i) then
                 
-            -- handshake
-            err_o <= '0';
-            if (module_active = '1') then
-                ack_o <= '1';        
-            else   
-                ack_o <= '0';
-            end if;
-            --write  
-            if (module_active = '1' and we_i = '1') then
-                reg_sevensegment <= dat_i(7 downto 0);          
-            end if;
-            --read
-            dat_o(31 downto 0) <= (others => '0');  
-            if (module_active = '1' and we_i = '0') then
-                dat_o(7 downto 0) <= reg_sevensegment;             
-            end if;      
+                -- handshake
+                err_o <= '0';
+                if (module_active = '1') then
+                    ack_o <= '1';        
+                else   
+                    ack_o <= '0';
+                end if;
+                --write  
+                if (module_active = '1' and we_i = '1') then
+                    ram_wdata <= dat_i((DATA_WIDTH - 1) downto 0);          
+                end if;
+                --read    
+                -- leer
             end if;
         end process w_access;
+    
+
         
     end architecture ram_bus_bridge_a;

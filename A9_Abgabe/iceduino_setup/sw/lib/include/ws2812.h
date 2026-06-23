@@ -3,6 +3,6 @@
 
 #define matrix_size 8*8
 
-void update_matrix();
+void update_matrix(int pixel, int r, int g, int b);
 
 #endif
