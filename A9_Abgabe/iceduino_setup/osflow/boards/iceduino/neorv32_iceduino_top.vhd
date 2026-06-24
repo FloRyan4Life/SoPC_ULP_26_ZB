@@ -142,6 +142,9 @@ signal ws2812_resp : slave_resp_t := slave_resp_default;
 -- signal con_gpio : std_ulogic_vector(63 downto 0);
 signal con_spi_csn  : std_ulogic_vector(07 downto 0);
 
+-- internal signals for RAMtoWS2812 --
+signal ws2812_out : std_ulogic;
+
 begin
 
     process(clk_50mhz) is
@@ -423,7 +426,7 @@ begin
     )
     port map(
             clk_i => clk_50mhz,
-            ws2812_out => pmod3(2),
+            ws2812_out => io_d(2),
             start_send => btn(0),
             rstn_i 		=>  external_rstn,       
             adr_i		=>	master_bus.adr_o,
@@ -554,24 +557,24 @@ begin
     );
     
 	-- module instance arduino gpio --
-    iceduino_arduino_gpio_inst: entity iceduino.iceduino_arduino_gpio
-    generic map (
-        gpio_addr_o => x"F0000048",
-        gpio_addr_i => x"F0000050"
-    )
-    port map (
-        clk_i  		=>  clk_50mhz,
-        rstn_i 		=>  external_rstn,
-        adr_i		=>	master_bus.adr_o,
-        dat_i	    =>  master_bus.dat_o,
-        dat_o	    =>  gpio_resp.rdata_i,
-        we_i        =>  master_bus.we_o,
-        stb_i		=>	master_bus.stb_o,
-        cyc_i       =>  master_bus.cyc_o,
-        ack_o       =>  gpio_resp.ack_i,
-        err_o       =>  gpio_resp.err_i,
-        io       	=>  io_d --io
-    );
+    -- iceduino_arduino_gpio_inst: entity iceduino.iceduino_arduino_gpio
+    -- generic map (
+    --     gpio_addr_o => x"F0000048",
+    --     gpio_addr_i => x"F0000050"
+    -- )
+    -- port map (
+    --     clk_i  		=>  clk_50mhz,
+    --     rstn_i 		=>  external_rstn,
+    --     adr_i		=>	master_bus.adr_o,
+    --     dat_i	    =>  master_bus.dat_o,
+    --     dat_o	    =>  gpio_resp.rdata_i,
+    --     we_i        =>  master_bus.we_o,
+    --     stb_i		=>	master_bus.stb_o,
+    --     cyc_i       =>  master_bus.cyc_o,
+    --     ack_o       =>  gpio_resp.ack_i,
+    --     err_o       =>  gpio_resp.err_i,
+    --     io       	=>  io_d --io
+    -- );
 
     -- module instance arduino uart --
     iceduino_arduino_uart_inst: entity iceduino.iceduino_arduino_uart
