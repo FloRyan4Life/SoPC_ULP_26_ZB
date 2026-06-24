@@ -57,7 +57,7 @@ port (
     sw  : in std_ulogic_vector(1 downto 0);
 
     -- -- PMOD --
-    -- pmod_pwr_en : out std_ulogic;
+    pmod_pwr_en : out std_ulogic;
     pmod1 : inout std_logic_vector(7 downto 0);
     pmod2 : inout std_logic_vector(7 downto 0);
     pmod3 : inout std_logic_vector(7 downto 0);
@@ -434,6 +434,9 @@ begin
             clk_i => clk_50mhz,
             ws2812_out => io_d(2),
             start_send => btn(0),
+            oe_j5_en => oe_j5,
+            oe_j6_en => oe_j6,
+            pmod_pwr_en => pmod_pwr_en,
             rstn_i 		=>  external_rstn,       
             adr_i		=>	master_bus.adr_o,
             dat_i	    =>  master_bus.dat_o,

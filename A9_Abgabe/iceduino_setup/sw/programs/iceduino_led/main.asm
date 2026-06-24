@@ -78,7 +78,7 @@ Disassembly of section .text:
 
 000000e0 <__crt0_clear_bss_loop_end>:
   e0:	00000597          	auipc	a1,0x0
-  e4:	10c58593          	addi	a1,a1,268 # 1ec <__crt0_copy_data_src_begin>
+  e4:	13058593          	addi	a1,a1,304 # 210 <__crt0_copy_data_src_begin>
   e8:	80000617          	auipc	a2,0x80000
   ec:	f1860613          	addi	a2,a2,-232 # 80000000 <__ctr0_io_space_begin+0x80000200>
   f0:	80000697          	auipc	a3,0x80000
@@ -143,26 +143,35 @@ Disassembly of section .text:
  18c:	00912223          	sw	s1,4(sp)
  190:	00112623          	sw	ra,12(sp)
  194:	00000413          	li	s0,0
- 198:	00a00493          	li	s1,10
+ 198:	04000493          	li	s1,64
  19c:	00040513          	mv	a0,s0
  1a0:	00000693          	li	a3,0
  1a4:	00000613          	li	a2,0
  1a8:	0ff00593          	li	a1,255
  1ac:	00140413          	addi	s0,s0,1
- 1b0:	00c000ef          	jal	ra,1bc <set_pixel>
+ 1b0:	030000ef          	jal	ra,1e0 <set_pixel>
  1b4:	fe9414e3          	bne	s0,s1,19c <main+0x18>
- 1b8:	0000006f          	j	1b8 <main+0x34>
+ 1b8:	00000413          	li	s0,0
+ 1bc:	04000493          	li	s1,64
+ 1c0:	00040513          	mv	a0,s0
+ 1c4:	00000693          	li	a3,0
+ 1c8:	0ff00613          	li	a2,255
+ 1cc:	00000593          	li	a1,0
+ 1d0:	00140413          	addi	s0,s0,1
+ 1d4:	00c000ef          	jal	ra,1e0 <set_pixel>
+ 1d8:	fe9414e3          	bne	s0,s1,1c0 <main+0x3c>
+ 1dc:	0000006f          	j	1dc <main+0x58>
 
-000001bc <set_pixel>:
- 1bc:	03f00793          	li	a5,63
- 1c0:	02a7e463          	bltu	a5,a0,1e8 <set_pixel+0x2c>
- 1c4:	00861613          	slli	a2,a2,0x8
- 1c8:	f00007b7          	lui	a5,0xf0000
- 1cc:	00d66633          	or	a2,a2,a3
- 1d0:	01059593          	slli	a1,a1,0x10
- 1d4:	00251513          	slli	a0,a0,0x2
- 1d8:	10078793          	addi	a5,a5,256 # f0000100 <__ctr0_io_space_begin+0xf0000300>
- 1dc:	00b66633          	or	a2,a2,a1
- 1e0:	00f50533          	add	a0,a0,a5
- 1e4:	00c52023          	sw	a2,0(a0)
- 1e8:	00008067          	ret
+000001e0 <set_pixel>:
+ 1e0:	03f00793          	li	a5,63
+ 1e4:	02a7e463          	bltu	a5,a0,20c <set_pixel+0x2c>
+ 1e8:	00861613          	slli	a2,a2,0x8
+ 1ec:	f00007b7          	lui	a5,0xf0000
+ 1f0:	00d66633          	or	a2,a2,a3
+ 1f4:	01059593          	slli	a1,a1,0x10
+ 1f8:	00251513          	slli	a0,a0,0x2
+ 1fc:	10078793          	addi	a5,a5,256 # f0000100 <__ctr0_io_space_begin+0xf0000300>
+ 200:	00b66633          	or	a2,a2,a1
+ 204:	00f50533          	add	a0,a0,a5
+ 208:	00c52023          	sw	a2,0(a0)
+ 20c:	00008067          	ret

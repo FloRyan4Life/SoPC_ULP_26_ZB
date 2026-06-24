@@ -80,7 +80,7 @@ all:
 	ghdl -m --std=08 --work=work -P../osflow/boards/iceduino neorv32_iceduino_top_tb
 
 wave:
-	ghdl -r --std=08 --work=work -P../osflow/boards/iceduino neorv32_iceduino_top_tb --wave=neorv32_iceduino_top_tb.ghw --stop-time="1000us" --ieee-asserts=disable
+	ghdl -r --std=08 --work=work -P../osflow/boards/iceduino neorv32_iceduino_top_tb --wave=neorv32_iceduino_top_tb.ghw --stop-time="3000us" --ieee-asserts=disable
 	gtkwave --rcvar 'do_initial_zoom_fit yes' --rcvar 'hier_max_level 1' --rcvar 'splash_disable on' neorv32_iceduino_top_tb.ghw
 	
 clean:

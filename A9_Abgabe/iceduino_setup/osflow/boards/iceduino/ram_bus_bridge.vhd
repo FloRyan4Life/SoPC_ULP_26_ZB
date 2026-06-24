@@ -30,7 +30,11 @@ entity ram_bus_bridge is
     
     -- specific ports
     ws2812_out : out std_ulogic;
-    start_send : in std_ulogic
+    start_send : in std_ulogic;
+
+    oe_j5_en : out std_ulogic;
+    oe_j6_en : out std_ulogic;
+    pmod_pwr_en : out std_ulogic
     
     );
 end entity ram_bus_bridge;
@@ -55,6 +59,10 @@ begin
     ram_waddr <= adr_i((ADDR_WIDTH+1) downto 2);
 
     module_active <= '1' when (adr_i(31 downto 8) = RAM_BUS_BRIDGE_ADDR(31 downto 8)) else '0';
+
+    oe_j5_en <= '1';
+    oe_j6_en <= '1';
+    pmod_pwr_en <= '1';
 
     ramtows2812_instance : entity iceduino.RAMtoWS2812
         generic map(
