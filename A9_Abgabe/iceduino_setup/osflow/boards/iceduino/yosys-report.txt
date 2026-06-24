@@ -3812,7 +3812,7 @@ ABC: Participating nodes from the first network   =    1805. (  64.83 % of nodes
 ABC: Participating nodes from the second network  =    2071. (  74.39 % of nodes)
 ABC: Node pairs (any polarity)                    =    1805. (  64.83 % of names can be moved)
 ABC: Node pairs (same polarity)                   =    1536. (  55.17 % of names can be moved)
-ABC: Total runtime =     0.25 sec
+ABC: Total runtime =     0.27 sec
 ABC: + write_blif <abc-temp-dir>/output.blif 
 
 2.46.1.2. Re-integrating ABC results.
@@ -4110,6 +4110,6 @@ Found and reported 0 problems.
 
 2.55. Executing JSON backend.
 
-End of script. Logfile hash: cef8d9f3c3, CPU: user 19.63s system 1.83s, MEM: 374.26 MB peak
+End of script. Logfile hash: 3197e0ade9, CPU: user 18.01s system 0.33s, MEM: 374.26 MB peak
 Yosys 0.9+4081 (open-tool-forge build) (git sha1 862e84eb, gcc 9.3.0-17ubuntu1~20.04 -Os)
-Time spent: 23% 35x opt_expr (5 sec), 19% 34x opt_clean (4 sec), ...
+Time spent: 24% 35x opt_expr (4 sec), 18% 34x opt_clean (3 sec), ...
