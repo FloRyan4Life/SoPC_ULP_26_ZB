@@ -1,8 +1,9 @@
 #ifndef ws2812_h
 #define ws2812_h
 
-#define matrix_size 8*8
 
-void update_matrix(int pixel, int r, int g, int b);
+#define MATRIX_SIZE (8*8)
+
+void set_pixel(int pixel, uint8_t r, uint8_t g, uint8_t b);
 
 #endif

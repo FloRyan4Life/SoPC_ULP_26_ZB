@@ -78,7 +78,7 @@ Disassembly of section .text:
 
 000000e0 <__crt0_clear_bss_loop_end>:
   e0:	00000597          	auipc	a1,0x0
-  e4:	0ec58593          	addi	a1,a1,236 # 1cc <__crt0_copy_data_src_begin>
+  e4:	10c58593          	addi	a1,a1,268 # 1ec <__crt0_copy_data_src_begin>
   e8:	80000617          	auipc	a2,0x80000
   ec:	f1860613          	addi	a2,a2,-232 # 80000000 <__ctr0_io_space_begin+0x80000200>
   f0:	80000697          	auipc	a3,0x80000
@@ -149,12 +149,20 @@ Disassembly of section .text:
  1a4:	00000613          	li	a2,0
  1a8:	0ff00593          	li	a1,255
  1ac:	00140413          	addi	s0,s0,1
- 1b0:	00c000ef          	jal	ra,1bc <update_matrix>
+ 1b0:	00c000ef          	jal	ra,1bc <set_pixel>
  1b4:	fe9414e3          	bne	s0,s1,19c <main+0x18>
  1b8:	0000006f          	j	1b8 <main+0x34>
 
-000001bc <update_matrix>:
- 1bc:	0ff6f693          	andi	a3,a3,255
- 1c0:	f00007b7          	lui	a5,0xf0000
- 1c4:	08d78423          	sb	a3,136(a5) # f0000088 <__ctr0_io_space_begin+0xf0000288>
- 1c8:	00008067          	ret
+000001bc <set_pixel>:
+ 1bc:	03f00793          	li	a5,63
+ 1c0:	02a7e463          	bltu	a5,a0,1e8 <set_pixel+0x2c>
+ 1c4:	00861613          	slli	a2,a2,0x8
+ 1c8:	f00007b7          	lui	a5,0xf0000
+ 1cc:	00d66633          	or	a2,a2,a3
+ 1d0:	01059593          	slli	a1,a1,0x10
+ 1d4:	00251513          	slli	a0,a0,0x2
+ 1d8:	08878793          	addi	a5,a5,136 # f0000088 <__ctr0_io_space_begin+0xf0000288>
+ 1dc:	00b66633          	or	a2,a2,a1
+ 1e0:	00f50533          	add	a0,a0,a5
+ 1e4:	00c52023          	sw	a2,0(a0)
+ 1e8:	00008067          	ret

@@ -1,6 +1,6 @@
 -- The NEORV32 RISC-V Processor, https://github.com/stnolting/neorv32
 -- Auto-generated memory init file (for APPLICATION) from source file <iceduino_led/main.bin>
--- Size: 460 bytes
+-- Size: 492 bytes
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -68,7 +68,7 @@ package neorv32_application_image is
     00000054 => x"00158593",
     00000055 => x"ff5ff06f",
     00000056 => x"00000597",
-    00000057 => x"0ec58593",
+    00000057 => x"10c58593",
     00000058 => x"80000617",
     00000059 => x"f1860613",
     00000060 => x"80000697",
@@ -122,10 +122,18 @@ package neorv32_application_image is
     00000108 => x"00c000ef",
     00000109 => x"fe9414e3",
     00000110 => x"0000006f",
-    00000111 => x"0ff6f693",
-    00000112 => x"f00007b7",
-    00000113 => x"08d78423",
-    00000114 => x"00008067"
+    00000111 => x"03f00793",
+    00000112 => x"02a7e463",
+    00000113 => x"00861613",
+    00000114 => x"f00007b7",
+    00000115 => x"00d66633",
+    00000116 => x"01059593",
+    00000117 => x"00251513",
+    00000118 => x"08878793",
+    00000119 => x"00b66633",
+    00000120 => x"00f50533",
+    00000121 => x"00c52023",
+    00000122 => x"00008067"
   );
 
 end neorv32_application_image;

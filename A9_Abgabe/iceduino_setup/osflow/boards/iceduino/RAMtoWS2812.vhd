@@ -77,28 +77,28 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
                 ADDR_WIDTH => ADDR_WIDTH,
                 MAX_ADDR => MAX_ADDR
             )
-        port map(
-            clk => clk,
-            acnt_rst => acnt_rst,
-            acnt_inc => acnt_inc,
-            address => raddr,
-            acnt_eq_max => acnt_eq_max
-        );
+            port map(
+                clk => clk,
+                acnt_rst => acnt_rst,
+                acnt_inc => acnt_inc,
+                address => raddr,
+                acnt_eq_max => acnt_eq_max
+            );
 
         sfr : entity iceduino.shiftregister
-        generic map(
-            DATA_WIDTH => DATA_WIDTH,
-            UNUSED_BITS => UNUSED_BITS
-        )
-        port map(
-            clk => clk,
-            sfr_din => dout,
-            sfr_rst => sfr_rst,
-            sfr_shift => sfr_shift,
-            sfr_load => sfr_load,
-            sfr_done => sfr_done,
-            sfr_serout => sfr_serout
-        );
+            generic map(
+                DATA_WIDTH => DATA_WIDTH,
+                UNUSED_BITS => UNUSED_BITS
+            )
+            port map(
+                clk => clk,
+                sfr_din => dout,
+                sfr_rst => sfr_rst,
+                sfr_shift => sfr_shift,
+                sfr_load => sfr_load,
+                sfr_done => sfr_done,
+                sfr_serout => sfr_serout
+            );
 
         ws2812_aserial : entity iceduino.ws2812_aserial
         port map (
