@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+
+
 entity shiftregister is
     generic(
         DATA_WIDTH : natural := 8;

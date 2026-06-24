@@ -411,7 +411,7 @@ begin
 		mext_irq_i     => 'L'  -- machine external interrupt
 	);
 
-  
+
 
     ram_bus_bridge_instance : entity iceduino.ram_bus_bridge
     generic map(
@@ -420,11 +420,11 @@ begin
             DATA_WIDTH => 32,
             UNUSED_BITS => 8,
             MAX_ADDR => 63
-    );
+    )
     port map(
             clk_i => clk_50mhz,
-            ws2812_out => pmod3[2],
-            start_send => btn[0],
+            ws2812_out => pmod3(2),
+            start_send => btn(0),
             rstn_i 		=>  external_rstn,       
             adr_i		=>	master_bus.adr_o,
             dat_i	    =>  master_bus.dat_o,

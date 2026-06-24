@@ -69,7 +69,14 @@ ICEDUINO_SRC := \
   $(ICEDUINO_HOME)/osflow/boards/iceduino/iceduino_arduino_spi.vhd \
   $(ICEDUINO_HOME)/osflow/boards/iceduino/iceduino_arduino_i2c.vhd \
   $(ICEDUINO_HOME)/osflow/boards/iceduino/iceduino_arduino_adc.vhd \
-  $(ICEDUINO_HOME)/osflow/boards/iceduino/neorv32_iceduino_top.vhd 
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/fsm.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/addresscounter.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/shiftregister.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/ws2812_aserial.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/RAMtoWS2812.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/ram.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/ram_bus_bridge.vhd \
+  $(ICEDUINO_HOME)/osflow/boards/iceduino/neorv32_iceduino_top.vhd
   
 DESIGN_NAME := iceduino
 IMPL_NAME := ${DESIGN_NAME}_impl

@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+
+
 entity ram_bus_bridge is
     generic(
         ram_bus_bridge_addr : std_ulogic_vector(31 downto 0);
@@ -25,10 +27,11 @@ entity ram_bus_bridge is
     err_o  	: out  std_ulogic;
     
     -- specific ports
-    ws2812_out : out std_ulogic,
+    ws2812_out : out std_ulogic;
     start_send : in std_ulogic
     
     );
+    end entity ram_bus_bridge;
 
     architecture ram_bus_bridge_a of ram_bus_bridge is
         signal ram_waddr : std_ulogic_vector((ADDR_WIDTH-1) downto 0) := (others => '0');
@@ -46,17 +49,17 @@ entity ram_bus_bridge is
 
         dat_o <= (others => '0');
 
-        ram_waddr <= adr_i[(ADDR_WIDTH-1) downto 0];
+        ram_waddr <= adr_i((ADDR_WIDTH-1) downto 0);
 
         ram_we <= module_active and we_i;
 
-    ramtows2812_instance : entity iceduino.ramtows2812
+    ramtows2812_instance : entity iceduino.RAMtoWS2812
     generic map(
             ADDR_WIDTH => ADDR_WIDTH,
             DATA_WIDTH => DATA_WIDTH,
             UNUSED_BITS => UNUSED_BITS,
             MAX_ADDR => MAX_ADDR
-    );
+    )
     port map(
             clk => clk_i,
             ws2812_out => ws2812_out,
@@ -68,8 +71,8 @@ entity ram_bus_bridge is
     ram_instance : entity iceduino.ram
     generic map(
             ADDR_WIDTH => ADDR_WIDTH,
-            DATA_WIDTH => DATA_WIDTH,
-    );
+            DATA_WIDTH => DATA_WIDTH
+    )
     port map(
         write_en => ram_we,
         waddr => ram_waddr,

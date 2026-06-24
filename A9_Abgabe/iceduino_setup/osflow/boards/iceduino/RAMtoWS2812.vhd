@@ -2,6 +2,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+
+
 -- library work;
 -- use work.const_image.all;
 
@@ -52,7 +54,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
 
         --clk <= not clk after 10 ns;
 
-        fsm : entity work.fsm
+        fsm : entity iceduino.fsm
         port map(
             clk => clk,
             start_send => start_send,
@@ -68,7 +70,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             aserial_rst => aserial_rst
         );
 
-        addr_counter : entity work.addresscounter
+        addr_counter : entity iceduino.addresscounter
             generic map(
                 ADDR_WIDTH => ADDR_WIDTH,
                 MAX_ADDR => MAX_ADDR
@@ -81,7 +83,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             acnt_eq_max => acnt_eq_max
         );
 
-        sfr : entity work.shiftregister
+        sfr : entity iceduino.shiftregister
         generic map(
             DATA_WIDTH => DATA_WIDTH,
             UNUSED_BITS => UNUSED_BITS
@@ -96,7 +98,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             sfr_serout => sfr_serout
         );
 
-        ws2812_aserial : entity work.ws2812_aserial
+        ws2812_aserial : entity iceduino.ws2812_aserial
         port map (
             reset => aserial_rst,
             clk => clk,

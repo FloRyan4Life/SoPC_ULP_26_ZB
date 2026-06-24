@@ -1,0 +1,126 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9+4081 (open-tool-forge build) (git sha1 862e84eb, gcc 9.3.0-17ubuntu1~20.04 -Os)
+
+
+-- Running command `ghdl --std=08 --work=iceduino --no-formal neorv32_iceduino_top; synth_ice40 -dsp -json iceduino_impl.json' --
+
+1. Executing GHDL.
+../../../neorv32/rtl/core/neorv32_package.vhd:1012:7:warning: no assignment for signal interface "pwm_o"
+      pwm_o          : out std_ulogic_vector(IO_PWM_NUM_CH-1 downto 0); -- pwm channels
+      ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:118:8:warning: no assignment for offsets 0:2 of signal "master_bus"
+signal master_bus : bus_wishbone_t;
+       ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:118:8:warning: no assignment for offsets 68:71 of signal "master_bus"
+signal master_bus : bus_wishbone_t;
+       ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:118:8:warning: no assignment for offset 74 of signal "master_bus"
+signal master_bus : bus_wishbone_t;
+       ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:63:5: multiple assignments for "pmod3" offsets 2:2
+    pmod3 : inout std_logic_vector(7 downto 0);
+    ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:63:5:note:  this concerns these parts of the signal:
+    pmod3 : inout std_logic_vector(7 downto 0);
+    ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:63:5:note:   pmod3(2)
+    pmod3 : inout std_logic_vector(7 downto 0);
+    ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:66:5:warning: no assignment for port "oe_j5"
+    oe_j5 : out std_ulogic;
+    ^
+../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd:67:5:warning: no assignment for port "oe_j6"
+    oe_j6 : out std_ulogic;
+    ^
+../../../neorv32/rtl/core/neorv32_top.vhd:343:3:(assertion note): NEORV32 PROCESSOR IO Configuration: MTIME UART0 SPI WDT 
+../../../neorv32/rtl/core/neorv32_top.vhd:365:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Boot configuration: Indirect boot via bootloader (processor-internal BOOTROM).
+../../../neorv32/rtl/core/neorv32_top.vhd:270:17:warning: no assignment for offsets 104:107 of signal "i_cache"
+  signal cpu_i, i_cache, cpu_d, p_bus : bus_interface_t;
+                ^
+../../../neorv32/rtl/core/neorv32_top.vhd:194:5:warning: no assignment for port "twi_sda_io"
+    twi_sda_io     : inout std_logic := 'U'; -- twi serial data line
+    ^
+../../../neorv32/rtl/core/neorv32_top.vhd:195:5:warning: no assignment for port "twi_scl_io"
+    twi_scl_io     : inout std_logic := 'U'; -- twi serial clock line
+    ^
+../../../neorv32/rtl/core/neorv32_top.vhd:198:5:warning: no assignment for port "pwm_o"
+    pwm_o          : out std_ulogic_vector(IO_PWM_NUM_CH-1 downto 0); -- pwm channels
+    ^
+../../../osflow/boards/iceduino/ram_bus_bridge.vhd:45:16:warning: signal "module_active" is never assigned
+        signal module_active : std_ulogic := '1';
+               ^
+../../../osflow/boards/iceduino/iceduino_pmod.vhd:24:5:warning: no assignment for port "pmod_en"
+    pmod_en : out  std_ulogic;
+    ^
+../../../osflow/boards/iceduino/iceduino_pmod.vhd:24:5:warning: no assignment for port "pmod_en"
+    pmod_en : out  std_ulogic;
+    ^
+../../../osflow/boards/iceduino/iceduino_pmod.vhd:24:5:warning: no assignment for port "pmod_en"
+    pmod_en : out  std_ulogic;
+    ^
+../../../neorv32/rtl/core/neorv32_cpu.vhd:164:3:(assertion note): NEORV32 CPU ISA Configuration (MARCH): RV32I_Zicsr
+../../../neorv32/rtl/core/neorv32_cpu.vhd:183:3:(assertion note): NEORV32 CPU CONFIG NOTE: Implementing NO dedicated hardware reset for uncritical registers (default, might reduce area). Set package constant <dedicated_reset_c> = TRUE to configure a DEFINED reset value for all CPU registers.
+../../../neorv32/rtl/core/neorv32_imem.vhd:110:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal IMEM as blank RAM (8192 bytes).
+../../../neorv32/rtl/core/neorv32_imem.vhd:95:10:note: found RAM "mem_ram_b0", width: 8 bits, depth: 2048
+  signal mem_ram_b0 : mem8_t(0 to IMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_imem.vhd:96:10:note: found RAM "mem_ram_b1", width: 8 bits, depth: 2048
+  signal mem_ram_b1 : mem8_t(0 to IMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_imem.vhd:97:10:note: found RAM "mem_ram_b2", width: 8 bits, depth: 2048
+  signal mem_ram_b2 : mem8_t(0 to IMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_imem.vhd:98:10:note: found RAM "mem_ram_b3", width: 8 bits, depth: 2048
+  signal mem_ram_b3 : mem8_t(0 to IMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_dmem.vhd:89:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal DMEM (RAM, 2048 bytes).
+../../../neorv32/rtl/core/neorv32_dmem.vhd:77:10:note: found RAM "mem_ram_b0", width: 8 bits, depth: 512
+  signal mem_ram_b0 : mem8_t(0 to DMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_dmem.vhd:78:10:note: found RAM "mem_ram_b1", width: 8 bits, depth: 512
+  signal mem_ram_b1 : mem8_t(0 to DMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_dmem.vhd:79:10:note: found RAM "mem_ram_b2", width: 8 bits, depth: 512
+  signal mem_ram_b2 : mem8_t(0 to DMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_dmem.vhd:80:10:note: found RAM "mem_ram_b3", width: 8 bits, depth: 512
+  signal mem_ram_b3 : mem8_t(0 to DMEM_SIZE/4-1);
+         ^
+../../../neorv32/rtl/core/neorv32_boot_rom.vhd:79:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing internal bootloader ROM (4096 bytes).
+../../../neorv32/rtl/core/neorv32_dmem.vhd:112:21:note: found ROM "n2286", width: 32 bits, depth: 1024
+          mem_ram_b1(to_integer(unsigned(addr))) <= data_i(15 downto 08);
+                    ^
+../../../neorv32/rtl/core/neorv32_wishbone.vhd:136:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: External Bus Interface - Implementing STANDARD Wishbone protocol.
+../../../neorv32/rtl/core/neorv32_wishbone.vhd:140:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: External Bus Interface - Implementing auto-timeout (255 cycles).
+../../../neorv32/rtl/core/neorv32_wishbone.vhd:144:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: External Bus Interface - Implementing LITTLE-endian byte order.
+../../../neorv32/rtl/core/neorv32_wishbone.vhd:148:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: External Bus Interface - Implementing registered RX path.
+../../../osflow/boards/iceduino/ram.vhd:26:12:note: found RAM "mem", width: 32 bits, depth: 64
+    signal mem : mem_type := (others => (others => '0')); 
+           ^
+../../../neorv32/rtl/core/neorv32_cpu_regfile.vhd:75:10:note: found RAM "reg_file", width: 32 bits, depth: 32
+  signal reg_file     : reg_file_t;
+         ^
+../../../neorv32/rtl/core/neorv32_fifo.vhd:84:10:warning: no assignment for offsets 76:109 of signal "fifo"
+  signal fifo : fifo_t;
+         ^
+ERROR: vhdl import failed.
