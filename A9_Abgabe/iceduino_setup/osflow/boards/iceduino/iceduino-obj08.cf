@@ -1,52 +1,52 @@
 v 4
-file . "../../../osflow/boards/iceduino/iceduino_led.vhd" "4f75e5f06d44f1bd424258c3aa7af163c14b32b5" "20260624210847.047":
-  entity iceduino_led at 1( 0) + 0 on 181;
-  architecture iceduino_led_rtl of iceduino_led at 25( 675) + 0 on 182;
-file . "../../../osflow/boards/iceduino/iceduino_switch.vhd" "50e14e35e9aa38b8d0bc27e2f627dd8493a53e2c" "20260624210847.053":
-  entity iceduino_switch at 1( 0) + 0 on 183;
-  architecture iceduino_switch_rtl of iceduino_switch at 27( 699) + 0 on 184;
-file . "../../../osflow/boards/iceduino/iceduino_button.vhd" "c6015143d82ffc856fcccc242d6e456107dcb497" "20260624210847.054":
-  entity iceduino_button at 1( 0) + 0 on 185;
-  architecture iceduino_button_rtl of iceduino_button at 27( 699) + 0 on 186;
-file . "../../../osflow/boards/iceduino/iceduino_arduino_gpio.vhd" "19240dba1e70013b569448e01d55436db4f711bc" "20260624210847.056":
-  entity iceduino_arduino_gpio at 1( 0) + 0 on 187;
-  architecture iceduino_arduino_gpio_rtl of iceduino_arduino_gpio at 27( 740) + 0 on 188;
-file . "../../../osflow/boards/iceduino/iceduino_pmod.vhd" "8a742082f2db30fa8348916c23d48b7a5c726513" "20260624210847.057":
-  entity iceduino_pmod at 1( 0) + 0 on 189;
-  architecture iceduino_pmod_rtl of iceduino_pmod at 29( 779) + 0 on 190;
-file . "../../../osflow/boards/iceduino/iceduino_arduino_uart.vhd" "1fb088922b2d2c85efcb478bfb3e1b4ce94f1057" "20260624210847.059":
-  entity iceduino_arduino_uart at 1( 0) + 0 on 191;
-  architecture iceduino_arduino_uart_rtl of iceduino_arduino_uart at 30( 736) + 0 on 192;
-file . "../../../osflow/boards/iceduino/iceduino_arduino_spi.vhd" "3015d5161107662b93759b9e73e54fa43ea036d6" "20260624210847.060":
-  entity iceduino_arduino_spi at 1( 0) + 0 on 193;
-  architecture iceduino_arduino_spi_rtl of iceduino_arduino_spi at 32( 788) + 0 on 194;
-file . "../../../osflow/boards/iceduino/iceduino_arduino_i2c.vhd" "771c56dd780a8eeff97436be7223a9069181631f" "20260624210847.062":
-  entity iceduino_arduino_i2c at 1( 0) + 0 on 195;
-  architecture iceduino_arduino_i2c_rtl of iceduino_arduino_i2c at 30( 737) + 0 on 196;
-file . "../../../osflow/boards/iceduino/iceduino_arduino_adc.vhd" "5fb50f8df6113340bd5f54704c52a2b6a89da500" "20260624210847.063":
-  entity iceduino_arduino_adc at 1( 0) + 0 on 197;
-  architecture iceduino_arduino_adc_rtl of iceduino_arduino_adc at 30( 737) + 0 on 198;
-file . "../../../osflow/boards/iceduino/fsm.vhd" "9a2a47556c232c152f3a43a8ccf4221a4fc24df0" "20260624210847.064":
-  entity fsm at 1( 0) + 0 on 199;
-  architecture fsm_a of fsm at 31( 728) + 0 on 200;
-file . "../../../osflow/boards/iceduino/addresscounter.vhd" "8552654d7b9180cc1c1bf9d62256cb574b75563b" "20260624210847.065":
-  entity addresscounter at 1( 0) + 0 on 201;
-  architecture addresscounter_a of addresscounter at 19( 419) + 0 on 202;
-file . "../../../osflow/boards/iceduino/shiftregister.vhd" "42b2a514de2430e9543d009dea7803b61c569de3" "20260624210847.067":
-  entity shiftregister at 1( 0) + 0 on 203;
-  architecture shiftregister_a of shiftregister at 23( 484) + 0 on 204;
-file . "../../../osflow/boards/iceduino/ws2812_aserial.vhd" "ba8d1372277bf8303449609326e8b970f412cce1" "20260624210847.068":
-  entity ws2812_aserial at 1( 0) + 0 on 205;
-  architecture ws2812_aserial_a of ws2812_aserial at 20( 264) + 0 on 206;
-file . "../../../osflow/boards/iceduino/RAMtoWS2812.vhd" "6a2b5e185b0a83842924cfe68446abaff636b56e" "20260624210847.070":
-  entity ramtows2812 at 1( 0) + 0 on 207;
-  architecture ramtows2812_a of ramtows2812 at 29( 665) + 0 on 208;
-file . "../../../osflow/boards/iceduino/ram.vhd" "1685a3494e05c6e48a248324254f27fefef962b1" "20260624210847.071":
-  entity ram at 1( 0) + 0 on 209;
-  architecture ram_a of ram at 23( 545) + 0 on 210;
-file . "../../../osflow/boards/iceduino/ram_bus_bridge.vhd" "89bc88301e7c89779a3c7c649d07d1d41b79db35" "20260624210847.073":
-  entity ram_bus_bridge at 1( 0) + 0 on 211;
-  architecture ram_bus_bridge_a of ram_bus_bridge at 42( 1049) + 0 on 212;
-file . "../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd" "ffd1b5383a841608eb6410b21a00fcdd7693a137" "20260624210847.086":
-  entity neorv32_iceduino_top at 36( 3419) + 0 on 213;
-  architecture neorv32_iceduino_top_rtl of neorv32_iceduino_top at 101( 5174) + 0 on 214;
+file . "../../../osflow/boards/iceduino/iceduino_led.vhd" "4f75e5f06d44f1bd424258c3aa7af163c14b32b5" "20260624213437.479":
+  entity iceduino_led at 1( 0) + 0 on 249;
+  architecture iceduino_led_rtl of iceduino_led at 25( 675) + 0 on 250;
+file . "../../../osflow/boards/iceduino/iceduino_switch.vhd" "50e14e35e9aa38b8d0bc27e2f627dd8493a53e2c" "20260624213437.484":
+  entity iceduino_switch at 1( 0) + 0 on 251;
+  architecture iceduino_switch_rtl of iceduino_switch at 27( 699) + 0 on 252;
+file . "../../../osflow/boards/iceduino/iceduino_button.vhd" "c6015143d82ffc856fcccc242d6e456107dcb497" "20260624213437.485":
+  entity iceduino_button at 1( 0) + 0 on 253;
+  architecture iceduino_button_rtl of iceduino_button at 27( 699) + 0 on 254;
+file . "../../../osflow/boards/iceduino/iceduino_arduino_gpio.vhd" "19240dba1e70013b569448e01d55436db4f711bc" "20260624213437.486":
+  entity iceduino_arduino_gpio at 1( 0) + 0 on 255;
+  architecture iceduino_arduino_gpio_rtl of iceduino_arduino_gpio at 27( 740) + 0 on 256;
+file . "../../../osflow/boards/iceduino/iceduino_pmod.vhd" "8a742082f2db30fa8348916c23d48b7a5c726513" "20260624213437.488":
+  entity iceduino_pmod at 1( 0) + 0 on 257;
+  architecture iceduino_pmod_rtl of iceduino_pmod at 29( 779) + 0 on 258;
+file . "../../../osflow/boards/iceduino/iceduino_arduino_uart.vhd" "1fb088922b2d2c85efcb478bfb3e1b4ce94f1057" "20260624213437.489":
+  entity iceduino_arduino_uart at 1( 0) + 0 on 259;
+  architecture iceduino_arduino_uart_rtl of iceduino_arduino_uart at 30( 736) + 0 on 260;
+file . "../../../osflow/boards/iceduino/iceduino_arduino_spi.vhd" "3015d5161107662b93759b9e73e54fa43ea036d6" "20260624213437.490":
+  entity iceduino_arduino_spi at 1( 0) + 0 on 261;
+  architecture iceduino_arduino_spi_rtl of iceduino_arduino_spi at 32( 788) + 0 on 262;
+file . "../../../osflow/boards/iceduino/iceduino_arduino_i2c.vhd" "771c56dd780a8eeff97436be7223a9069181631f" "20260624213437.491":
+  entity iceduino_arduino_i2c at 1( 0) + 0 on 263;
+  architecture iceduino_arduino_i2c_rtl of iceduino_arduino_i2c at 30( 737) + 0 on 264;
+file . "../../../osflow/boards/iceduino/iceduino_arduino_adc.vhd" "5fb50f8df6113340bd5f54704c52a2b6a89da500" "20260624213437.494":
+  entity iceduino_arduino_adc at 1( 0) + 0 on 265;
+  architecture iceduino_arduino_adc_rtl of iceduino_arduino_adc at 30( 737) + 0 on 266;
+file . "../../../osflow/boards/iceduino/fsm.vhd" "9a2a47556c232c152f3a43a8ccf4221a4fc24df0" "20260624213437.496":
+  entity fsm at 1( 0) + 0 on 267;
+  architecture fsm_a of fsm at 31( 728) + 0 on 268;
+file . "../../../osflow/boards/iceduino/addresscounter.vhd" "8552654d7b9180cc1c1bf9d62256cb574b75563b" "20260624213437.497":
+  entity addresscounter at 1( 0) + 0 on 269;
+  architecture addresscounter_a of addresscounter at 19( 419) + 0 on 270;
+file . "../../../osflow/boards/iceduino/shiftregister.vhd" "42b2a514de2430e9543d009dea7803b61c569de3" "20260624213437.498":
+  entity shiftregister at 1( 0) + 0 on 271;
+  architecture shiftregister_a of shiftregister at 23( 484) + 0 on 272;
+file . "../../../osflow/boards/iceduino/ws2812_aserial.vhd" "ba8d1372277bf8303449609326e8b970f412cce1" "20260624213437.500":
+  entity ws2812_aserial at 1( 0) + 0 on 273;
+  architecture ws2812_aserial_a of ws2812_aserial at 20( 264) + 0 on 274;
+file . "../../../osflow/boards/iceduino/RAMtoWS2812.vhd" "6a2b5e185b0a83842924cfe68446abaff636b56e" "20260624213437.501":
+  entity ramtows2812 at 1( 0) + 0 on 275;
+  architecture ramtows2812_a of ramtows2812 at 29( 665) + 0 on 276;
+file . "../../../osflow/boards/iceduino/ram.vhd" "1685a3494e05c6e48a248324254f27fefef962b1" "20260624213437.503":
+  entity ram at 1( 0) + 0 on 277;
+  architecture ram_a of ram at 23( 545) + 0 on 278;
+file . "../../../osflow/boards/iceduino/ram_bus_bridge.vhd" "89bc88301e7c89779a3c7c649d07d1d41b79db35" "20260624213437.504":
+  entity ram_bus_bridge at 1( 0) + 0 on 279;
+  architecture ram_bus_bridge_a of ram_bus_bridge at 42( 1049) + 0 on 280;
+file . "../../../osflow/boards/iceduino/neorv32_iceduino_top.vhd" "ffd1b5383a841608eb6410b21a00fcdd7693a137" "20260624213437.521":
+  entity neorv32_iceduino_top at 36( 3419) + 0 on 281;
+  architecture neorv32_iceduino_top_rtl of neorv32_iceduino_top at 101( 5174) + 0 on 282;

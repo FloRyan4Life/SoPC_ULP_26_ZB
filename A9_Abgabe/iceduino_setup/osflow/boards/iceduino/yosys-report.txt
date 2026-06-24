@@ -68,7 +68,7 @@ signal gpio_resp : slave_resp_t := slave_resp_default;
     ^
 ../../../neorv32/rtl/core/neorv32_cpu.vhd:164:3:(assertion note): NEORV32 CPU ISA Configuration (MARCH): RV32I_Zicsr
 ../../../neorv32/rtl/core/neorv32_cpu.vhd:183:3:(assertion note): NEORV32 CPU CONFIG NOTE: Implementing NO dedicated hardware reset for uncritical registers (default, might reduce area). Set package constant <dedicated_reset_c> = TRUE to configure a DEFINED reset value for all CPU registers.
-../../../neorv32/rtl/core/neorv32_imem.vhd:107:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal IMEM as ROM (8192 bytes), pre-initialized with application (528 bytes).
+../../../neorv32/rtl/core/neorv32_imem.vhd:107:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal IMEM as ROM (8192 bytes), pre-initialized with application (1044 bytes).
 ../../../neorv32/rtl/core/neorv32_imem.vhd:131:32:note: found ROM "n1966", width: 32 bits, depth: 2048
           mem_rom_rd <= mem_rom(to_integer(unsigned(addr)));
                                ^
@@ -2803,44 +2803,44 @@ Generating RTLIL representation for module `\$__ICE40_RAM4K_M123'.
 Successfully finished Verilog frontend.
 
 2.31.2. Continuing TECHMAP pass.
-Using template $paramod$9cb6b204cd5a5739bd5e569bde466b097f7ece4a\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$5e6ca9e8e7d5306472652cac025db2091ce15ba9\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$c125b2939b1f7c8a8bd667879abedb55668785ef\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$3ca27cff9a0c648f166782a54dbf0f8d57ecbe7b\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$99313dd110e4b7160faaf7addb286a4d216c81da\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$0bda2a712a0a080d1d7eb1892c53981ea84c15aa\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$7f50a673d4773845c03451fa0ad5b7e96466ca2c\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$7f34fe5a0c9abf41441ca66ea9cc2eb7f5cdd2c5\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$36aac79955350b73649dc79416f80db606af595c\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$6ec18e671bff0f1f3c9bb17499bcc5299e09e61c\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$6f983d5cc1f65275c0ff95eff2519adc49561e43\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$5e53d0641c3a33ba1f6efb587bc445e473708f7a\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$7425b4a5fdd768d7089cec05e2070149a7002238\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$c46d9cf40ee596916ff56ec3f097828446a8ab61\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$4aac28111ab55b8a702404cecd7c386f9003c768\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$767acf7f5404ca3d55964e4ae461d47f2f7aba27\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
 Using template $paramod$0a019bf6356ccccf899399d072352b73127d7d6e\$__ICE40_RAM4K_M0 for cells of type $__ICE40_RAM4K_M0.
 Using template $paramod$e235fb0d01570b7d5db500847f23843e9c734745\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$9df583a43d150df662ba44ee9f139cd6b0eb6a10\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$52e32ae73a6e1b3c73ed398f2c255c94f91ed3c6\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$bbbecf3654fef33b618200b62a6dd3c6b5b081f0\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$a4b17dc4930aa7efbc7d3c85cb037b9e1ab94e4b\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$5d2596fb5244158a148563ca2209d2f889289d61\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$a2007f3f9f145704f0d7b8bccdf542b15b920b37\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
 Using template $paramod$60043cabcbaea98043cde982cd8e71d00644550c\$__ICE40_RAM4K_M0 for cells of type $__ICE40_RAM4K_M0.
-Using template $paramod$5dc3ba23c02a630488ca7031f55067111978fdb3\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$44c76feb9dce49d85eca83b717434ba3c863b990\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$28ccb586f33f33782f0b345736b99e31936bc756\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$7a6ed8f655261634a13699b256c6b2b69f8efe1b\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$c3b37221ebe679463820b0a8c217f5535ab329a2\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$4a12b2a02813b9ae2932378afcabc74ffa352a6a\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$d5bebdc75d9e84a5327dd0034f453f03ea7b0aa7\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$328fff34b156703ecb8ca03051f3671eb0c32b26\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$7511560a4653fa3b34a4c7c58db3e6b923eaaeeb\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$c6feca61e1b45016254cda5e8a7a61f279ba03fa\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
 Using template $paramod$74e86a1473a276d7f5e0aabab902bd3b9ea7e933\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$05972d9ef3e7635070c208ec46c4d2fe39eaecf2\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$1c8a8e3f09b70117443aa696546e834fdaedd794\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$1032f5897583783e08c30291f8b2192667a422de\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$88805ba2d74e008ee1b9eeb577ac519a25a78522\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 Using template $paramod$ddf5a7132863f6e9af192ea23a6e92b177af3b26\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$8e913ac855842f77e21f9fa3166bcbdbd11caf2c\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$a9023e6b76d03952307a79027fe8303daf2b3dff\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$d6aafc394590e7f6cfbf402c2718617112d9ec35\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$ffca2907f0772911a95d722cce1dcc6a3eeda0e4\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$1d1d458e39b5a6cce7049a314df3d3e151ab66cb\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$fffb10e014673b228ca756d3c607cb9c0da7f7f2\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$5ced0f00bcfe0f194106629cc145639cb046d756\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$eb2f7e983098b636df6ac8d911656a8c6d515a8c\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$656873101fb8ca789ff7e195c232cd43bb926afa\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$2496d48cd8214f3656f84fd6ae87204714d465c8\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$015b984720e6996df0c384f9b44cc4654ce64eb6\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$cba2c1fee4f2dbb6424aa08fe64ea2c3213ccefe\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$30e33a1f657441dc580ee494a891c2043bd40ded\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$bee8a9e9d701813fc75e4a9fe145ed642174c55c\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$1f96cfb0ea84326e6cd8e6a6b9e5df8f067e5f60\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$f3f8de73140a52a77e8a7f84528c9a723870a159\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 Using template $paramod$4ba4fe1982a55ef019b30baa076e9e61d1def7f7\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$ace45dea9609def3df3b63765f1333aa6d2ce038\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$9be238ea003da74ed90c5b76c20fa8c2fec4e70e\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$8bb35f6d76511ca9e16c468bddfafc2b8e7abd57\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$78909a0e7cbca98d0fda5dd2cfe607716b48363f\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$c01edde6954947ae87748eacb459e1372735b9e6\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$0a768ced51aceb2e44fd9e06d9efd2b54b3560e9\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$3d7a2e2552d451d9ef27a7602b1386ee04251c7e\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$4f712db7a498378dba0999625635f493be9a860e\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$f60313270f7472bd5c71030257cac42c7e27da30\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$f7ac74e4f0faac55bba00932d4eab4a8054cb133\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$99229274269b4880027d2eca96ca305b1d7898b2\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$5fb6625b73d44f63d8c078bbfbe842407b077d73\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 No more expansions possible.
 <suppressed ~1305 debug messages>
 
@@ -3812,7 +3812,7 @@ ABC: Participating nodes from the first network   =    1728. (  62.29 % of nodes
 ABC: Participating nodes from the second network  =    1984. (  71.52 % of nodes)
 ABC: Node pairs (any polarity)                    =    1728. (  62.29 % of names can be moved)
 ABC: Node pairs (same polarity)                   =    1472. (  53.06 % of names can be moved)
-ABC: Total runtime =     0.27 sec
+ABC: Total runtime =     0.29 sec
 ABC: + write_blif <abc-temp-dir>/output.blif 
 
 2.46.1.2. Re-integrating ABC results.
@@ -4123,6 +4123,6 @@ Found and reported 0 problems.
 
 2.55. Executing JSON backend.
 
-End of script. Logfile hash: de90344d41, CPU: user 16.95s system 1.59s, MEM: 374.18 MB peak
+End of script. Logfile hash: 48dd34501d, CPU: user 17.89s system 0.28s, MEM: 373.73 MB peak
 Yosys 0.9+4081 (open-tool-forge build) (git sha1 862e84eb, gcc 9.3.0-17ubuntu1~20.04 -Os)
-Time spent: 23% 35x opt_expr (4 sec), 17% 34x opt_clean (3 sec), ...
+Time spent: 24% 35x opt_expr (4 sec), 18% 34x opt_clean (3 sec), ...
