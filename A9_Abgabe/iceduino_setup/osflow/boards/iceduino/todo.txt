@@ -1,0 +1,13 @@
+1 sind die msb / reservierten bytes 0 oder 1 und korrekt in dat_1?
+
+2 2 lsb von dat_i und adr_i sind immer 0 warum?
+
+3. es wird nur in mem[52]geschrieben.
+
+- 2 unterste bits ignorieren.
+
+- base address auf F0000100
+
+nach richtiger adresse filtern mit modul aktive
+
+bootloader false
