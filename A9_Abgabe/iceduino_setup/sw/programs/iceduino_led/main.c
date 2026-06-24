@@ -3,7 +3,7 @@
 
 int main() {
 
-  for (int i = 0; i<64;i++){
+  for (int i = 0; i<64; i++){
     set_pixel(i, 255,0,0);
   }
   while(1);
