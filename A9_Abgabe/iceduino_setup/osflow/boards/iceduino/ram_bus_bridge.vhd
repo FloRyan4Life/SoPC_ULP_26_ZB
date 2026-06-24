@@ -8,7 +8,7 @@ library iceduino;
 
 entity ram_bus_bridge is
     generic(
-        ram_bus_bridge_addr : std_ulogic_vector(31 downto 0);
+        RAM_BUS_BRIDGE_ADDR : std_ulogic_vector(31 downto 0);
         ADDR_WIDTH : natural := 6;
         DATA_WIDTH : natural := 32;
         UNUSED_BITS : natural := 8;
@@ -45,14 +45,16 @@ architecture ram_bus_bridge_a of ram_bus_bridge is
     
     signal ram_we : std_ulogic := '0';
 
-    signal module_active : std_ulogic := '1';
+    signal module_active : std_ulogic := '0';
 
 
 begin
 
     dat_o <= (others => '0');
 
-    ram_waddr <= adr_i((ADDR_WIDTH-1) downto 0);
+    ram_waddr <= adr_i((ADDR_WIDTH+1) downto 2);
+
+    module_active <= '1' when (adr_i(31 downto 8) = RAM_BUS_BRIDGE_ADDR(31 downto 8)) else '0';
 
     ramtows2812_instance : entity iceduino.RAMtoWS2812
         generic map(
@@ -88,7 +90,6 @@ begin
     w_access: process(clk_i)
         begin
             if rising_edge(clk_i) then
-                ack_o <= '0';
                 ram_we <= '0';
                 err_o <= '0';
                 ack_o <= module_active;

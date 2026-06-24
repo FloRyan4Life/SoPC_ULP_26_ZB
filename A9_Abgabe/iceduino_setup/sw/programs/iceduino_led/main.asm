@@ -143,7 +143,7 @@ Disassembly of section .text:
  18c:	00912223          	sw	s1,4(sp)
  190:	00112623          	sw	ra,12(sp)
  194:	00000413          	li	s0,0
- 198:	04000493          	li	s1,64
+ 198:	02000493          	li	s1,32
  19c:	00040513          	mv	a0,s0
  1a0:	00000693          	li	a3,0
  1a4:	00000613          	li	a2,0
@@ -161,7 +161,7 @@ Disassembly of section .text:
  1cc:	00d66633          	or	a2,a2,a3
  1d0:	01059593          	slli	a1,a1,0x10
  1d4:	00251513          	slli	a0,a0,0x2
- 1d8:	08878793          	addi	a5,a5,136 # f0000088 <__ctr0_io_space_begin+0xf0000288>
+ 1d8:	10078793          	addi	a5,a5,256 # f0000100 <__ctr0_io_space_begin+0xf0000300>
  1dc:	00b66633          	or	a2,a2,a1
  1e0:	00f50533          	add	a0,a0,a5
  1e4:	00c52023          	sw	a2,0(a0)

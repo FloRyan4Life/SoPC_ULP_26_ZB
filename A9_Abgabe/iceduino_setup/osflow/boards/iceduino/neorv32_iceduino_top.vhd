@@ -161,11 +161,13 @@ begin
     end process;
 
     -- external bus multiplexer --
-    bus_multiplexer: process(master_bus, led_resp,switch_resp,button_resp)
+    bus_multiplexer: process(master_bus, led_resp,switch_resp,button_resp, pmod1_resp, pmod2_resp, pmod3_resp, gpio_resp, uart_resp, spi_resp, i2c_resp, adc_resp, ws2812_resp)
     begin
         active_slave_resp.rdata_i <= (others => '0');
         active_slave_resp.ack_i <= '0';
         active_slave_resp.err_i <= '0';
+
+        -- BEREICH 1: F00000xx (Peripherie, 256 Byte)
         if(master_bus.adr_o(31 downto 8) = x"F00000") then
             case master_bus.adr_o(7 downto 0) is
                 when x"00" =>
@@ -228,15 +230,19 @@ begin
                         active_slave_resp.rdata_i <= adc_resp.rdata_i; 
                         active_slave_resp.ack_i <= adc_resp.ack_i;
                         active_slave_resp.err_i <= adc_resp.err_i;
-                when x"88" =>
-                        active_slave_resp.rdata_i <= ws2812_resp.rdata_i; 
-                        active_slave_resp.ack_i <= ws2812_resp.ack_i;
-                        active_slave_resp.err_i <= ws2812_resp.err_i;
                 when others =>
                         active_slave_resp.rdata_i <= (others => '0');
                         active_slave_resp.ack_i <= '0';
                         active_slave_resp.err_i <= '0';
             end case;
+
+        -- BEREICH 2: F00001xx (WS2812 DPRAM, 256 Byte)
+        elsif(master_bus.adr_o(31 downto 8) = x"F00001") then
+
+            active_slave_resp.rdata_i <= ws2812_resp.rdata_i; 
+            active_slave_resp.ack_i <= ws2812_resp.ack_i;
+            active_slave_resp.err_i <= ws2812_resp.err_i;
+
         end if;
     end process;
 
@@ -418,7 +424,7 @@ begin
 
     ram_bus_bridge_instance : entity iceduino.ram_bus_bridge
     generic map(
-        ram_bus_bridge_addr => x"F0000088",
+            RAM_BUS_BRIDGE_ADDR => x"F0000100",
             ADDR_WIDTH => 6,
             DATA_WIDTH => 32,
             UNUSED_BITS => 8,
