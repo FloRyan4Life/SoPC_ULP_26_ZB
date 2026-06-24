@@ -89,6 +89,11 @@ architecture fsm_a of fsm is
                             if aserial_run = '0' then                    
                                 sfr_shift <= '1';
                             end if; 
+                        elsif acnt_eq_max = '1' and sfr_done = '1' then
+                            aserial_wnr <= '0';
+                            sfr_shift <= '0';
+                            sfr_load <= '0';
+                            state <= IDLE;  
                         else 
                             if aserial_run = '0' then
 
@@ -96,12 +101,12 @@ architecture fsm_a of fsm is
                             end if;                        
                         end if;
 
-                        if acnt_eq_max = '1' then
-                            aserial_wnr <= '0';
-                            sfr_shift <= '0';
-                            sfr_load <= '0';
-                            state <= IDLE;
-                        end if;  
+                        -- if acnt_eq_max = '1' then
+                        --     aserial_wnr <= '0';
+                        --     sfr_shift <= '0';
+                        --     sfr_load <= '0';
+                        --     state <= IDLE;
+                        -- end if;  
                     when IDLE =>
                         if start_send = '1' then
                             first_addr := '1';
