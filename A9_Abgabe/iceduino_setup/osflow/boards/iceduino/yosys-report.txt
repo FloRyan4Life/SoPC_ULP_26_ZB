@@ -68,7 +68,7 @@ signal gpio_resp : slave_resp_t := slave_resp_default;
     ^
 ../../../neorv32/rtl/core/neorv32_cpu.vhd:164:3:(assertion note): NEORV32 CPU ISA Configuration (MARCH): RV32I_Zicsr
 ../../../neorv32/rtl/core/neorv32_cpu.vhd:183:3:(assertion note): NEORV32 CPU CONFIG NOTE: Implementing NO dedicated hardware reset for uncritical registers (default, might reduce area). Set package constant <dedicated_reset_c> = TRUE to configure a DEFINED reset value for all CPU registers.
-../../../neorv32/rtl/core/neorv32_imem.vhd:107:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal IMEM as ROM (8192 bytes), pre-initialized with application (1116 bytes).
+../../../neorv32/rtl/core/neorv32_imem.vhd:107:3:(assertion note): NEORV32 PROCESSOR CONFIG NOTE: Implementing processor-internal IMEM as ROM (8192 bytes), pre-initialized with application (584 bytes).
 ../../../neorv32/rtl/core/neorv32_imem.vhd:131:32:note: found ROM "n1966", width: 32 bits, depth: 2048
           mem_rom_rd <= mem_rom(to_integer(unsigned(addr)));
                                ^
@@ -100,7 +100,7 @@ signal gpio_resp : slave_resp_t := slave_resp_default;
          ^
 Importing module neorv32_iceduino_top.
 Importing module neorv32_top_50000000_0_64_2_0_65536_0_40_8192_2048_4_64_1_255_0_0_1_1_0_0_32_32_1_1df0ab472a40367b83f5a6900fa8fe708fdb4274.
-Importing module ram_bus_bridge_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362.
+Importing module neorv_ws2812_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362.
 Importing module iceduino_led_4bb30df029d7fd5419252628949b47cb3ce46c0c.
 Importing module iceduino_switch_52ec6e92492a00a7deb58a07b42cc225058694c6.
 Importing module iceduino_button_6a1be6959b6c9beea231fc5b73b6cbc3f27932fa.
@@ -227,7 +227,7 @@ root of   0 design levels: iceduino_pmod_ae30cd60c8910ea7f51ce320ac31ce5744145c5
 root of   0 design levels: iceduino_button_6a1be6959b6c9beea231fc5b73b6cbc3f27932fa
 root of   0 design levels: iceduino_switch_52ec6e92492a00a7deb58a07b42cc225058694c6
 root of   0 design levels: iceduino_led_4bb30df029d7fd5419252628949b47cb3ce46c0c
-root of   2 design levels: ram_bus_bridge_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
+root of   2 design levels: neorv_ws2812_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
 root of   3 design levels: neorv32_top_50000000_0_64_2_0_65536_0_40_8192_2048_4_64_1_255_0_0_1_1_0_0_32_32_1_1df0ab472a40367b83f5a6900fa8fe708fdb4274
 root of   4 design levels: neorv32_iceduino_top
 Automatically selected neorv32_iceduino_top as design top module.
@@ -244,7 +244,7 @@ Used module:     \iceduino_pmod_ae30cd60c8910ea7f51ce320ac31ce5744145c50
 Used module:     \iceduino_button_6a1be6959b6c9beea231fc5b73b6cbc3f27932fa
 Used module:     \iceduino_switch_52ec6e92492a00a7deb58a07b42cc225058694c6
 Used module:     \iceduino_led_4bb30df029d7fd5419252628949b47cb3ce46c0c
-Used module:     \ram_bus_bridge_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
+Used module:     \neorv_ws2812_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
 Used module:         \ram_6_32
 Used module:         \ramtows2812_6_32_8_63
 Used module:             \ws2812_aserial
@@ -282,7 +282,7 @@ Used module:     \iceduino_pmod_ae30cd60c8910ea7f51ce320ac31ce5744145c50
 Used module:     \iceduino_button_6a1be6959b6c9beea231fc5b73b6cbc3f27932fa
 Used module:     \iceduino_switch_52ec6e92492a00a7deb58a07b42cc225058694c6
 Used module:     \iceduino_led_4bb30df029d7fd5419252628949b47cb3ce46c0c
-Used module:     \ram_bus_bridge_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
+Used module:     \neorv_ws2812_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362
 Used module:         \ram_6_32
 Used module:         \ramtows2812_6_32_8_63
 Used module:             \ws2812_aserial
@@ -586,7 +586,7 @@ Deleting now unused module iceduino_pmod_ae30cd60c8910ea7f51ce320ac31ce5744145c5
 Deleting now unused module iceduino_button_6a1be6959b6c9beea231fc5b73b6cbc3f27932fa.
 Deleting now unused module iceduino_switch_52ec6e92492a00a7deb58a07b42cc225058694c6.
 Deleting now unused module iceduino_led_4bb30df029d7fd5419252628949b47cb3ce46c0c.
-Deleting now unused module ram_bus_bridge_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362.
+Deleting now unused module neorv_ws2812_6_32_8_63_01663fdbd9ea4b1596af854e33d52433a8bb3362.
 Deleting now unused module neorv32_top_50000000_0_64_2_0_65536_0_40_8192_2048_4_64_1_255_0_0_1_1_0_0_32_32_1_1df0ab472a40367b83f5a6900fa8fe708fdb4274.
 <suppressed ~35 debug messages>
 
@@ -635,10 +635,10 @@ Running muxtree optimizer on module \neorv32_iceduino_top..
       Replacing known input bits on port B of cell neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst.2373: $flatten\neorv32_inst.\neorv32_wdt_inst_true.neorv32_wdt_inst.$auto$ghdl.cc:762:import_module$718 [2] -> 1'1
       Replacing known input bits on port A of cell neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2192: \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [0] -> 1'0
       Replacing known input bits on port A of cell neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2229: \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [0] -> 1'1
-      Replacing known input bits on port A of cell ram_bus_bridge_instance.ramtows2812_instance.fsm.8659: \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'0
-      Replacing known input bits on port B of cell ram_bus_bridge_instance.ramtows2812_instance.fsm.8629: \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'1
-      Replacing known input bits on port A of cell ram_bus_bridge_instance.ramtows2812_instance.fsm.8621: \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'1
-      Replacing known input bits on port A of cell ram_bus_bridge_instance.ramtows2812_instance.fsm.8665: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2919 -> 1'0
+      Replacing known input bits on port A of cell neorv_ws2812_instance.ramtows2812_instance.fsm.8659: \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'0
+      Replacing known input bits on port B of cell neorv_ws2812_instance.ramtows2812_instance.fsm.8629: \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'1
+      Replacing known input bits on port A of cell neorv_ws2812_instance.ramtows2812_instance.fsm.8621: \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.first_addr -> 1'1
+      Replacing known input bits on port A of cell neorv_ws2812_instance.ramtows2812_instance.fsm.8665: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2919 -> 1'0
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
 <suppressed ~287 debug messages>
@@ -759,14 +759,14 @@ Removed 0 multiplexer ports.
     New ctrl vector for $pmux cell \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2255: $flatten\neorv32_inst.\neorv32_wishbone_inst_true.neorv32_wishbone_inst.$auto$ghdl.cc:762:import_module$658
     New ctrl vector for $pmux cell \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2257: $flatten\neorv32_inst.\neorv32_wishbone_inst_true.neorv32_wishbone_inst.$auto$ghdl.cc:762:import_module$658
     New ctrl vector for $pmux cell \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2259: $flatten\neorv32_inst.\neorv32_wishbone_inst_true.neorv32_wishbone_inst.$auto$ghdl.cc:762:import_module$658
-    New ctrl vector for $mux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8665: { }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8706: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3601 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8708: { $auto$opt_reduce.cc:134:opt_mux$3603 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8710: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3605 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8717: { $auto$opt_reduce.cc:134:opt_mux$3607 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8721: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3609 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8727: { $auto$opt_reduce.cc:134:opt_mux$3611 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8729: { $auto$opt_reduce.cc:134:opt_mux$3613 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $mux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8665: { }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8706: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3601 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8708: { $auto$opt_reduce.cc:134:opt_mux$3603 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8710: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3605 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8717: { $auto$opt_reduce.cc:134:opt_mux$3607 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8721: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $auto$opt_reduce.cc:134:opt_mux$3609 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8727: { $auto$opt_reduce.cc:134:opt_mux$3611 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8729: { $auto$opt_reduce.cc:134:opt_mux$3613 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
   Optimizing cells in module \neorv32_iceduino_top.
 Performed a total of 122 changes.
 
@@ -1157,7 +1157,7 @@ Not marking neorv32_iceduino_top.$flatten\neorv32_inst.\neorv32_cpu_inst.\neorv3
     Users of register don't seem to benefit from recoding.
 Not marking neorv32_iceduino_top.neorv32_inst.neorv32_sysinfo_inst:1066 as FSM state register:
     Users of register don't seem to benefit from recoding.
-Not marking neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.state as FSM state register:
+Not marking neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.state as FSM state register:
     Register has an initialization value.
     Circuit seems to be self-resetting.
 
@@ -1202,35 +1202,35 @@ Finding identical cells in module `\neorv32_iceduino_top'.
 Removed a total of 0 cells.
 
 2.12.6. Executing OPT_DFF pass (perform DFF optimizations).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8902 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3023, Q = \ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.cnt, rval = 0).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8901 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3022, Q = \ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.run, rval = 1'0).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8900 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3021, Q = \io_d [0], rval = 1'0).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.sfr.8848 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2996, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.8805.shift_cnt, rval = 5'00000).
-Adding EN signal on $auto$opt_dff.cc:702:run$3633 ($sdff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2991 [4:0], Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.8805.shift_cnt).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.sfr.8847 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.shift_reg, rval = 24'000000000000000000000000).
-Adding EN signal on $auto$opt_dff.cc:702:run$3635 ($sdff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.shift_reg).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.sfr.8846 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2993, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.sfr_done, rval = 1'0).
-Adding EN signal on $auto$opt_dff.cc:702:run$3641 ($sdff) from module neorv32_iceduino_top (D = 1'1, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.sfr_done).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8752 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2952, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.loading_finished).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8751 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2951, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.load_steps).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8750 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2950, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.first_addr).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8749 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2949, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.state).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8748 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2948, Q = \ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.reset).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8747 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2947, Q = \ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.wnr).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8746 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2946, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.sfr_load).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8745 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2945, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.sfr_shift).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8744 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2944, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.sfr_rst).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8743 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2943, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.acnt_inc).
-Adding EN signal on ram_bus_bridge_instance.ramtows2812_instance.fsm.8742 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2942, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.acnt_rst).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8801 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2973, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8755.hastobereset, rval = 1'0).
-Adding EN signal on $auto$opt_dff.cc:702:run$3726 ($sdff) from module neorv32_iceduino_top (D = 1'1, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8755.hastobereset).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8800 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2980, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8755.addr_cnt, rval = 6'000000).
-Adding EN signal on $auto$opt_dff.cc:702:run$3728 ($sdff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2966, Q = \ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8755.addr_cnt).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8799 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2979, Q = \ram_bus_bridge_instance.ram_instance.raddr, rval = 6'000000).
-Adding EN signal on $auto$opt_dff.cc:702:run$3732 ($sdff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2966, Q = \ram_bus_bridge_instance.ram_instance.raddr).
-Adding SRST signal on ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8798 ($dff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2978, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.acnt_eq_max, rval = 1'0).
-Adding EN signal on $auto$opt_dff.cc:702:run$3736 ($sdff) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2969, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.acnt_eq_max).
-Adding EN signal on ram_bus_bridge_instance.1139 ($dff) from module neorv32_iceduino_top (D = \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [65:34], Q = \ram_bus_bridge_instance.ram_wdata).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8902 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3023, Q = \neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.cnt, rval = 0).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8901 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3022, Q = \neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.run, rval = 1'0).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8900 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\ws2812_aserial.$auto$ghdl.cc:762:import_module$3021, Q = \io_d [0], rval = 1'0).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.sfr.8848 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2996, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.8805.shift_cnt, rval = 5'00000).
+Adding EN signal on $auto$opt_dff.cc:702:run$3633 ($sdff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2991 [4:0], Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.8805.shift_cnt).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.sfr.8847 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.shift_reg, rval = 24'000000000000000000000000).
+Adding EN signal on $auto$opt_dff.cc:702:run$3635 ($sdff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.shift_reg).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.sfr.8846 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2993, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.sfr_done, rval = 1'0).
+Adding EN signal on $auto$opt_dff.cc:702:run$3641 ($sdff) from module neorv32_iceduino_top (D = 1'1, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.sfr_done).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8752 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2952, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.loading_finished).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8751 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2951, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.load_steps).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8750 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2950, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.first_addr).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8749 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2949, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.state).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8748 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2948, Q = \neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.reset).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8747 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2947, Q = \neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.wnr).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8746 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2946, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.sfr_load).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8745 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2945, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.sfr_shift).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8744 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2944, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.sfr_rst).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8743 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2943, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.acnt_inc).
+Adding EN signal on neorv_ws2812_instance.ramtows2812_instance.fsm.8742 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2942, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.acnt_rst).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.addr_counter.8801 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2973, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.8755.hastobereset, rval = 1'0).
+Adding EN signal on $auto$opt_dff.cc:702:run$3726 ($sdff) from module neorv32_iceduino_top (D = 1'1, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.8755.hastobereset).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.addr_counter.8800 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2980, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.8755.addr_cnt, rval = 6'000000).
+Adding EN signal on $auto$opt_dff.cc:702:run$3728 ($sdff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2966, Q = \neorv_ws2812_instance.ramtows2812_instance.addr_counter.8755.addr_cnt).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.addr_counter.8799 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2979, Q = \neorv_ws2812_instance.ram_instance.raddr, rval = 6'000000).
+Adding EN signal on $auto$opt_dff.cc:702:run$3732 ($sdff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2966, Q = \neorv_ws2812_instance.ram_instance.raddr).
+Adding SRST signal on neorv_ws2812_instance.ramtows2812_instance.addr_counter.8798 ($dff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2978, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.acnt_eq_max, rval = 1'0).
+Adding EN signal on $auto$opt_dff.cc:702:run$3736 ($sdff) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\addr_counter.$auto$ghdl.cc:762:import_module$2969, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.acnt_eq_max).
+Adding EN signal on neorv_ws2812_instance.1139 ($dff) from module neorv32_iceduino_top (D = \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [65:34], Q = \neorv_ws2812_instance.ram_wdata).
 Adding EN signal on neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2265 ($adff) from module neorv32_iceduino_top (D = { 3'110 \neorv32_inst.neorv32_busswitch_inst:619 \neorv32_inst.neorv32_busswitch_inst:623 [3:1] \neorv32_inst.neorv32_cpu_inst.neorv32_cpu_bus_inst.d_bus_ben [0] \neorv32_inst.neorv32_int_dmem_inst_true.neorv32_int_dmem_inst.data_i [31:8] \neorv32_inst.neorv32_cpu_inst.neorv32_cpu_bus_inst.mdo [7:0] \neorv32_inst.neorv32_bus_keeper_inst.addr_i [31:11] \neorv32_inst.neorv32_busswitch_inst:620 [10:9] \neorv32_inst.neorv32_int_dmem_inst_true.neorv32_int_dmem_inst.addr_i [8:2] \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.addr_i [1:0] \neorv32_inst.neorv32_bus_keeper_inst.wren_i }, Q = { \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [115:112] \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [101:98] \neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [65:1] }).
 Setting constant 0-bit at position 70 on $auto$opt_dff.cc:764:run$3741 ($adffe) from module neorv32_iceduino_top.
 Setting constant 1-bit at position 71 on $auto$opt_dff.cc:764:run$3741 ($adffe) from module neorv32_iceduino_top.
@@ -1403,15 +1403,15 @@ Removed 0 multiplexer ports.
 
 2.12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \neorv32_iceduino_top.
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8706: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8708: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8710: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8713: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2935 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8719: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2935 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8721: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8725: { $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8727: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
-    New ctrl vector for $pmux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8729: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8706: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8708: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8710: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8713: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2935 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8719: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2935 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8721: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8725: { $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2941 $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922 }
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8727: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
+    New ctrl vector for $pmux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8729: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2922
   Optimizing cells in module \neorv32_iceduino_top.
 Performed a total of 9 changes.
 
@@ -1421,7 +1421,7 @@ Finding identical cells in module `\neorv32_iceduino_top'.
 Removed a total of 53 cells.
 
 2.12.13. Executing OPT_DFF pass (perform DFF optimizations).
-Adding SRST signal on $auto$opt_dff.cc:764:run$3645 ($dffe) from module neorv32_iceduino_top (D = 1'x, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.loading_finished, rval = 1'0).
+Adding SRST signal on $auto$opt_dff.cc:764:run$3645 ($dffe) from module neorv32_iceduino_top (D = 1'x, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.loading_finished, rval = 1'0).
 Setting constant 0-bit at position 0 on $auto$opt_dff.cc:702:run$4074 ($sdffce) from module neorv32_iceduino_top.
 
 2.12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
@@ -1681,41 +1681,41 @@ Removed top 1 bits (of 2) from port B of cell neorv32_iceduino_top.neorv32_inst.
 Removed top 23 bits (of 32) from port B of cell neorv32_iceduino_top.neorv32_inst.770 ($or).
 Removed top 11 bits (of 12) from port B of cell neorv32_iceduino_top.neorv32_inst.453 ($add).
 Removed top 1 bits (of 3) from port B of cell neorv32_iceduino_top.$auto$opt_dff.cc:218:make_patterns_logic$3696 ($ne).
-Removed top 26 bits (of 32) from port A of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt).
-Removed top 26 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt).
-Converting cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt) from signed to unsigned.
-Removed top 1 bits (of 6) from port A of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt).
-Removed top 1 bits (of 6) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8727 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8708 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8706 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8701 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8699 ($mux).
-Removed top 1 bits (of 2) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8688 ($eq).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8686 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8685 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8679 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8677 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8663 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8656 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8653 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8645 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8641 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8628 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8627 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8623 ($mux).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8619 ($mux).
-Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8617 ($eq).
-Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.fsm.8615 ($add).
-Removed top 5 bits (of 6) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8763 ($add).
-Removed cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8826 ($mux).
-Removed top 27 bits (of 32) from port A of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8818 ($add).
-Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8818 ($add).
-Removed top 27 bits (of 32) from port Y of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.sfr.8818 ($add).
-Removed top 25 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8866 ($lt).
-Removed top 25 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8862 ($lt).
-Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8860 ($add).
-Removed top 26 bits (of 32) from port B of cell neorv32_iceduino_top.ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8858 ($lt).
+Removed top 26 bits (of 32) from port A of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt).
+Removed top 26 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt).
+Converting cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt) from signed to unsigned.
+Removed top 1 bits (of 6) from port A of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt).
+Removed top 1 bits (of 6) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8727 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8708 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8706 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8701 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8699 ($mux).
+Removed top 1 bits (of 2) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8688 ($eq).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8686 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8685 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8679 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8677 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8663 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8656 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8653 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8645 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8641 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8628 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8627 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8623 ($mux).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8619 ($mux).
+Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8617 ($eq).
+Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.fsm.8615 ($add).
+Removed top 5 bits (of 6) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.addr_counter.8763 ($add).
+Removed cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8826 ($mux).
+Removed top 27 bits (of 32) from port A of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8818 ($add).
+Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8818 ($add).
+Removed top 27 bits (of 32) from port Y of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.sfr.8818 ($add).
+Removed top 25 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8866 ($lt).
+Removed top 25 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8862 ($lt).
+Removed top 31 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8860 ($add).
+Removed top 26 bits (of 32) from port B of cell neorv32_iceduino_top.neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8858 ($lt).
 Removed top 5 bits (of 70) from FF cell neorv32_iceduino_top.$auto$opt_dff.cc:764:run$3741 ($adffe).
 Removed cell neorv32_iceduino_top.neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.3002 ($mux).
 Removed cell neorv32_iceduino_top.neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.3042 ($mux).
@@ -1746,8 +1746,8 @@ Removed top 1 bits (of 15) from wire neorv32_iceduino_top.$flatten\neorv32_inst.
 Removed top 1 bits (of 26) from wire neorv32_iceduino_top.$flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$910.
 Removed top 1 bits (of 12) from wire neorv32_iceduino_top.$flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$917.
 Removed top 2 bits (of 3) from wire neorv32_iceduino_top.$flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$929.
-Removed top 27 bits (of 32) from wire neorv32_iceduino_top.$flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2991.
-Removed top 16 bits (of 24) from wire neorv32_iceduino_top.$flatten\ram_bus_bridge_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001.
+Removed top 27 bits (of 32) from wire neorv32_iceduino_top.$flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$2991.
+Removed top 16 bits (of 24) from wire neorv32_iceduino_top.$flatten\neorv_ws2812_instance.\ramtows2812_instance.\sfr.$auto$ghdl.cc:762:import_module$3001.
 Removed top 1 bits (of 34) from wire neorv32_iceduino_top.active_slave_resp.
 
 2.14. Executing PEEPOPT pass (run peephole optimizers).
@@ -1839,14 +1839,14 @@ Extracting $alu and $macc cells in module neorv32_iceduino_top:
   creating $macc model for neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.2936 ($sub).
   creating $macc model for neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst.2406 ($add).
   creating $macc model for neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2236 ($sub).
-  creating $macc model for ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8763 ($add).
-  creating $macc model for ram_bus_bridge_instance.ramtows2812_instance.fsm.8615 ($add).
-  creating $macc model for ram_bus_bridge_instance.ramtows2812_instance.sfr.8818 ($add).
-  creating $macc model for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8860 ($add).
+  creating $macc model for neorv_ws2812_instance.ramtows2812_instance.addr_counter.8763 ($add).
+  creating $macc model for neorv_ws2812_instance.ramtows2812_instance.fsm.8615 ($add).
+  creating $macc model for neorv_ws2812_instance.ramtows2812_instance.sfr.8818 ($add).
+  creating $macc model for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8860 ($add).
   merging $macc model for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.7879 into neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.7881.
-  creating $alu model for $macc ram_bus_bridge_instance.ramtows2812_instance.sfr.8818.
-  creating $alu model for $macc ram_bus_bridge_instance.ramtows2812_instance.fsm.8615.
-  creating $alu model for $macc ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8763.
+  creating $alu model for $macc neorv_ws2812_instance.ramtows2812_instance.sfr.8818.
+  creating $alu model for $macc neorv_ws2812_instance.ramtows2812_instance.fsm.8615.
+  creating $alu model for $macc neorv_ws2812_instance.ramtows2812_instance.addr_counter.8763.
   creating $alu model for $macc neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2236.
   creating $alu model for $macc neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst.2406.
   creating $alu model for $macc neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.2936.
@@ -1870,7 +1870,7 @@ Extracting $alu and $macc cells in module neorv32_iceduino_top:
   creating $alu model for $macc neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3651.
   creating $alu model for $macc neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.neorv32_cpu_cp_shifter_inst.9077.
   creating $alu model for $macc neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.7881.
-  creating $alu model for $macc ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8860.
+  creating $alu model for $macc neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8860.
   creating $alu model for $macc neorv32_inst.neorv32_bus_keeper_inst.1937.
   creating $alu model for $macc neorv32_inst.453.
   creating $alu model for $macc \30.
@@ -1878,14 +1878,14 @@ Extracting $alu and $macc cells in module neorv32_iceduino_top:
   creating $alu model for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst.7838 ($lt): new $alu
   creating $alu model for neorv32_inst.neorv32_mtime_inst_true.neorv32_mtime_inst.2611 ($ge): new $alu
   creating $alu model for neorv32_inst.neorv32_mtime_inst_true.neorv32_mtime_inst.2615 ($ge): new $alu
-  creating $alu model for ram_bus_bridge_instance.ramtows2812_instance.sfr.8812 ($lt): new $alu
-  creating $alu model for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8858 ($lt): new $alu
-  creating $alu model for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8862 ($lt): new $alu
-  creating $alu model for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8866 ($lt): new $alu
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8866: $auto$alumacc.cc:485:replace_alu$4146
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8862: $auto$alumacc.cc:485:replace_alu$4159
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8858: $auto$alumacc.cc:485:replace_alu$4172
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.sfr.8812: $auto$alumacc.cc:485:replace_alu$4185
+  creating $alu model for neorv_ws2812_instance.ramtows2812_instance.sfr.8812 ($lt): new $alu
+  creating $alu model for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8858 ($lt): new $alu
+  creating $alu model for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8862 ($lt): new $alu
+  creating $alu model for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8866 ($lt): new $alu
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8866: $auto$alumacc.cc:485:replace_alu$4146
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8862: $auto$alumacc.cc:485:replace_alu$4159
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8858: $auto$alumacc.cc:485:replace_alu$4172
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.sfr.8812: $auto$alumacc.cc:485:replace_alu$4185
   creating $alu cell for neorv32_inst.neorv32_mtime_inst_true.neorv32_mtime_inst.2615: $auto$alumacc.cc:485:replace_alu$4196
   creating $alu cell for neorv32_inst.neorv32_mtime_inst_true.neorv32_mtime_inst.2611: $auto$alumacc.cc:485:replace_alu$4205
   creating $alu cell for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst.7838: $auto$alumacc.cc:485:replace_alu$4218
@@ -1893,7 +1893,7 @@ Extracting $alu and $macc cells in module neorv32_iceduino_top:
   creating $alu cell for \30: $auto$alumacc.cc:485:replace_alu$4230
   creating $alu cell for neorv32_inst.453: $auto$alumacc.cc:485:replace_alu$4233
   creating $alu cell for neorv32_inst.neorv32_bus_keeper_inst.1937: $auto$alumacc.cc:485:replace_alu$4236
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.8860: $auto$alumacc.cc:485:replace_alu$4239
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.8860: $auto$alumacc.cc:485:replace_alu$4239
   creating $alu cell for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.7881: $auto$alumacc.cc:485:replace_alu$4242
   creating $alu cell for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.neorv32_cpu_cp_shifter_inst.9077: $auto$alumacc.cc:485:replace_alu$4245
   creating $alu cell for neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3651: $auto$alumacc.cc:485:replace_alu$4248
@@ -1917,9 +1917,9 @@ Extracting $alu and $macc cells in module neorv32_iceduino_top:
   creating $alu cell for neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.2936: $auto$alumacc.cc:485:replace_alu$4302
   creating $alu cell for neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst.2406: $auto$alumacc.cc:485:replace_alu$4305
   creating $alu cell for neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2236: $auto$alumacc.cc:485:replace_alu$4308
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8763: $auto$alumacc.cc:485:replace_alu$4311
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.fsm.8615: $auto$alumacc.cc:485:replace_alu$4314
-  creating $alu cell for ram_bus_bridge_instance.ramtows2812_instance.sfr.8818: $auto$alumacc.cc:485:replace_alu$4317
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.addr_counter.8763: $auto$alumacc.cc:485:replace_alu$4311
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.fsm.8615: $auto$alumacc.cc:485:replace_alu$4314
+  creating $alu cell for neorv_ws2812_instance.ramtows2812_instance.sfr.8818: $auto$alumacc.cc:485:replace_alu$4317
   created 38 $alu and 0 $macc cells.
 
 2.27. Executing OPT pass (performing simple optimizations).
@@ -2689,7 +2689,7 @@ Processing neorv32_iceduino_top.neorv32_inst.neorv32_int_imem_inst_true.neorv32_
       Creating $__ICE40_RAM4K_M123 cell at grid position <13 0 0>: neorv32_inst.neorv32_int_imem_inst_true.neorv32_int_imem_inst.1992.13.0.0
       Creating $__ICE40_RAM4K_M123 cell at grid position <14 0 0>: neorv32_inst.neorv32_int_imem_inst_true.neorv32_int_imem_inst.1992.14.0.0
       Creating $__ICE40_RAM4K_M123 cell at grid position <15 0 0>: neorv32_inst.neorv32_int_imem_inst_true.neorv32_int_imem_inst.1992.15.0.0
-Processing neorv32_iceduino_top.ram_bus_bridge_instance.ram_instance.3570:
+Processing neorv32_iceduino_top.neorv_ws2812_instance.ram_instance.3570:
   Properties: ports=2 bits=2048 rports=1 wports=1 dbits=32 abits=6 words=64
   Checking rule #1 for bram type $__ICE40_RAM4K_M0 (variant 1):
     Bram geometry: abits=8 dbits=16 wports=0 rports=0
@@ -2790,8 +2790,8 @@ Processing neorv32_iceduino_top.ram_bus_bridge_instance.ram_instance.3570:
         Mapped to bram port B1.
       Read port #0 is in clock domain \clk_50mhz.
         Mapped to bram port A1.1.
-      Creating $__ICE40_RAM4K_M0 cell at grid position <0 0 0>: ram_bus_bridge_instance.ram_instance.3570.0.0.0
-      Creating $__ICE40_RAM4K_M0 cell at grid position <1 0 0>: ram_bus_bridge_instance.ram_instance.3570.1.0.0
+      Creating $__ICE40_RAM4K_M0 cell at grid position <0 0 0>: neorv_ws2812_instance.ram_instance.3570.0.0.0
+      Creating $__ICE40_RAM4K_M0 cell at grid position <1 0 0>: neorv_ws2812_instance.ram_instance.3570.1.0.0
 
 2.31. Executing TECHMAP pass (map to technology primitives).
 
@@ -2803,43 +2803,43 @@ Generating RTLIL representation for module `\$__ICE40_RAM4K_M123'.
 Successfully finished Verilog frontend.
 
 2.31.2. Continuing TECHMAP pass.
-Using template $paramod$094f0f8f03635bc8fe090544cb8ff6dd9a405fd2\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$51a251afcdd9a98c5fdfe8e84f5d6475e2a4764d\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$37f14f62e96d44b295a57dcecca0e3e06de44119\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$a7677b1644cd81b9600768aee17e668848ec2d2e\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$8d7a743c1567d3e071727e303ad8417a200f9fb2\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$fdd9d1c2d69dcb0de65dfac111bfe37cf51edd07\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$784574eae958c6bc31a4c5339e21c96f92dfd1ad\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$c74d3f5491cf8f479345422330d88661adba203f\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$252dc4cb5f340208a4dcce88fc14657a8991a25d\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$c6df2a35d4f4c2b3cc976cfec69275e113a38f64\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$8e1ed101ef6e46a6e813218b7eb1b262605446ef\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$edab066e1e0d0d18eaa86be27762c81992466bbf\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$18a5fcaa9c8b5e9f7d0dddf4dc5bc82608aea4b8\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$9bbf0541a2a044a0ffd953199d64d31663b94509\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
 Using template $paramod$0a019bf6356ccccf899399d072352b73127d7d6e\$__ICE40_RAM4K_M0 for cells of type $__ICE40_RAM4K_M0.
 Using template $paramod$e235fb0d01570b7d5db500847f23843e9c734745\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$63cb702154d7367c2cd7224d5eaa50b40d58803b\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$0a89dba5372399c5adf1339d6e05936fb9543275\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$b4bc4a968a73101f6d8708b51590e49a491f96c3\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$dd9cf90dd7e3cf149f27e77afdefa9ae86e99a4c\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
 Using template $paramod$60043cabcbaea98043cde982cd8e71d00644550c\$__ICE40_RAM4K_M0 for cells of type $__ICE40_RAM4K_M0.
-Using template $paramod$23d4bfad98de2abda9b341f17e2194536da101f1\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$33cf6c6aca35d52ac3f32990a5da514697331e1a\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$1e09b148a0e7167bb0c3d73fadb07021e6574bc4\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$e62b983231c0fcf2148dfb960c3b7b2d701102fd\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$497899d3d46877d7f6749c3001f4f428700550c2\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$390864615c8ac258ebdc6eeb87bbccfc08410a1e\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$ee0a2ed968ab4e7785c6c00ecadbbcdb6e0ac946\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
-Using template $paramod$c5e391b7424e5ca5cfaaa4fda288484dcbe75442\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$ce18c9696bd631190dcb2ca3f6148b877d91935f\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$09fa3a728ae0e16cd0729852d854021841f7afd1\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$ed85a35583379d14495eaa2170b7090a6eb458aa\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$40910201e514aae4f9793cf07952f8335658b8b4\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$042d15bbf99b9550153eafa01a336457c845e0f2\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$93efb55cfeab5454b9b55f61ea172dca148c9c2c\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$8082bf36b71a27ffdc27618fad6610cfb3d563e1\$__ICE40_RAM4K_M123 for cells of type $__ICE40_RAM4K_M123.
+Using template $paramod$7db7bc0cbdba2c14161dc52db66f19a9d34eae79\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 Using template $paramod$ddf5a7132863f6e9af192ea23a6e92b177af3b26\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 Using template $paramod$74e86a1473a276d7f5e0aabab902bd3b9ea7e933\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$0da8106b6d3ed48ec33609a4caf96cd1fe924d89\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$b86f2a2bc0efb528338cbdba2d956d4619daf096\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$7388371b3e51f02a7a5bb1e6926b82a37e210e81\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$3f8fe8198f9f1a9d44f90f67fbac42397aa6c95a\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$c8aa608c4ff97cb8c254f519453762b864dd4965\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$807923b7bb3efac326c30ccbf4035f61d6f23d1c\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$05e73768ef20d04e0a04db7dcfb404d1c5977d48\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$ead526b2c424bdb76b286b3123ad609d4dbf83f8\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$df4c74ce9de70d81d5661c6fdfc2399154c63c26\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$04720aa84ed7adec37247d674ce074e901dce371\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$23bf5b4f1b21eb5b994f759190848eb31a7ac61f\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$6ad50ab6f2ddc9da9747f9bd0ff592fb3a79966a\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$d523c5b4ba0198a4a06a1acaf8569e94b04d2e93\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$e3a74f8212f04b88d63bb5bcf79705f8fa8c2c96\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
-Using template $paramod$2b625af93edcff88035cc0791a6c1fcd44423e6a\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$9be8152d0fdb60ee2c5002dffcafe5f0db4c16fc\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$50737972fa4fbcb47203c2519a37d6a02ff2a39f\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$568f45920468363baaecf4eda1faf6d642cc608a\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$27846225ae9729d80b51b26274c234aab9c2343d\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$c9d18c7d5408b95d528a2764c77f698a723e6bbf\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$dd8ab666938dcbd9fcb72ec309f919ecc7fe88e9\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$7c50014315ee1977585eebf50989064ab4095d42\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$0788941527471be58f0c1be4787d6edbcf6f2341\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$e2bf4f6bac506439a10ac223ff21c8936cab023f\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$6d0e9ee87571cb4e28fd6d5b8b4dc7a8dd680f0d\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$de4b81cbe4738c74034dd6805fdebdea20fad688\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$04e010389faeb581adff3b5ecb6e816e477b0144\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$17296c366cdca2e95b2d9c9c3b8cb9750c7f86af\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$f09fada23258ec2c088871f7e5ae67863cdab291\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
+Using template $paramod$91a4a9ecbf6aef82a238c13e7095a88c92c52d32\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 Using template $paramod$4ba4fe1982a55ef019b30baa076e9e61d1def7f7\$__ICE40_RAM4K for cells of type $__ICE40_RAM4K.
 No more expansions possible.
 <suppressed ~1305 debug messages>
@@ -2859,8 +2859,8 @@ Removed a total of 9 cells.
 
 2.33.3. Executing OPT_DFF pass (perform DFF optimizations).
 Adding EN signal on $auto$opt_dff.cc:764:run$4028 ($adffe) from module neorv32_iceduino_top (D = $flatten\neorv32_inst.\neorv32_cpu_inst.\neorv32_cpu_control_inst.$auto$ghdl.cc:762:import_module$1113 [1:0], Q = { \neorv32_inst.neorv32_cpu_inst.neorv32_cpu_bus_inst.fetch_pc_i [1] $flatten\neorv32_inst.\neorv32_cpu_inst.\neorv32_cpu_control_inst.$auto$ghdl.cc:762:import_module$1116 [0] }).
-Adding SRST signal on $auto$opt_dff.cc:764:run$3706 ($dffe) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2925, Q = \ram_bus_bridge_instance.ramtows2812_instance.sfr.sfr_shift, rval = 1'0).
-Adding SRST signal on $auto$opt_dff.cc:764:run$3659 ($dffe) from module neorv32_iceduino_top (D = $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2917, Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.first_addr, rval = 1'1).
+Adding SRST signal on $auto$opt_dff.cc:764:run$3706 ($dffe) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2925, Q = \neorv_ws2812_instance.ramtows2812_instance.sfr.sfr_shift, rval = 1'0).
+Adding SRST signal on $auto$opt_dff.cc:764:run$3659 ($dffe) from module neorv32_iceduino_top (D = $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2917, Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.8606.first_addr, rval = 1'1).
 
 2.33.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \neorv32_iceduino_top..
@@ -2926,8 +2926,8 @@ Removed 0 multiplexer ports.
       New ports: A=2'10, B=2'01, Y={ $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [0] }
       New connections: { $auto$wreduce.cc:454:run$4094 [25:8] $auto$wreduce.cc:454:run$4094 [6:1] } = { $auto$wreduce.cc:454:run$4094 [7] 1'0 $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] 1'0 $auto$wreduce.cc:454:run$4094 [7] 1'0 $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] $auto$wreduce.cc:454:run$4094 [7] 10'0000000000 }
     Consolidated identical input bits for $mux cell \139:
-      Old ports: A=33'000000000000000000000000000000000, B={ \ram_bus_bridge_instance.ack_o 32'00000000000000000000000000000000 }, Y=$auto$ghdl.cc:762:import_module$27
-      New ports: A=1'0, B=\ram_bus_bridge_instance.ack_o, Y=$auto$ghdl.cc:762:import_module$27 [32]
+      Old ports: A=33'000000000000000000000000000000000, B={ \neorv_ws2812_instance.ack_o 32'00000000000000000000000000000000 }, Y=$auto$ghdl.cc:762:import_module$27
+      New ports: A=1'0, B=\neorv_ws2812_instance.ack_o, Y=$auto$ghdl.cc:762:import_module$27 [32]
       New connections: $auto$ghdl.cc:762:import_module$27 [31:0] = 0
     Consolidated identical input bits for $mux cell \neorv32_inst.neorv32_busswitch_inst.1761:
       Old ports: A=4'0xxx, B=4'1100, Y=$flatten\neorv32_inst.\neorv32_busswitch_inst.$auto$ghdl.cc:762:import_module$520
@@ -2993,10 +2993,10 @@ Removed 0 multiplexer ports.
       Old ports: A={ $flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$860 1'1 $auto$wreduce.cc:454:run$4098 [13:0] }, B={ \neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.ctrl [11:0] 1'1 $auto$wreduce.cc:454:run$4096 [9:1] $auto$wreduce.cc:454:run$4097 [0] 3'101 \neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.ctrl [23] }, Y=$flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$866
       New ports: A={ $flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$860 $auto$wreduce.cc:454:run$4098 [13:0] }, B={ \neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.ctrl [11:0] $auto$wreduce.cc:454:run$4096 [9:1] $auto$wreduce.cc:454:run$4097 [0] 3'101 \neorv32_inst.neorv32_uart0_inst_true.neorv32_uart0_inst.ctrl [23] }, Y={ $flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$866 [26:15] $flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$866 [13:0] }
       New connections: $flatten\neorv32_inst.\neorv32_uart0_inst_true.neorv32_uart0_inst.$auto$ghdl.cc:762:import_module$866 [14] = 1'1
-    Consolidated identical input bits for $mux cell \ram_bus_bridge_instance.ramtows2812_instance.fsm.8683:
-      Old ports: A=2'00, B=2'10, Y=$flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931
-      New ports: A=1'0, B=1'1, Y=$flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931 [1]
-      New connections: $flatten\ram_bus_bridge_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931 [0] = 1'0
+    Consolidated identical input bits for $mux cell \neorv_ws2812_instance.ramtows2812_instance.fsm.8683:
+      Old ports: A=2'00, B=2'10, Y=$flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931
+      New ports: A=1'0, B=1'1, Y=$flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931 [1]
+      New connections: $flatten\neorv_ws2812_instance.\ramtows2812_instance.\fsm.$auto$ghdl.cc:762:import_module$2931 [0] = 1'0
   Optimizing cells in module \neorv32_iceduino_top.
     Consolidated identical input bits for $mux cell $flatten\neorv32_inst.\neorv32_sysinfo_inst.$auto$ghdl.cc:1006:import_module$1091:
       Old ports: A=$flatten\neorv32_inst.\neorv32_sysinfo_inst.$auto$ghdl.cc:1003:import_module$1088, B={ 18'000000000000000000 $auto$wreduce.cc:454:run$4092 [13:0] }, Y=$flatten\neorv32_inst.\neorv32_sysinfo_inst.$auto$ghdl.cc:762:import_module$1084
@@ -3553,8 +3553,8 @@ Adding SRST signal on $auto$simplemap.cc:527:simplemap_adff_sdff$6103 ($_SDFF_PN
 Adding SRST signal on $auto$simplemap.cc:527:simplemap_adff_sdff$6102 ($_SDFF_PN0_) from module neorv32_iceduino_top (D = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.spi_rtx_sreg [26], Q = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1031 [26], rval = 1'0).
 Adding SRST signal on $auto$simplemap.cc:527:simplemap_adff_sdff$6101 ($_SDFF_PN0_) from module neorv32_iceduino_top (D = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.spi_rtx_sreg [25], Q = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1031 [25], rval = 1'0).
 Adding SRST signal on $auto$simplemap.cc:527:simplemap_adff_sdff$6100 ($_SDFF_PN0_) from module neorv32_iceduino_top (D = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.spi_rtx_sreg [24], Q = \neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst:1031 [24], rval = 1'0).
-Adding SRST signal on $auto$simplemap.cc:442:simplemap_dffe$5374 ($_DFFE_PP_) from module neorv32_iceduino_top (D = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8723.Y_B [1], Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.state [1], rval = 1'0).
-Adding SRST signal on $auto$simplemap.cc:442:simplemap_dffe$5373 ($_DFFE_PP_) from module neorv32_iceduino_top (D = \ram_bus_bridge_instance.ramtows2812_instance.fsm.8723.Y_B [0], Q = \ram_bus_bridge_instance.ramtows2812_instance.fsm.state [0], rval = 1'0).
+Adding SRST signal on $auto$simplemap.cc:442:simplemap_dffe$5374 ($_DFFE_PP_) from module neorv32_iceduino_top (D = \neorv_ws2812_instance.ramtows2812_instance.fsm.8723.Y_B [1], Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.state [1], rval = 1'0).
+Adding SRST signal on $auto$simplemap.cc:442:simplemap_dffe$5373 ($_DFFE_PP_) from module neorv32_iceduino_top (D = \neorv_ws2812_instance.ramtows2812_instance.fsm.8723.Y_B [0], Q = \neorv_ws2812_instance.ramtows2812_instance.fsm.state [0], rval = 1'0).
 
 2.38.9. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \neorv32_iceduino_top..
@@ -3590,7 +3590,7 @@ Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_i
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4230.slice[0].carry: CO=\23.cnt [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4233.slice[0].carry: CO=\neorv32_inst.clk_div [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4236.slice[0].carry: CO=\neorv32_inst.neorv32_bus_keeper_inst.control [1]
-Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4239.slice[0].carry: CO=\ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.cnt [0]
+Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4239.slice[0].carry: CO=\neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.cnt [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4245.slice[0].carry: CO=$auto$alumacc.cc:485:replace_alu$4245.A [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4248.slice[0].carry: CO=\neorv32_inst.neorv32_busswitch_inst.cb_bus_addr_i [2]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4251.slice[0].carry: CO=\neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.pc2_i [2]
@@ -3607,9 +3607,9 @@ Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_i
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4302.slice[0].carry: CO=$auto$alumacc.cc:485:replace_alu$4302.A [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4305.slice[0].carry: CO=\neorv32_inst.neorv32_wdt_inst_true.neorv32_wdt_inst.wdt_cnt [0]
 Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4308.slice[0].carry: CO=\neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.ctrl [104]
-Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4311.slice[0].carry: CO=\ram_bus_bridge_instance.ramtows2812_instance.addr_counter.8755.addr_cnt [0]
-Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4314.slice[0].carry: CO=\ram_bus_bridge_instance.ramtows2812_instance.fsm.8606.load_steps [0]
-Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4317.slice[0].carry: CO=\ram_bus_bridge_instance.ramtows2812_instance.sfr.8805.shift_cnt [0]
+Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4311.slice[0].carry: CO=\neorv_ws2812_instance.ramtows2812_instance.addr_counter.8755.addr_cnt [0]
+Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4314.slice[0].carry: CO=\neorv_ws2812_instance.ramtows2812_instance.fsm.8606.load_steps [0]
+Optimized $__ICE40_CARRY_WRAPPER cell back to logic (without SB_CARRY) neorv32_iceduino_top.$auto$alumacc.cc:485:replace_alu$4317.slice[0].carry: CO=\neorv_ws2812_instance.ramtows2812_instance.sfr.8805.shift_cnt [0]
 
 2.39.2. Executing OPT_EXPR pass (perform const folding).
 Optimizing module neorv32_iceduino_top.
@@ -3812,7 +3812,7 @@ ABC: Participating nodes from the first network   =    1805. (  64.83 % of nodes
 ABC: Participating nodes from the second network  =    2071. (  74.39 % of nodes)
 ABC: Node pairs (any polarity)                    =    1805. (  64.83 % of names can be moved)
 ABC: Node pairs (same polarity)                   =    1536. (  55.17 % of names can be moved)
-ABC: Total runtime =     0.27 sec
+ABC: Total runtime =     0.24 sec
 ABC: + write_blif <abc-temp-dir>/output.blif 
 
 2.46.1.2. Re-integrating ABC results.
@@ -4066,7 +4066,7 @@ No more expansions possible.
 Removed 0 unused cells and 6352 unused wires.
 
 2.51. Executing AUTONAME pass.
-Renamed 188139 objects in module neorv32_iceduino_top (141 iterations).
+Renamed 188137 objects in module neorv32_iceduino_top (141 iterations).
 <suppressed ~7258 debug messages>
 
 2.52. Executing HIERARCHY pass (managing design hierarchy).
@@ -4110,6 +4110,6 @@ Found and reported 0 problems.
 
 2.55. Executing JSON backend.
 
-End of script. Logfile hash: 3197e0ade9, CPU: user 18.01s system 0.33s, MEM: 374.26 MB peak
+End of script. Logfile hash: 60b1fe7eea, CPU: user 15.49s system 1.52s, MEM: 373.11 MB peak
 Yosys 0.9+4081 (open-tool-forge build) (git sha1 862e84eb, gcc 9.3.0-17ubuntu1~20.04 -Os)
-Time spent: 24% 35x opt_expr (4 sec), 18% 34x opt_clean (3 sec), ...
+Time spent: 22% 35x opt_expr (4 sec), 19% 8x techmap (3 sec), ...

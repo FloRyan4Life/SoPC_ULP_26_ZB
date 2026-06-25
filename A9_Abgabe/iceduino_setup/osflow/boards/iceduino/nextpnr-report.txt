@@ -118,18 +118,18 @@ Info: Packing PLLs..
 Info: Promoting globals..
 Info: promoting clk_50mhz$SB_IO_IN (fanout 1761)
 Info: promoting neorv32_inst.sys_rstn_SB_LUT4_I3_O [reset] (fanout 860)
-Info: promoting ram_bus_bridge_instance.ramtows2812_instance.ws2812_aserial.wnr_SB_LUT4_I2_O [reset] (fanout 34)
+Info: promoting neorv_ws2812_instance.ramtows2812_instance.ws2812_aserial.wnr_SB_LUT4_I2_O [reset] (fanout 34)
 Info: promoting neorv32_inst.neorv32_sysinfo_inst.rden_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_I1_SB_LUT4_I2_O_SB_LUT4_I3_O[1] [reset] (fanout 32)
-Info: promoting ram_bus_bridge_instance.ramtows2812_instance.acnt_rst [reset] (fanout 31)
+Info: promoting neorv_ws2812_instance.ramtows2812_instance.acnt_rst [reset] (fanout 31)
 Info: promoting neorv32_inst.neorv32_wishbone_inst_true.neorv32_wishbone_inst.2241.S[0] [cen] (fanout 65)
 Info: promoting neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst:1547[36] [cen] (fanout 64)
 Info: promoting neorv32_inst.neorv32_cpu_inst.sleep_o_SB_LUT4_I1_O_SB_LUT4_I2_O_SB_LUT4_O_1_I2[1] [cen] (fanout 63)
 Info: Constraining chains...
 Info:      262 LCs used to legalise carry chains.
-Info: Checksum: 0x6cc5b033
+Info: Checksum: 0x051651d6
 
 Info: Annotating ports with timing budgets for target frequency 50.00 MHz
-Info: Checksum: 0x302eee42
+Info: Checksum: 0x473c2eb8
 
 Info: Device utilisation:
 Info: 	         ICESTORM_LC:  4334/ 7680    56%
@@ -140,358 +140,364 @@ Info: 	        ICESTORM_PLL:     0/    2     0%
 Info: 	         SB_WARMBOOT:     0/    1     0%
 
 Info: Placed 69 cells based on constraints.
-Info: Creating initial analytic placement for 3509 cells, random placement wirelen = 118001.
-Info:     at initial placer iter 0, wirelen = 2991
-Info:     at initial placer iter 1, wirelen = 3005
-Info:     at initial placer iter 2, wirelen = 2992
-Info:     at initial placer iter 3, wirelen = 2940
+Info: Creating initial analytic placement for 3509 cells, random placement wirelen = 119156.
+Info:     at initial placer iter 0, wirelen = 3060
+Info:     at initial placer iter 1, wirelen = 2913
+Info:     at initial placer iter 2, wirelen = 2952
+Info:     at initial placer iter 3, wirelen = 2900
 Info: Running main analytical placer.
-Info:     at iteration #1, type ALL: wirelen solved = 3030, spread = 36079, legal = 52400; time = 0.31s
-Info:     at iteration #2, type ALL: wirelen solved = 3646, spread = 34420, legal = 48717; time = 0.57s
-Info:     at iteration #3, type ALL: wirelen solved = 4094, spread = 37288, legal = 48897; time = 0.40s
-Info:     at iteration #4, type ALL: wirelen solved = 4960, spread = 34507, legal = 47550; time = 0.22s
-Info:     at iteration #5, type ALL: wirelen solved = 5953, spread = 31689, legal = 43712; time = 0.17s
-Info:     at iteration #6, type ALL: wirelen solved = 7597, spread = 29768, legal = 40780; time = 0.20s
-Info:     at iteration #7, type ALL: wirelen solved = 8724, spread = 29514, legal = 38781; time = 0.79s
-Info:     at iteration #8, type ALL: wirelen solved = 10417, spread = 28915, legal = 41235; time = 0.20s
-Info:     at iteration #9, type ALL: wirelen solved = 11052, spread = 28594, legal = 39515; time = 0.21s
-Info:     at iteration #10, type ALL: wirelen solved = 11218, spread = 28293, legal = 38876; time = 0.20s
-Info:     at iteration #11, type ALL: wirelen solved = 12303, spread = 28500, legal = 38349; time = 0.20s
-Info:     at iteration #12, type ALL: wirelen solved = 13493, spread = 26359, legal = 36195; time = 0.16s
-Info:     at iteration #13, type ALL: wirelen solved = 13952, spread = 26779, legal = 37331; time = 0.19s
-Info:     at iteration #14, type ALL: wirelen solved = 15112, spread = 26347, legal = 37613; time = 0.18s
-Info:     at iteration #15, type ALL: wirelen solved = 15038, spread = 26122, legal = 34430; time = 0.16s
-Info:     at iteration #16, type ALL: wirelen solved = 15150, spread = 25085, legal = 34028; time = 0.17s
-Info:     at iteration #17, type ALL: wirelen solved = 16040, spread = 24841, legal = 32719; time = 0.17s
-Info:     at iteration #18, type ALL: wirelen solved = 15974, spread = 24694, legal = 33084; time = 0.16s
-Info:     at iteration #19, type ALL: wirelen solved = 16203, spread = 24224, legal = 32566; time = 0.19s
-Info:     at iteration #20, type ALL: wirelen solved = 17396, spread = 23476, legal = 32361; time = 0.61s
-Info:     at iteration #21, type ALL: wirelen solved = 16763, spread = 24848, legal = 34847; time = 0.18s
-Info:     at iteration #22, type ALL: wirelen solved = 17215, spread = 25026, legal = 33836; time = 0.17s
-Info:     at iteration #23, type ALL: wirelen solved = 17440, spread = 24853, legal = 35079; time = 0.18s
-Info:     at iteration #24, type ALL: wirelen solved = 17654, spread = 24474, legal = 32819; time = 0.16s
-Info:     at iteration #25, type ALL: wirelen solved = 18337, spread = 24121, legal = 33809; time = 0.16s
-Info: HeAP Placer Time: 7.52s
-Info:   of which solving equations: 1.90s
-Info:   of which spreading cells: 0.36s
-Info:   of which strict legalisation: 4.24s
+Info:     at iteration #1, type ALL: wirelen solved = 2949, spread = 36012, legal = 54388; time = 0.27s
+Info:     at iteration #2, type ALL: wirelen solved = 3531, spread = 35751, legal = 49121; time = 0.23s
+Info:     at iteration #3, type ALL: wirelen solved = 4025, spread = 35260, legal = 49802; time = 0.22s
+Info:     at iteration #4, type ALL: wirelen solved = 4743, spread = 34746, legal = 49944; time = 0.22s
+Info:     at iteration #5, type ALL: wirelen solved = 5685, spread = 31351, legal = 45577; time = 0.19s
+Info:     at iteration #6, type ALL: wirelen solved = 7571, spread = 27728, legal = 38325; time = 0.17s
+Info:     at iteration #7, type ALL: wirelen solved = 9231, spread = 25911, legal = 37379; time = 0.17s
+Info:     at iteration #8, type ALL: wirelen solved = 9502, spread = 26281, legal = 38173; time = 0.18s
+Info:     at iteration #9, type ALL: wirelen solved = 10783, spread = 25674, legal = 39992; time = 0.19s
+Info:     at iteration #10, type ALL: wirelen solved = 10637, spread = 26315, legal = 39097; time = 0.17s
+Info:     at iteration #11, type ALL: wirelen solved = 11423, spread = 26187, legal = 41036; time = 0.18s
+Info:     at iteration #12, type ALL: wirelen solved = 12062, spread = 26342, legal = 40269; time = 0.17s
+Info: HeAP Placer Time: 3.03s
+Info:   of which solving equations: 1.04s
+Info:   of which spreading cells: 0.13s
+Info:   of which strict legalisation: 1.45s
 
 Info: Running simulated annealing placer for refinement.
-Info:   at iteration #1: temp = 0.000000, timing cost = 425, wirelen = 32361
-Info:   at iteration #5: temp = 0.000000, timing cost = 326, wirelen = 25797
-Info:   at iteration #10: temp = 0.000000, timing cost = 294, wirelen = 24213
-Info:   at iteration #15: temp = 0.000000, timing cost = 284, wirelen = 23309
-Info:   at iteration #20: temp = 0.000000, timing cost = 270, wirelen = 22661
-Info:   at iteration #25: temp = 0.000000, timing cost = 271, wirelen = 22291
-Info:   at iteration #25: temp = 0.000000, timing cost = 269, wirelen = 22299 
-Info: SA placement time 5.62s
+Info:   at iteration #1: temp = 0.000000, timing cost = 496, wirelen = 37379
+Info:   at iteration #5: temp = 0.000000, timing cost = 423, wirelen = 28498
+Info:   at iteration #10: temp = 0.000000, timing cost = 446, wirelen = 26025
+Info:   at iteration #15: temp = 0.000000, timing cost = 380, wirelen = 24847
+Info:   at iteration #20: temp = 0.000000, timing cost = 388, wirelen = 24132
+Info:   at iteration #25: temp = 0.000000, timing cost = 393, wirelen = 23588
+Info:   at iteration #28: temp = 0.000000, timing cost = 378, wirelen = 23491 
+Info: SA placement time 4.89s
 
-Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 53.47 MHz (PASS at 50.00 MHz)
+Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 58.68 MHz (PASS at 50.00 MHz)
 
-Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 3.32 ns
-Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 4.23 ns
+Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 3.39 ns
+Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 4.50 ns
 
 Info: Slack histogram:
 Info:  legend: * represents 15 endpoint(s)
 Info:          + represents [1,15) endpoint(s)
-Info: [  1298,   2187) |**+
-Info: [  2187,   3076) |**+
-Info: [  3076,   3965) |*****+
-Info: [  3965,   4854) |********+
-Info: [  4854,   5743) |****+
-Info: [  5743,   6632) |*+
-Info: [  6632,   7521) |***+
-Info: [  7521,   8410) |*********+
-Info: [  8410,   9299) |*************+
-Info: [  9299,  10188) |*********************+
-Info: [ 10188,  11077) |********************+
-Info: [ 11077,  11966) |***********************************+
-Info: [ 11966,  12855) |************************************************************ 
-Info: [ 12855,  13744) |****************************************+
-Info: [ 13744,  14633) |************************+
-Info: [ 14633,  15522) |*************************+
-Info: [ 15522,  16411) |***********************************+
-Info: [ 16411,  17300) |*********************************+
-Info: [ 17300,  18189) |***********************************************************+
-Info: [ 18189,  19078) |************************************************+
-Info: Checksum: 0xf588e074
+Info: [  2958,   3758) |**+
+Info: [  3758,   4558) |*******+
+Info: [  4558,   5358) |*********+
+Info: [  5358,   6158) |***+
+Info: [  6158,   6958) |*+
+Info: [  6958,   7758) |***+
+Info: [  7758,   8558) |***+
+Info: [  8558,   9358) |*********+
+Info: [  9358,  10158) |*************+
+Info: [ 10158,  10958) |*******************+
+Info: [ 10958,  11758) |***************************+
+Info: [ 11758,  12558) |************************************************+
+Info: [ 12558,  13358) |************************************************************ 
+Info: [ 13358,  14158) |***************************+
+Info: [ 14158,  14958) |*******************+
+Info: [ 14958,  15758) |***********************+
+Info: [ 15758,  16558) |****************************+
+Info: [ 16558,  17358) |********************************+
+Info: [ 17358,  18158) |***********************************************************+
+Info: [ 18158,  18958) |**************************************************+
+Info: Checksum: 0x360ab6e0
 
 Info: Routing..
 Info: Setting up routing queue.
-Info: Routing 13720 arcs.
+Info: Routing 13703 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |       29        634 |   29   634 |     12751|       0.14       0.14|
-Info:       2000 |       45       1618 |   16   984 |     11767|       0.23       0.37|
-Info:       3000 |       84       2579 |   39   961 |     10815|       0.23       0.60|
-Info:       4000 |      156       3507 |   72   928 |      9916|       0.21       0.81|
-Info:       5000 |      220       4443 |   64   936 |      9033|       0.28       1.09|
-Info:       6000 |      304       5359 |   84   916 |      8138|       0.24       1.34|
-Info:       7000 |      384       6279 |   80   920 |      7245|       0.42       1.76|
-Info:       8000 |      491       7172 |  107   893 |      6411|       0.30       2.06|
-Info:       9000 |      682       7981 |  191   809 |      5681|       0.27       2.33|
-Info:      10000 |      910       8753 |  228   772 |      5059|       0.50       2.83|
-Info:      11000 |     1187       9476 |  277   723 |      4500|       0.33       3.17|
-Info:      12000 |     1593      10070 |  406   594 |      4134|       0.49       3.66|
-Info:      13000 |     2040      10623 |  447   553 |      3871|       0.51       4.17|
-Info:      14000 |     2469      11194 |  429   571 |      3567|       0.47       4.63|
-Info:      15000 |     2939      11724 |  470   530 |      3293|       0.48       5.11|
-Info:      16000 |     3307      12356 |  368   632 |      2935|       0.67       5.78|
-Info:      17000 |     3796      12867 |  489   511 |      2814|       0.57       6.35|
-Info:      18000 |     4230      13433 |  434   566 |      2567|       0.60       6.95|
-Info:      19000 |     4746      13917 |  516   484 |      2405|       0.62       7.57|
-Info:      20000 |     5221      14442 |  475   525 |      2269|       0.59       8.16|
-Info:      21000 |     5691      14972 |  470   530 |      2102|       0.55       8.71|
-Info:      22000 |     6053      15610 |  362   638 |      1644|       0.44       9.15|
-Info:      23000 |     6392      16271 |  339   661 |      1093|       0.38       9.53|
-Info:      24000 |     6670      16993 |  278   722 |       534|       0.88      10.41|
-Info:      24895 |     6869      17484 |  199   491 |         0|       0.44      10.84|
+Info:       1000 |       12        651 |   12   651 |     12716|       0.59       0.59|
+Info:       2000 |       32       1631 |   20   980 |     11739|       0.24       0.83|
+Info:       3000 |       87       2576 |   55   945 |     10802|       0.19       1.02|
+Info:       4000 |      162       3501 |   75   925 |      9899|       0.19       1.21|
+Info:       5000 |      225       4438 |   63   937 |      8981|       0.24       1.45|
+Info:       6000 |      298       5365 |   73   927 |      8072|       0.23       1.69|
+Info:       7000 |      406       6257 |  108   892 |      7245|       0.35       2.04|
+Info:       8000 |      570       7093 |  164   836 |      6516|       0.30       2.34|
+Info:       9000 |      758       7905 |  188   812 |      5786|       0.23       2.57|
+Info:      10000 |     1023       8640 |  265   735 |      5204|       0.45       3.02|
+Info:      11000 |     1298       9365 |  275   725 |      4650|       0.36       3.38|
+Info:      12000 |     1666       9997 |  368   632 |      4230|       0.36       3.73|
+Info:      13000 |     2059      10604 |  393   607 |      3861|       0.39       4.13|
+Info:      14000 |     2535      11128 |  476   524 |      3611|       0.43       4.55|
+Info:      15000 |     3024      11639 |  489   511 |      3328|       0.38       4.93|
+Info:      16000 |     3482      12181 |  458   542 |      3086|       0.57       5.50|
+Info:      17000 |     4019      12644 |  537   463 |      3019|       0.53       6.03|
+Info:      18000 |     4531      13132 |  512   488 |      2830|       0.50       6.53|
+Info:      19000 |     5016      13647 |  485   515 |      2634|       0.53       7.06|
+Info:      20000 |     5539      14124 |  523   477 |      2515|       0.51       7.57|
+Info:      21000 |     6033      14630 |  494   506 |      2390|       0.52       8.08|
+Info:      22000 |     6559      15104 |  526   474 |      2262|       0.56       8.65|
+Info:      23000 |     6967      15696 |  408   592 |      1934|       0.45       9.10|
+Info:      24000 |     7286      16377 |  319   681 |      1377|       0.21       9.31|
+Info:      25000 |     7629      17034 |  343   657 |       888|       0.49       9.80|
+Info:      26000 |     7927      17736 |  298   702 |       378|       0.63      10.43|
+Info:      26434 |     7949      17943 |   22   207 |         0|       0.12      10.55|
 Info: Routing complete.
-Info: Router1 time 10.84s
-Info: Checksum: 0x7eedb7a7
+Info: Router1 time 10.55s
+Info: Checksum: 0x5589958a
 
 Info: Critical path report for clock 'clk_50mhz$SB_IO_IN_$glb_clk' (posedge -> posedge):
 Info: curr total
-Info:  2.1  2.1  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst.7843.0.0.0_RAM.RDATA_4
-Info:  2.0  4.2    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst:1570[4] budget 0.000000 ns (8,21) -> (5,20)
-Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_27_LC.I3
-Info:  0.3  4.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_27_LC.O
-Info:  0.6  5.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2[4] budget 0.000000 ns (5,20) -> (4,19)
-Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_5$CARRY.I2
+Info:  2.1  2.1  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst.7843.0.0.0_RAM.RDATA_0
+Info:  1.6  3.8    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_regfile_inst:1570[0] budget 0.000000 ns (8,21) -> (6,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_31_LC.I3
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.3  4.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_31_LC.O
+Info:  0.6  4.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I2[0] budget 0.000000 ns (6,20) -> (7,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_31$CARRY.I2
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:49.21-49.23
-Info:  0.2  5.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_5$CARRY.COUT
-Info:  0.0  5.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[4] budget 0.000000 ns (4,19) -> (4,19)
+Info:  0.2  4.9  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_31$CARRY.COUT
+Info:  0.0  4.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[0] budget 0.000000 ns (7,20) -> (7,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_20$CARRY.CIN
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
+Info:  0.1  5.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_20$CARRY.COUT
+Info:  0.0  5.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[1] budget 0.000000 ns (7,20) -> (7,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_9$CARRY.CIN
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
+Info:  0.1  5.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_9$CARRY.COUT
+Info:  0.0  5.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[2] budget 0.000000 ns (7,20) -> (7,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_6$CARRY.CIN
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
+Info:  0.1  5.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_6$CARRY.COUT
+Info:  0.0  5.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[3] budget 0.000000 ns (7,20) -> (7,20)
+Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_5$CARRY.CIN
+Info:                Defined in:
+Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
+Info:  0.1  5.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_5$CARRY.COUT
+Info:  0.0  5.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[4] budget 0.000000 ns (7,20) -> (7,20)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_4$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  5.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_4$CARRY.COUT
-Info:  0.0  5.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[5] budget 0.000000 ns (4,19) -> (4,19)
+Info:  0.1  5.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_4$CARRY.COUT
+Info:  0.0  5.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[5] budget 0.000000 ns (7,20) -> (7,20)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_3$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  5.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_3$CARRY.COUT
-Info:  0.0  5.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[6] budget 0.000000 ns (4,19) -> (4,19)
+Info:  0.1  5.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_3$CARRY.COUT
+Info:  0.0  5.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[6] budget 0.000000 ns (7,20) -> (7,20)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_2$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  5.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_2$CARRY.COUT
-Info:  0.2  5.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[7] budget 0.190000 ns (4,19) -> (4,20)
+Info:  0.1  5.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_2$CARRY.COUT
+Info:  0.2  6.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[7] budget 0.190000 ns (7,20) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_1$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_1$CARRY.COUT
-Info:  0.0  6.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[8] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_1$CARRY.COUT
+Info:  0.0  6.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[8] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
-Info:  0.0  6.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[9] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.0  6.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[9] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_30$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_30$CARRY.COUT
-Info:  0.0  6.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[10] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_30$CARRY.COUT
+Info:  0.0  6.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[10] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_29$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_29$CARRY.COUT
-Info:  0.0  6.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[11] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_29$CARRY.COUT
+Info:  0.0  6.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[11] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_28$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_28$CARRY.COUT
-Info:  0.0  6.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[12] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_28$CARRY.COUT
+Info:  0.0  6.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[12] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_27$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_27$CARRY.COUT
-Info:  0.0  6.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[13] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_27$CARRY.COUT
+Info:  0.0  6.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[13] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_26$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_26$CARRY.COUT
-Info:  0.0  6.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[14] budget 0.000000 ns (4,20) -> (4,20)
+Info:  0.1  6.9  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_26$CARRY.COUT
+Info:  0.0  6.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[14] budget 0.000000 ns (7,21) -> (7,21)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_25$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.9  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_25$CARRY.COUT
-Info:  0.2  7.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[15] budget 0.190000 ns (4,20) -> (4,21)
+Info:  0.1  7.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_25$CARRY.COUT
+Info:  0.2  7.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[15] budget 0.190000 ns (7,21) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_24$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_24$CARRY.COUT
-Info:  0.0  7.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[16] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  7.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_24$CARRY.COUT
+Info:  0.0  7.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[16] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_23$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_23$CARRY.COUT
-Info:  0.0  7.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[17] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  7.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_23$CARRY.COUT
+Info:  0.0  7.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[17] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_22$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_22$CARRY.COUT
-Info:  0.0  7.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[18] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  7.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_22$CARRY.COUT
+Info:  0.0  7.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[18] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_21$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_21$CARRY.COUT
-Info:  0.0  7.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[19] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  7.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_21$CARRY.COUT
+Info:  0.0  7.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[19] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_19$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_19$CARRY.COUT
-Info:  0.0  7.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[20] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  7.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_19$CARRY.COUT
+Info:  0.0  7.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[20] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_18$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  7.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_18$CARRY.COUT
-Info:  0.0  7.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[21] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  8.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_18$CARRY.COUT
+Info:  0.0  8.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[21] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_17$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_17$CARRY.COUT
-Info:  0.0  8.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[22] budget 0.000000 ns (4,21) -> (4,21)
+Info:  0.1  8.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_17$CARRY.COUT
+Info:  0.0  8.1    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[22] budget 0.000000 ns (7,22) -> (7,22)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_16$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.1  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_16$CARRY.COUT
-Info:  0.2  8.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[23] budget 0.190000 ns (4,21) -> (4,22)
+Info:  0.1  8.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_16$CARRY.COUT
+Info:  0.2  8.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[23] budget 0.190000 ns (7,22) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_15$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_15$CARRY.COUT
-Info:  0.0  8.4    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[24] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  8.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_15$CARRY.COUT
+Info:  0.0  8.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[24] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_14$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.5  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_14$CARRY.COUT
-Info:  0.0  8.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[25] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  8.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_14$CARRY.COUT
+Info:  0.0  8.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[25] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_13$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_13$CARRY.COUT
-Info:  0.0  8.7    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[26] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  8.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_13$CARRY.COUT
+Info:  0.0  8.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[26] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_12$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.8  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_12$CARRY.COUT
-Info:  0.0  8.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[27] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  8.9  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_12$CARRY.COUT
+Info:  0.0  8.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[27] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_11$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  8.9  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_11$CARRY.COUT
-Info:  0.0  8.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[28] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  9.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_11$CARRY.COUT
+Info:  0.0  9.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[28] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_10$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  9.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_10$CARRY.COUT
-Info:  0.0  9.0    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[29] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  9.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_10$CARRY.COUT
+Info:  0.0  9.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[29] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_8$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  9.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_8$CARRY.COUT
-Info:  0.0  9.2    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[30] budget 0.000000 ns (4,22) -> (4,22)
+Info:  0.1  9.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_8$CARRY.COUT
+Info:  0.0  9.3    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[30] budget 0.000000 ns (7,23) -> (7,23)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_7$CARRY.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  9.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_7$CARRY.COUT
-Info:  0.2  9.5    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[31] budget 0.190000 ns (4,22) -> (4,23)
+Info:  0.1  9.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_7$CARRY.COUT
+Info:  0.2  9.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[31] budget 0.190000 ns (7,23) -> (7,24)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.CIN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  9.6  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
-Info:  0.3  9.9    Net $nextpnr_ICESTORM_LC_0$I3 budget 0.260000 ns (4,23) -> (4,23)
+Info:  0.1  9.7  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
+Info:  0.3 10.0    Net $nextpnr_ICESTORM_LC_0$I3 budget 0.260000 ns (7,24) -> (7,24)
 Info:                Sink $nextpnr_ICESTORM_LC_0.I3
-Info:  0.3 10.2  Source $nextpnr_ICESTORM_LC_0.O
-Info:  0.6 10.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[32] budget 4.028000 ns (4,23) -> (4,23)
+Info:  0.3 10.3  Source $nextpnr_ICESTORM_LC_0.O
+Info:  0.6 10.9    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_I0[32] budget 4.028000 ns (7,24) -> (7,24)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.I0
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/arith_map.v:37.23-37.25
-Info:  0.4 11.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.O
-Info:  0.6 11.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0[0] budget 2.013000 ns (4,23) -> (5,24)
+Info:  0.4 11.4  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  1.2 12.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_I0[0] budget 2.013000 ns (7,24) -> (11,24)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_LC.I0
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 12.3  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_LC.O
-Info:  1.6 13.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1[1] budget 1.208000 ns (5,24) -> (11,28)
+Info:  0.4 13.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1_SB_LUT4_O_LC.O
+Info:  0.6 13.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_I1[1] budget 1.208000 ns (11,24) -> (12,24)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_LC.I1
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 14.2  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_LC.O
-Info:  0.6 14.8    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O[1] budget 1.208000 ns (11,28) -> (11,27)
+Info:  0.4 14.0  Source neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_O_LC.O
+Info:  0.6 14.6    Net neorv32_inst.neorv32_cpu_inst.sleep_o_SB_DFFER_Q_E_SB_LUT4_O_I3_SB_LUT4_I3_O[1] budget 1.208000 ns (12,24) -> (12,24)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3778.S_SB_LUT4_I2_O_SB_LUT4_O_LC.I2
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 15.2  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3778.S_SB_LUT4_I2_O_SB_LUT4_O_LC.O
-Info:  1.3 16.5    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3666.Y_SB_LUT4_O_I2[1] budget 1.208000 ns (11,27) -> (11,24)
+Info:  0.4 15.0  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3778.S_SB_LUT4_I2_O_SB_LUT4_O_LC.O
+Info:  0.6 15.6    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.3666.Y_SB_LUT4_O_I2[1] budget 1.208000 ns (12,24) -> (12,25)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.4674.Y_SB_LUT4_O_LC.I3
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 16.9  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.4674.Y_SB_LUT4_O_LC.O
-Info:  1.9 18.7    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.4674.Y budget 1.208000 ns (11,24) -> (11,24)
+Info:  0.3 15.9  Source neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.4674.Y_SB_LUT4_O_LC.O
+Info:  2.0 17.9    Net neorv32_inst.neorv32_cpu_inst.neorv32_cpu_control_inst.4674.Y budget 1.208000 ns (12,25) -> (12,25)
 Info:                Sink neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.pc2_i_SB_DFFER_Q_D_SB_LUT4_O_LC.CEN
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/techmap.v:575.21-575.22
-Info:  0.1 18.8  Setup neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.pc2_i_SB_DFFER_Q_D_SB_LUT4_O_LC.CEN
-Info: 8.6 ns logic, 10.2 ns routing
+Info:  0.1 18.0  Setup neorv32_inst.neorv32_cpu_inst.neorv32_cpu_alu_inst.pc2_i_SB_DFFER_Q_D_SB_LUT4_O_LC.CEN
+Info: 9.1 ns logic, 8.9 ns routing
 
 Info: Critical path report for cross-domain path '<async>' -> 'posedge clk_50mhz$SB_IO_IN_$glb_clk':
 Info: curr total
 Info:  0.0  0.0  Source btn[0]$sb_io.D_IN_0
-Info:  1.3  1.3    Net btn[0]$SB_IO_IN budget 6.379000 ns (20,33) -> (21,30)
-Info:                Sink ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E_SB_LUT4_O_I3_SB_LUT4_O_LC.I0
+Info:  0.6  0.6    Net btn[0]$SB_IO_IN budget 9.609000 ns (20,33) -> (20,32)
+Info:                Sink iceduino_button_inst.reg_button_SB_DFF_Q_4_D_SB_LUT4_O_LC.I3
 Info:                Defined in:
 Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4  1.7  Source ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E_SB_LUT4_O_I3_SB_LUT4_O_LC.O
-Info:  0.6  2.3    Net ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E_SB_LUT4_O_I3[2] budget 3.537000 ns (21,30) -> (21,30)
-Info:                Sink ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E_SB_LUT4_O_LC.I3
-Info:                Defined in:
-Info:                  /opt/fpga-toolchain/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3  2.6  Source ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E_SB_LUT4_O_LC.O
-Info:  0.9  3.6    Net ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_E budget 3.537000 ns (21,30) -> (21,30)
-Info:                Sink ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_DFFLC.CEN
-Info:  0.1  3.7  Setup ram_bus_bridge_instance.ramtows2812_instance.fsm.state_SB_DFFESR_Q_DFFLC.CEN
-Info: 0.9 ns logic, 2.8 ns routing
+Info:  0.3  0.9  Source iceduino_button_inst.reg_button_SB_DFF_Q_4_D_SB_LUT4_O_LC.O
+Info:  1.8  2.8    Net iceduino_button_inst.reg_button_SB_DFF_Q_4_D budget 9.608000 ns (20,32) -> (5,32)
+Info:                Sink iceduino_button_inst.reg_button_SB_DFF_Q_4_DFFLC.I0
+Info:  0.5  3.2  Setup iceduino_button_inst.reg_button_SB_DFF_Q_4_DFFLC.I0
+Info: 0.8 ns logic, 2.4 ns routing
 
 Info: Critical path report for cross-domain path 'posedge clk_50mhz$SB_IO_IN_$glb_clk' -> '<async>':
 Info: curr total
 Info:  0.5  0.5  Source neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.ctrl_SB_DFFE_Q_13_DFFLC.O
-Info:  1.8  2.4    Net neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.ctrl[0] budget 9.573000 ns (14,3) -> (26,3)
+Info:  1.3  1.8    Net neorv32_inst.neorv32_spi_inst_true.neorv32_spi_inst.ctrl[0] budget 9.573000 ns (10,3) -> (13,1)
 Info:                Sink flash_csn_SB_LUT4_O_LC.I3
-Info:  0.3  2.7  Source flash_csn_SB_LUT4_O_LC.O
-Info:  1.7  4.4    Net flash_csn$SB_IO_OUT budget 9.572000 ns (26,3) -> (31,0)
+Info:  0.3  2.1  Source flash_csn_SB_LUT4_O_LC.O
+Info:  2.5  4.7    Net flash_csn$SB_IO_OUT budget 9.572000 ns (13,1) -> (31,0)
 Info:                Sink flash_csn$sb_io.D_OUT_0
-Info: 0.9 ns logic, 3.5 ns routing
+Info: 0.9 ns logic, 3.8 ns routing
 
-Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 53.11 MHz (PASS at 50.00 MHz)
+Info: Max frequency for clock 'clk_50mhz$SB_IO_IN_$glb_clk': 55.50 MHz (PASS at 50.00 MHz)
 
-Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 3.66 ns
-Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 4.36 ns
+Info: Max delay <async>                             -> posedge clk_50mhz$SB_IO_IN_$glb_clk: 3.22 ns
+Info: Max delay posedge clk_50mhz$SB_IO_IN_$glb_clk -> <async>                            : 4.66 ns
 
 Info: Slack histogram:
 Info:  legend: * represents 20 endpoint(s)
 Info:          + represents [1,20) endpoint(s)
-Info: [  1170,   2066) |**+
-Info: [  2066,   2962) |******+
-Info: [  2962,   3858) |***+
-Info: [  3858,   4754) |***+
-Info: [  4754,   5650) |*+
-Info: [  5650,   6546) |**+
-Info: [  6546,   7442) |*****+
-Info: [  7442,   8338) |***+
-Info: [  8338,   9234) |***************+
-Info: [  9234,  10130) |*************+
-Info: [ 10130,  11026) |*****************+
-Info: [ 11026,  11922) |**************+
-Info: [ 11922,  12818) |**************+
-Info: [ 12818,  13714) |******************+
-Info: [ 13714,  14610) |******************+
-Info: [ 14610,  15506) |************************************************************ 
-Info: [ 15506,  16402) |*************************+
-Info: [ 16402,  17298) |*******************************+
-Info: [ 17298,  18194) |****************************************+
-Info: [ 18194,  19090) |***********************************+
+Info: [  1982,   2831) |*+
+Info: [  2831,   3680) |*+
+Info: [  3680,   4529) |*****+
+Info: [  4529,   5378) |*****+
+Info: [  5378,   6227) |***+
+Info: [  6227,   7076) |*+
+Info: [  7076,   7925) |****+
+Info: [  7925,   8774) |******+
+Info: [  8774,   9623) |*****+
+Info: [  9623,  10472) |************+
+Info: [ 10472,  11321) |******************+
+Info: [ 11321,  12170) |*********************+
+Info: [ 12170,  13019) |**********************+
+Info: [ 13019,  13868) |****************+
+Info: [ 13868,  14717) |***********+
+Info: [ 14717,  15566) |************************************************************ 
+Info: [ 15566,  16415) |************************+
+Info: [ 16415,  17264) |*******************************+
+Info: [ 17264,  18113) |**************************************+
+Info: [ 18113,  18962) |***************************************+
 34 warnings, 0 errors
 
 Info: Program finished normally.
