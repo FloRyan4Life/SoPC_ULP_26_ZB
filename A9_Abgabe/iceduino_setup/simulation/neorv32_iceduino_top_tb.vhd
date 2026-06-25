@@ -51,9 +51,10 @@ architecture neorv32_iceduino_top_sim of neorv32_iceduino_top_tb is
 
 begin
 
-  clk <= not clk after 10 ns;
-  sw <= "11", "10" after 550 us, "01" after 560 us, "00" after 570 us; --low_active
-  btn <= "00000", "00001" after 1000 us, "00000" after 1200 us; --low_active
+
+
+  clk <= not clk after 10 ns; -- 50 MHz clock
+  btn <= "00000", "00001" after 1000 us, "00000" after 1200 us;  -- simulate a button press on btn[0] after 1 ms for 200 us
 
   neorv32_iceduino_inst: entity iceduino.neorv32_iceduino_top
   port map (

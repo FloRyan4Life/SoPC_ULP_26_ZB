@@ -79,16 +79,15 @@ Taster-Eingabe für start\textunderscore send nutzt btn(0).
 
 Die Softwareschicht definiert über den WS2812\textunderscore BASE-Zeiger einen typisierten Zugriff 
 auf das DPRAM. Die Headerdatei deklariert die set\textunderscore pixel-Funktion, die 24-Bit-RGB-Werte 
-in 32-Bit-Worte packt und an die Speicheradressen der Matrix schreibt. Das Hauptprogramm 
-implementiert einen Zustandsautomaten auf Tastendruck, der die gesamte Matrix sequenziell 
-in Rot, Grün oder Blau beschreibt. Die Verzögerungsschleifen zwischen den Schreibzugriffen 
-dienen der visuellen Beobachtung; in der Praxis würde die Hardware-FSM die Ausgabe autonom 
-übernehmen. Die volatile-Qualifizierung der Pointer verhindert Compiler-Optimierungen bei 
-Memory-Mapped-I/O-Zugriffen.
+in 32-Bit-Worte packt und an die Speicheradressen der Matrix schreibt. 
+Die volatile-Qualifizierung der Pointer verhindert Compiler-Optimierungen bei 
+Memory-Mapped-I/O-Zugriffen. Das Hauptprogramm nutzt eine einfache Schleife um die Pixel 
+abwechselnd mit den Werten für Rot, Grün und Blau zu füllen, bis alle 64 Pixel beschrieben sind. Dies dient 
+zunächst der Verifikation der Speicheranbindung und der korrekten Ausgabe über die WS2812-Logik.
 
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=83, lastline=86]{c}{A9_Abgabe/iceduino_setup/sw/lib/include/neorv32_iceduino.h}
-\vspace{-4mm}
+\vspace{-8mm}
 \begin{center}
 \footnotesize\textit{neorv32\textunderscore iceduino.h}
 \end{center}
@@ -97,23 +96,78 @@ Memory-Mapped-I/O-Zugriffen.
 \newpage
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/lib/include/ws2812.h}
-\vspace{-4mm}
+\vspace{-8mm}
 \begin{center}
 \footnotesize\textit{ws2812.h}
 \end{center}
 \vspace{4mm}
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/lib/source/ws2812.c}
-\vspace{-4mm}
+\vspace{-8mm}
 \begin{center}
 \footnotesize\textit{ws2812.c}
 \end{center}
 \vspace{4mm}
 
 \inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/programs/iceduino_led/main.c}
-\vspace{-4mm}
+\vspace{-8mm}
 \begin{center}
 \footnotesize\textit{main.c}
 \end{center}
 
+\subsection{Simulation und Testbench}
 
+Zur Verifikation der Integration wurde eine Testbench erstellt, die die gesamte Top-Level-Entity 
+neorv32\textunderscore iceduino\textunderscore top, inklusive der neorv\textunderscore ws2812-Instanz und des Testprogramms in der main.c instanziiert.
+Das Schreiben in den DPRAM wird durch diese main.c instruiert, während die Testbench die Taktung und die Tastereingaben simuliert. 
+Nach einer Wartezeit von 1 ms wird der Taster btn(0) für 200 µs auf high gesetzt, um über das Signal start\textunderscore send die 
+Ausgabe der Pixelwerte an die WS2812-Logik zu triggern. Ein solcher kurzer Puls reicht aus, um das einmalige Übertragen des gesamten Pixelarrays zu initiieren.
+Um die Rechenaufwand der Simulation zu begrenzen wird nur ein kompletter Durchlauf der Übertragung des Pixelarrays simuliert, welche ca. 2 ms dauert. Für die 
+praktische Anwendung kann dieses Signal auch dauerhaft auf high gehalten werden, um kontinuierlich die Pixelwerte aus dem DPRAM zu übertragen.
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=36, breaklines]{vhdl}{A9_Abgabe/iceduino_setup/simulation/neorv32_iceduino_top_tb.vhd}
+
+In  den folgenden Abbildungen ist der zeitliche Ablauf der Simulation dargestellt. Nach dem Start der Simulation wird die CPU 
+initialisiert und das Testprogramm ausgeführt. Es lässt sich in Abbildung \ref{fig:ws2812_sim_1} erkennen, dass die einzelnen 
+Speicherstellen des DPRAM korrekt beschrieben werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=0]{A9_Abgabe/res/ws2812_sim_1.png}
+\caption{Ausschnitt der Simulation: CPU schreibt Pixelwerte in DPRAM}
+\label{fig:ws2812_sim_1}
+\end{figure}
+
+Nach 1 ms wird der Taster simuliert, wodurch die WS2812-Logik die Pixelwerte aus dem 
+DPRAM ausliest und den seriellen Datenstrom an die LED-Matrix ausgibt. Abbildung \ref{fig:ws2812_sim_2} zeigt, dass die aserielle Übertragung korrekt startet 
+und der Bitstream den erwarteten Farbwerten entspricht.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=0]{A9_Abgabe/res/ws2812_sim_2.png}
+\caption{Ausschnitt der Simulation: Übertragung der Pixelwerte an die LED-Matrix startet.}
+\label{fig:ws2812_sim_2}
+\end{figure}
+
+Abbildung \ref{fig:ws2812_sim_3} zeigt den Abschluss der Übertragung und bestätigt, 
+dass die gesamte 64-Pixel-Matrix bis zum Ende korrekt übertragen wurde. Die Simulation verifiziert somit die Funktionalität der gesamten 
+Integration von CPU, DPRAM und WS2812-Controller.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=0]{A9_Abgabe/res/ws2812_sim_3.png}
+\caption{Ausschnitt der Simulation: Abschluss der Übertragung}
+\label{fig:ws2812_sim_3}
+\end{figure}
+
+\subsection{Synthese und Testlauf auf dem Iceduino-Board}
+
+In der Abbildung \ref{fig:ws2812_board} ist das Iceduino-Board mit der angeschlossenen 8×8-RGB-Matrix zu sehen.
+Es lässt sich erkennen, dass die Matrix korrekt angesteuert wird und die Farbwerte wie im Testprogramm beschrieben dargestellt werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=0]{A9_Abgabe/res/ws2812_board.jpeg}
+\caption{Foto des Aufbaus der realen Hardware: Iceduino-Board mit angeschlossener 8×8-RGB-Matrix}
+\label{fig:ws2812_board}
+\end{figure}

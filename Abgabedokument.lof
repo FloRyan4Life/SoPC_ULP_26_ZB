@@ -1,29 +1,32 @@
-\babel@toc {ngerman}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Simulation des Address-Slave mit Testbench}}{7}{figure.caption.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Blockschaltbild des Address-Master und Slave-Anbindung}}{8}{figure.caption.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Zustandsdiagramm des Address-Master}}{11}{figure.caption.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Simulation des Address-Master mit Slave}}{13}{figure.caption.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces UART TX Blockdiagramm}}{15}{figure.caption.5}%
-\contentsline {figure}{\numberline {6}{\ignorespaces UART TX Statemaschine}}{16}{figure.caption.6}%
-\contentsline {figure}{\numberline {7}{\ignorespaces UART TX Simulation 1}}{22}{figure.caption.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces UART TX Simulation 2}}{22}{figure.caption.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces UART TX Simulation 3}}{23}{figure.caption.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces UART RX Blockdiagramm}}{24}{figure.caption.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt {state}, \texttt {uart\_in} und \texttt {led}}}{31}{figure.caption.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces GTKWave-Simulation: Zeitlicher Verlauf von \texttt {reg\_sevensegment} mit Zählsequenz 0--9. Die Änderungen beginnen nach ca. 170 µs, der Zyklus beträgt ca. 720 ns.}}{44}{figure.caption.18}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.}}{45}{figure.caption.19}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Simulation des Aserial Moduls. Die Bitfolge 1010 wird in MSB-First Reihenfolge gesendet.}}{49}{figure.caption.20}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Timing des ersten Bits}}{50}{figure.caption.21}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Timing des zweiten Bits}}{50}{figure.caption.22}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Timing des dritten Bits}}{50}{figure.caption.23}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Timing des vierten Bits}}{51}{figure.caption.24}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Blockschaltbild des RAMtoWS2812 Moduls}}{52}{figure.caption.25}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Zustandsüberführungsdiagramm der FSM des WS2812-to-RAM Moduls}}{53}{figure.caption.26}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Ausschnitt der Simulation über den Sendevorgang von 5 Bytes}}{62}{figure.caption.27}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Simulation des FSM-Zustandsübergangs IDLE $\rightarrow $ LOAD\_DATA}}{62}{figure.caption.28}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow $ SENDING}}{63}{figure.caption.29}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ LOAD\_DATA}}{63}{figure.caption.30}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ IDLE}}{63}{figure.caption.31}%
-\contentsline {figure}{\numberline {26}{\ignorespaces Darstellung des ersten ROM Images auf der WS2812 LED Matrix}}{66}{figure.caption.32}%
-\contentsline {figure}{\numberline {27}{\ignorespaces Darstellung des zweiten ROM Images auf der WS2812 LED Matrix}}{67}{figure.caption.33}%
-\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
+\babel@toc {ngerman}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Simulation des Address-Slave mit Testbench\relax }}{7}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Blockschaltbild des Address-Master und Slave-Anbindung\relax }}{9}{figure.caption.4}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Zustandsdiagramm des Address-Master\relax }}{12}{figure.caption.5}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Simulation des Address-Master mit Slave\relax }}{14}{figure.caption.6}%
+\contentsline {figure}{\numberline {5}{\ignorespaces UART TX Blockdiagramm\relax }}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {6}{\ignorespaces UART TX Statemaschine\relax }}{17}{figure.caption.8}%
+\contentsline {figure}{\numberline {7}{\ignorespaces UART TX Simulation 1\relax }}{23}{figure.caption.9}%
+\contentsline {figure}{\numberline {8}{\ignorespaces UART TX Simulation 2\relax }}{24}{figure.caption.10}%
+\contentsline {figure}{\numberline {9}{\ignorespaces UART TX Simulation 3\relax }}{24}{figure.caption.11}%
+\contentsline {figure}{\numberline {10}{\ignorespaces UART RX Blockdiagramm\relax }}{25}{figure.caption.12}%
+\contentsline {figure}{\numberline {11}{\ignorespaces GTKWave-Simulation des UART RX Moduls: Verlauf der Signale \texttt {state}, \texttt {uart\_in} und \texttt {led}\relax }}{32}{figure.caption.13}%
+\contentsline {figure}{\numberline {12}{\ignorespaces GTKWave-Simulation: Zeitlicher Verlauf von \texttt {reg\_sevensegment} mit Zählsequenz 0--9. Die Änderungen beginnen nach ca. 170 µs, der Zyklus beträgt ca. 720 ns.\relax }}{45}{figure.caption.19}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Foto des Aufbaus der realen Hardware: FPGA-Board mit angeschlossener 7-Segment-Anzeige. Die Anzeige ist über Vorwiderstände mit den FPGA-Ausgängen verbunden, die Common-Kathode liegt an GND.\relax }}{46}{figure.caption.20}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Simulation des Aserial Moduls. Die Bitfolge 1010 wird in MSB-First Reihenfolge gesendet.\relax }}{50}{figure.caption.21}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Timing des ersten Bits\relax }}{51}{figure.caption.22}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Timing des zweiten Bits\relax }}{51}{figure.caption.23}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Timing des dritten Bits\relax }}{51}{figure.caption.24}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Timing des vierten Bits\relax }}{52}{figure.caption.25}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Blockschaltbild des RAMtoWS2812 Moduls\relax }}{53}{figure.caption.26}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Zustandsüberführungsdiagramm der FSM des WS2812-to-RAM Moduls\relax }}{54}{figure.caption.27}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Ausschnitt der Simulation über den Sendevorgang von 5 Bytes\relax }}{63}{figure.caption.28}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Simulation des FSM-Zustandsübergangs IDLE $\rightarrow $ LOAD\_DATA\relax }}{64}{figure.caption.29}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow $ SENDING\relax }}{64}{figure.caption.30}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ LOAD\_DATA\relax }}{64}{figure.caption.31}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ IDLE\relax }}{64}{figure.caption.32}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Darstellung des ersten ROM Images auf der WS2812 LED Matrix\relax }}{67}{figure.caption.33}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Darstellung des zweiten ROM Images auf der WS2812 LED Matrix\relax }}{68}{figure.caption.34}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Ausschnitt der Simulation: CPU schreibt Pixelwerte in DPRAM\relax }}{84}{figure.caption.35}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Ausschnitt der Simulation: Übertragung der Pixelwerte an die LED-Matrix startet.\relax }}{84}{figure.caption.36}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Ausschnitt der Simulation: Abschluss der Übertragung\relax }}{85}{figure.caption.37}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Foto des Aufbaus der realen Hardware: Iceduino-Board mit angeschlossener 8×8-RGB-Matrix\relax }}{86}{figure.caption.38}%
