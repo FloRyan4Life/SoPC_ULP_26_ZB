@@ -1,6 +1,7 @@
 #ifndef ws2812_h
 #define ws2812_h
 
+#include <stdint.h>
 
 #define MATRIX_SIZE (8*8)
 

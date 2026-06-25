@@ -82,7 +82,7 @@
 
 //WS2812 base address
 #define WS2812_BASE (0xF0000100UL)
-
+// WS2812 output array 32-bit (r/w)
 #define WS2812 ((volatile uint32_t*) (WS2812_BASE))
 
 #endif // iceduino_neorv32_h

@@ -422,9 +422,9 @@ begin
 
 
 
-    ram_bus_bridge_instance : entity iceduino.ram_bus_bridge
+    neorv_ws2812_instance : entity iceduino.neorv_ws2812
     generic map(
-            RAM_BUS_BRIDGE_ADDR => x"F0000100",
+            NEORV_WS2812_ADDR => x"F0000100",
             ADDR_WIDTH => 6,
             DATA_WIDTH => 32,
             UNUSED_BITS => 8,

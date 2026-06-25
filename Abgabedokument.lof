@@ -21,7 +21,7 @@
 \contentsline {figure}{\numberline {20}{\ignorespaces Zustandsüberführungsdiagramm der FSM des WS2812-to-RAM Moduls}}{53}{figure.caption.26}%
 \contentsline {figure}{\numberline {21}{\ignorespaces Ausschnitt der Simulation über den Sendevorgang von 5 Bytes}}{62}{figure.caption.27}%
 \contentsline {figure}{\numberline {22}{\ignorespaces Simulation des FSM-Zustandsübergangs IDLE $\rightarrow $ LOAD\_DATA}}{62}{figure.caption.28}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow $ SENDING}}{62}{figure.caption.29}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Simulation des FSM-Zustandsübergangs LOAD\_DATA $\rightarrow $ SENDING}}{63}{figure.caption.29}%
 \contentsline {figure}{\numberline {24}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ LOAD\_DATA}}{63}{figure.caption.30}%
 \contentsline {figure}{\numberline {25}{\ignorespaces Simulation des FSM-Zustandsübergangs SENDING $\rightarrow $ IDLE}}{63}{figure.caption.31}%
 \contentsline {figure}{\numberline {26}{\ignorespaces Darstellung des ersten ROM Images auf der WS2812 LED Matrix}}{66}{figure.caption.32}%

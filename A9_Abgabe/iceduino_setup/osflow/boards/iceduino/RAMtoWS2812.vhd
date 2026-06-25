@@ -4,11 +4,6 @@ use ieee.numeric_std.all;
 
 library iceduino;
 
-
-
--- library work;
--- use work.const_image.all;
-
 entity RAMtoWS2812 is
     generic(
         ADDR_WIDTH : natural := 6;
@@ -19,21 +14,13 @@ entity RAMtoWS2812 is
     port(
         clk : in std_logic;
         ws2812_out : out std_logic;
-        -- sollte es hier nicht heißen din ?? Es ist ja der dateneingang des moduls.
-        dout : in std_ulogic_vector((DATA_WIDTH-1) downto 0);
+        din : in std_ulogic_vector((DATA_WIDTH-1) downto 0);
         raddr : out std_ulogic_vector((ADDR_WIDTH-1) downto 0);
         start_send : in std_logic
     );
 end RAMtoWS2812;
 
 architecture RAMtoWS2812_a of RAMtoWS2812 is
-    --signal clk : std_logic := '0';
-
-    -- top level signals
-    --signal ws2812_out : std_logic := '0';
-    --signal raddr : std_ulogic_vector(7 downto 0):= "00000000";
-    --signal dout : std_ulogic_vector(7 downto 0) := "00000000";
-    --signal start_send : std_logic := '0';
 
     -- intern signals
     signal aserial_run : std_logic := '0';
@@ -53,8 +40,6 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
 
         
     begin
-
-        --clk <= not clk after 10 ns;
 
         fsm : entity iceduino.fsm
         port map(
@@ -92,7 +77,7 @@ architecture RAMtoWS2812_a of RAMtoWS2812 is
             )
             port map(
                 clk => clk,
-                sfr_din => dout,
+                sfr_din => din,
                 sfr_rst => sfr_rst,
                 sfr_shift => sfr_shift,
                 sfr_load => sfr_load,

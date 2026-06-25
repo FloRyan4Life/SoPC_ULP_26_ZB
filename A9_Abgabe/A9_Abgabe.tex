@@ -1,0 +1,119 @@
+\newpage
+\section{Top-Level-Entity für DPRAM und CPU Integration \\ (Aufgabe 9)}
+
+Dieses Kapitel beschreibt die Integration des WS2812-LED-Controllers in das 
+bestehende NEORV32-SoPC. Ziel ist es, eine Dual-Port-RAM-basierte 
+Peripherie zu schaffen, die über den Wishbone-Bus von der CPU beschrieben 
+und gleichzeitig von der Hardware-FSM zur Ansteuerung der 8×8-RGB-Matrix 
+ausgelesen werden kann. Hierzu werden das RAMtoWS2812-Modul um Generics 
+erweitert, ein DPRAM als Pixelpuffer instanziiert und eine übergeordnete 
+Wishbone-Slave-Entity entworfen. Die Anbindung an das Prozessorsystem 
+erfolgt durch Erweiterung des Busmultiplexers im Top-Level-Design. 
+Abschließend wird die Funktion durch ein C-Testprogramm verifiziert, das 
+die Matrix über Memory-Mapped-I/O mit verschiedenen Farbmustern beschreibt.
+
+\subsection{Anpassung von RAMtoWS2812 auf Generic-Parameter}
+
+Das bestehende RAMtoWS2812-Modul wurde von festen Konstanten auf flexible
+ Generics umgestellt. Die Parameter ADDR\textunderscore WIDTH, DATA\textunderscore WIDTH, UNUSED\textunderscore BITS 
+ und MAX\textunderscore ADDR ermöglichen eine wiederverwendbare Architektur, die sich 
+ an verschiedene Speicherbreiten und Protokollanforderungen anpassen 
+ lässt. Das Shiftregister arbeitet nun mit reduzierter Bitbreite, wobei 
+ die oberen, ungenutzten Bits des Datenvektors ignoriert werden. Dies ist 
+ notwendig, da der Wishbone-Bus mit 32 Bit arbeitet, die WS2812-Logik 
+ jedoch nur 24 Bit Farbinformation pro Pixel verarbeitet. Die 
+Generic-Schnittstelle erlaubt spätere Änderungen ohne Eingriff in den Modulkern.
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/RAMtoWS2812.vhd}
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/addresscounter.vhd}
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/shiftregister.vhd}
+
+
+\subsection{Dual-Port-RAM}
+
+Das DPRAM stellt die zentrale Speicherbrücke zwischen CPU und 
+WS2812-Controller dar. Zwei unabhängige Ports ermöglichen gleichzeitiges 
+Schreiben durch die CPU und Lesen durch die LED-Ansteuerlogik. Die 
+Schreibseite empfängt 32-Bit-Worte vom Wishbone-Bus, während die 
+Leseite 32-Bit-Blöcke an das Shiftregister weitergibt. Die getrennten 
+Takt- und Adressleitungen beider Ports verhindern Zugriffskonflikte und 
+gewährleisten deterministisches Timing für die LED-Ausgabe. Die 
+Speichergröße von 64 Einträgen deckt exakt die 64 Pixel der 8×8-Matrix ab.
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/ram.vhd}
+
+
+\subsection{Wishbone-Bridge neorv\textunderscore ws2812}
+
+Die neorv\textunderscore ws2812-Entity kapselt die gesamte WS2812-Peripherie und stellt 
+eine standardisierte Wishbone-Slave-Schnittstelle bereit. Sie instanziiert 
+das DPRAM sowie den RAMtoWS2812-Controller und verbindet deren interne Signale. 
+Die Adressdekodierung aktiviert das Modul bei Zugriffen auf den konfigurierten 
+Basisadressbereich. Der Ausgang ws2812\textunderscore out führt den seriellen Datenstrom zur 
+LED-Matrix, während start\textunderscore send die Ausgabe der gespeicherten Pixeldaten auslöst. 
+Die Struktur folgt dem etablierten Muster der bestehenden Iceduino-Peripheriemodule.
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv_ws2812.vhd}
+
+
+\subsection{Integration in neorv32\textunderscore iceduino\textunderscore top}
+
+Das Top-Level-Entity wurde um eine weitere Wishbone-Response-Instanz erweitert. 
+Der Adressbereich F0000100 wurde gewählt, da die oberen 24 Bit (F00001) eine einfache 
+Maskierung im Busmultiplexer erlauben – die unteren 8 Bit bleiben für Registeroffsets 
+innerhalb des Moduls frei. Der Multiplexer wählt bei Treffer auf diesen Bereich die 
+Response-Signale der neorv\textunderscore ws2812-Instanz aus und leitet sie an den Prozessor weiter. 
+Der WS2812-Ausgang wurde auf io\textunderscore d(2) gelegt, da dieser Pin über den Arduino-Header 
+zugänglich ist und später kompatibel zum Multi-Iceduino-Baseboard bleibt. Die 
+Taster-Eingabe für start\textunderscore send nutzt btn(0).
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=163, lastline=248, breaklines]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv32_iceduino_top.vhd}
+
+\newpage
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=425, lastline=449]{vhdl}{A9_Abgabe/iceduino_setup/osflow/boards/iceduino/neorv32_iceduino_top.vhd}
+
+\subsection{C-Software mit Hardware-Abstraktion}
+
+Die Softwareschicht definiert über den WS2812\textunderscore BASE-Zeiger einen typisierten Zugriff 
+auf das DPRAM. Die Headerdatei deklariert die set\textunderscore pixel-Funktion, die 24-Bit-RGB-Werte 
+in 32-Bit-Worte packt und an die Speicheradressen der Matrix schreibt. Das Hauptprogramm 
+implementiert einen Zustandsautomaten auf Tastendruck, der die gesamte Matrix sequenziell 
+in Rot, Grün oder Blau beschreibt. Die Verzögerungsschleifen zwischen den Schreibzugriffen 
+dienen der visuellen Beobachtung; in der Praxis würde die Hardware-FSM die Ausgabe autonom 
+übernehmen. Die volatile-Qualifizierung der Pointer verhindert Compiler-Optimierungen bei 
+Memory-Mapped-I/O-Zugriffen.
+
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=83, lastline=86]{c}{A9_Abgabe/iceduino_setup/sw/lib/include/neorv32_iceduino.h}
+\vspace{-4mm}
+\begin{center}
+\footnotesize\textit{neorv32\textunderscore iceduino.h}
+\end{center}
+\vspace{4mm}
+
+\newpage
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/lib/include/ws2812.h}
+\vspace{-4mm}
+\begin{center}
+\footnotesize\textit{ws2812.h}
+\end{center}
+\vspace{4mm}
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/lib/source/ws2812.c}
+\vspace{-4mm}
+\begin{center}
+\footnotesize\textit{ws2812.c}
+\end{center}
+\vspace{4mm}
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A9_Abgabe/iceduino_setup/sw/programs/iceduino_led/main.c}
+\vspace{-4mm}
+\begin{center}
+\footnotesize\textit{main.c}
+\end{center}
+
+

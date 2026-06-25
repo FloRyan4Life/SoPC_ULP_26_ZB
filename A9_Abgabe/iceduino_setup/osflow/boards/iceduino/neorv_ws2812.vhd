@@ -6,9 +6,9 @@ library iceduino;
 
 
 
-entity ram_bus_bridge is
+entity neorv_ws2812 is
     generic(
-        RAM_BUS_BRIDGE_ADDR : std_ulogic_vector(31 downto 0);
+        NEORV_WS2812_ADDR : std_ulogic_vector(31 downto 0);
         ADDR_WIDTH : natural := 6;
         DATA_WIDTH : natural := 32;
         UNUSED_BITS : natural := 8;
@@ -37,9 +37,9 @@ entity ram_bus_bridge is
     pmod_pwr_en : out std_ulogic
     
     );
-end entity ram_bus_bridge;
+end entity neorv_ws2812;
 
-architecture ram_bus_bridge_a of ram_bus_bridge is
+architecture neorv_ws2812_a of neorv_ws2812 is
 
     signal ram_waddr : std_ulogic_vector((ADDR_WIDTH-1) downto 0) := (others => '0');
     signal ram_wdata : std_ulogic_vector((DATA_WIDTH - 1) downto 0) := (others => '0');
@@ -58,7 +58,7 @@ begin
 
     ram_waddr <= adr_i((ADDR_WIDTH+1) downto 2);
 
-    module_active <= '1' when (adr_i(31 downto 8) = RAM_BUS_BRIDGE_ADDR(31 downto 8)) else '0';
+    module_active <= '1' when (adr_i(31 downto 8) = NEORV_WS2812_ADDR(31 downto 8)) else '0';
 
     oe_j5_en <= '1';
     oe_j6_en <= '1';
@@ -74,7 +74,7 @@ begin
         port map(
                 clk => clk_i,
                 ws2812_out => ws2812_out,
-                dout => ram_rdata,
+                din => ram_rdata,
                 raddr => ram_raddr,
                 start_send => start_send
         );
@@ -113,4 +113,4 @@ begin
     
 
         
-end architecture ram_bus_bridge_a;
+end architecture neorv_ws2812_a;

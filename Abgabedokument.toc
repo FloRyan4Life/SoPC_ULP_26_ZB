@@ -46,4 +46,10 @@
 \contentsline {subsubsection}{\numberline {7.1.4}WS2812-to-RAM Hauptmodul}{58}{subsubsection.7.1.4}%
 \contentsline {subsection}{\numberline {7.2}Simulation des WS2812-to-RAM Moduls}{60}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Synthese und Test des WS2812-to-RAM Moduls}{63}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Top-Level-Entity für DPRAM und CPU Integration \\ (Aufgabe 9)}{68}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Anpassung von RAMtoWS2812 auf Generic-Parameter}{68}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Dual-Port-RAM}{72}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Wishbone-Bridge neorv\textunderscore ws2812}{73}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Integration in neorv32\textunderscore iceduino\textunderscore top}{76}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}C-Software mit Hardware-Abstraktion}{78}{subsection.8.5}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
