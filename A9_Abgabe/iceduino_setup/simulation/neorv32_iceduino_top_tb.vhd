@@ -53,7 +53,7 @@ begin
 
   clk <= not clk after 10 ns;
   sw <= "11", "10" after 550 us, "01" after 560 us, "00" after 570 us; --low_active
-  btn <= "00000", "00001" after 200 us, "00000" after 800 us; --low_active
+  btn <= "00000", "00001" after 1000 us, "00000" after 1200 us; --low_active
 
   neorv32_iceduino_inst: entity iceduino.neorv32_iceduino_top
   port map (
