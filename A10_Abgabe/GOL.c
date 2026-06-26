@@ -52,6 +52,7 @@ int main(void)
                     break;
 
                 }
+                living_neighbors_cnt = 0;
             }
         }
 
