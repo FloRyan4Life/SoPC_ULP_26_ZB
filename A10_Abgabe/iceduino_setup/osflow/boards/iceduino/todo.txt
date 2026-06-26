@@ -1,0 +1,13 @@
+1 sind die msb / reservierten bytes 0 oder 1 und korrekt in dat_1?  -Nein, waren sie nicht. gelöst
+
+2 lsb von dat_i und adr_i sind immer 0 warum?                       - wegen 4 byte inkrementierung! gelöst
+
+3 es wird nur in mem[52]geschrieben.
+
+4 die 2 unterste bits ignorieren in der addresse des wishbone       -done 
+
+5 base address auf F0000100                                         -done
+
+6 nach richtiger adresse filtern mit modul aktive                   -done
+
+7 bootloader false                                                  -done
