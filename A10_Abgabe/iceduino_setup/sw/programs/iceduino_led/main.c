@@ -12,6 +12,7 @@ uint8_t living_neighbors_cnt = 0;
 
 uint8_t grid_switch = 0;
 
+const int OCTAGON_2[8] = {0b00011000, 0b00100100, 0b01000010, 0b10000001, 0b10000001, 0b01000010, 0b00100100, 0b00011000};
 // Geburt bei 3 lebenden Nachbarn
 // Überleben bei 2 oder 3 lebenden Nachbarn
 // Sterben bei weniger als 2 oder mehr als 3 lebenden Nachbarn
@@ -23,17 +24,22 @@ int main(void)
 
     neorv32_cpu_delay_ms(10);
 
-    for (int i = 0; i < 64; i++)
-    {
-        if (i % 2 == 0)
-        {
-            grid1[i / 8] = grid1[i / 8] | (0x01 << (i % 8));
-        }
-        else
-        {
-            // nothing
-        }
+    // for (int i = 0; i < 64; i++)
+    // {
+    //     if (i % 2 == 0)
+    //     {
+    //         grid1[i / 8] = grid1[i / 8] | (0x01 << (i % 8));
+    //     }
+    //     else
+    //     {
+    //         // nothing
+    //     }
+    // }
+
+    for(int i=0;i<8;i++){
+        grid1[i] = OCTAGON_2[i];
     }
+    
 
     for (int i = 0; i < 64; i++)
     {

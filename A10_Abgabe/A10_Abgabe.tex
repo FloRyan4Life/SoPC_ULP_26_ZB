@@ -1,0 +1,25 @@
+\newpage
+\section{Game of Life ohne Kommunikation \\ (Aufgabe 10)}
+
+
+In der Main\-Datei werden zwei Arrays, grid1[8] und grid2[8], angelegt. Beide stellen das vollständige LED\-Raster dar. Die
+Arrays sind vom Typ integer, welche jeweils aus 8 Bit bestehen. 
+Bei einem Zustandsübergang im Game of Life, also bei der Berechnung des Folgerasters, wird abhängig von einem der grid\-Arrays das
+jeweils andere neu berechnet. Liegt das alte Raster im ersten Array, so wird das Folgeraster neu berechnet und in das zweite Array
+geschrieben. Anschließend wird mithilfe der schon im vorigen Kapitel beschriebenen C\-Bibliothek namens \"ws2812.h\", das 
+neue Raster auf die LED\-Matrix übertragen. In der folgenden Runde werden die Rasterspeicher getauscht behandelt. 
+
+
+
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A10_Abgabe/iceduino_setup/sw/programs/main.c}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=0]{A10_Abgabe/res/xxxx.png}
+\caption{Ausschnitt der Simulation: CPU schreibt Pixelwerte in DPRAM}
+\label{fig:ws2812_sim_1}
+\end{figure}
+
+\subsection{Dual-Port-RAM}
