@@ -1,5 +1,11 @@
-#include
+//#include "neorv32_iceduino.h"
 #include <stdint.h>
+#include <stdbool.h>
+
+#define GRB_ALIVE 255,0,0
+#define GRB_DEAD 0,0,0
+
+
 
 uint8_t grid1[8] = {0};
 uint8_t grid2[8] = {0};
