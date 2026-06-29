@@ -1,8 +1,8 @@
 #include "neorv32_iceduino.h"
 
 
-uint8_t grid_1[8] = {0};
-uint8_t grid_2[8] = {0};
+static uint8_t grid_1[8] = {0};
+static uint8_t grid_2[8] = {0};
 
 
 int main(void) {

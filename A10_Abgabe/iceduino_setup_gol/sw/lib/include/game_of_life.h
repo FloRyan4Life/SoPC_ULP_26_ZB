@@ -16,14 +16,14 @@ extern const uint8_t OCTAGON_2[8];
 
 // Prototypen für normale Funktionen
 void write_grid_to_matrix(uint8_t *grid, int delay_ms);
-void load_pattern_to_grid(uint8_t *grid, const uint8_t *pattern);
+void load_pattern_to_grid(uint8_t *grid, uint8_t *pattern);
 void reset_grid(uint8_t *grid);
 void compute_next_generation(uint8_t *grid1, uint8_t *grid2);
 
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation
 // inkl. Randbehandlung (Zellen am Rand haben weniger Nachbarn)
-static inline uint8_t count_living_neighbors(uint8_t* current_grid, uint8_t i, uint8_t j) {
+static inline uint8_t count_living_neighbors(const uint8_t *current_grid, uint8_t i, uint8_t j) {
 
     uint8_t living_neighbors_cnt = 0;
 
@@ -63,7 +63,7 @@ static inline uint8_t count_living_neighbors(uint8_t* current_grid, uint8_t i, u
 
 // Aktualisiert den Zustand einer Zelle in der nächsten Generation basierend auf
 // der Anzahl der lebenden Nachbarn
-static inline void update_cell_state(uint8_t* current_grid, uint8_t* next_grid,
+static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_grid,
                                      const uint8_t living_neighbors_cnt,
                                      uint8_t i, uint8_t j) {
     switch (living_neighbors_cnt) {

@@ -43,7 +43,7 @@ void write_grid_to_matrix(uint8_t *grid, const int delay_ms)
 }
 
 // Lädt ein Muster in das Grid.
-void load_pattern_to_grid(uint8_t *grid, const uint8_t *pattern)
+void load_pattern_to_grid(uint8_t *grid, uint8_t *pattern)
 {
     for(int i=0;i<8;i++){
         grid[i] = pattern[i];
@@ -59,7 +59,7 @@ void reset_grid(uint8_t *grid)
 }
 
 // Berechnet die nächste Generation basierend auf den aktuellen Zuständen der Zellen und deren Nachbarn.
-void compute_next_generation(uint8_t* grid1, uint8_t* grid2) {
+void compute_next_generation(uint8_t *grid1, uint8_t *grid2) {
 
     uint8_t living_neighbors_cnt = 0;
     // static Variable, um den aktuellen aktiven Grid zwischen den Aufrufen zu verfolgen
