@@ -4,12 +4,7 @@
 static uint8_t grid_1[8] = {0};
 static uint8_t grid_2[8] = {0};
 
-static uint16_t extended_grid[10] = {0};  // 10x10 Grid, um unsichtbare Zellen zu berücksichtigen
 
-static uint8_t rx_buffer[16] = {0};  // Buffer für empfangene Daten per MMCP
-static uint8_t tx_buffer[16] = {0};  // Buffer für zu sendende Daten per MMCP
-
-static uint8_t sdu[8] = {0};  // SDU (Service Data Unit) im MMCP-Protokoll
 
 
 int main(void) {
@@ -19,15 +14,6 @@ int main(void) {
     
     // Lade das GLIDER-Muster in das erste Grid
     load_pattern_to_grid(grid_1, GLIDER);
-
-    uint8_t edge_sdu[8] = {0};
-    edge_sdu[2] = 0b11111111;
-    edge_sdu[3] = 0b11111111;
-    edge_sdu[4] = 0b11111111;
-    edge_sdu[5] = 0b11111111;
-    edge_sdu[6] = 0b11101010;
-    edge_sdu[7] = 0b11111111;
-
 
     // Schreibe das initiale Muster in die LED-Matrix
     write_grid_to_matrix(grid_1, SET_PIXEL_DELAY_MS);
@@ -40,7 +26,7 @@ int main(void) {
             neorv32_cpu_delay_ms(500);
   
             // Berechne die nächste Generation, inkl. Schreiben in den DP-RAM und Reset des alten Grids
-            compute_next_generation(grid_1, grid_2, extended_grid, sdu);
+            compute_next_generation(grid_1, grid_2);
         }
     }
 }

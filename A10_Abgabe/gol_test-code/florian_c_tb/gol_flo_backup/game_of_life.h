@@ -3,48 +3,59 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-// #include "neorv32_iceduino.h"
+#include "neorv32_iceduino.h"
 
 // Konstanten
 #define GRB_ALIVE 255, 0, 0
 #define GRB_DEAD 0, 0, 0
-#define SET_PIXEL_DELAY_MS 2
+#define SET_PIXEL_DELAY_MS 3
 
 // Muster (extern, da Definition in .c)
-extern uint8_t GLIDER[8];
-extern uint8_t OCTAGON_2[8];
-
+extern const uint8_t GLIDER[8];
+extern const uint8_t OCTAGON_2[8];
 
 // Prototypen für normale Funktionen
 void write_grid_to_matrix(uint8_t *grid, int delay_ms);
 void load_pattern_to_grid(uint8_t *grid, uint8_t *pattern);
 void reset_grid(uint8_t *grid);
-void reset_extended_grid(uint16_t *extended_grid);
-void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_extended_grid, uint8_t *sdu);
-void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, uint8_t *edge_sdu);
+void compute_next_generation(uint8_t *grid1, uint8_t *grid2);
 
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation
-// Randbehandlung nicht nötig, da nur durch das innere Grid iteriert aber im erweiterten Grid nach Nachbarn gesucht wird.
-static inline uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j) {
+// inkl. Randbehandlung (Zellen am Rand haben weniger Nachbarn)
+static inline uint8_t count_living_neighbors(const uint8_t *current_grid, uint8_t i, uint8_t j) {
 
-    // Anzahl der Nachbarn
     uint8_t living_neighbors_cnt = 0;
 
-    
-    for (uint8_t s = (j - 1); s <= (j + 1); s++) {
+    // Berechne die Grenzen für die Nachbarzellen, um Array-Index-Out-of-Bounds zu vermeiden
+    uint8_t top_gap = (i > 0) ? 1 : 0;
+    uint8_t bottom_gap = (i < 7) ? 1 : 0;
+    uint8_t right_gap = (j > 0) ? 1 : 0;
+    uint8_t left_gap = (j < 7) ? 1 : 0;
 
-        living_neighbors_cnt += (current_extended_grid[i - 1] & (0x0010 << s)) ? 1 : 0;
-        
-        living_neighbors_cnt += (current_extended_grid[i + 1] & (0x0010 << s)) ? 1 : 0;
-        
+    // Obere und untere Zeile
+    // Wichtig: j - right_gap ist immer >= 0, da right_gap = 1, wenn j > 0
+    // Wichtig: j + left_gap ist immer <= 7, da left_gap = 1, wenn j < 7
+    for (uint8_t s = (j - right_gap); s <= (j + left_gap); s++) {
+
+        // wenn top_gap = 0, dann ist i - 1 < 0, also keine obere Zeile
+        if(top_gap) {
+            living_neighbors_cnt += (current_grid[i - 1] & (0x01 << s)) ? 1 : 0;
+        }
+
+        // wenn bottom_gap = 0, dann ist i + 1 > 7, also keine untere Zeile
+        if(bottom_gap) {
+            living_neighbors_cnt += (current_grid[i + 1] & (0x01 << s)) ? 1 : 0;
+        }
     }
 
-    living_neighbors_cnt += (current_extended_grid[i] & (0x0010 << (j - 1))) ? 1 : 0;
-    living_neighbors_cnt += (current_extended_grid[i] & (0x0010 << (j + 1))) ? 1 : 0;
 
-    if (living_neighbors_cnt != 0) {
-        printf("Cnt[Zeile:%d][Spalte:%d] = %d\n", i, j, living_neighbors_cnt);
+    if (right_gap) {  // wenn j > 0, dann ist j - 1 >= 0, also rechte Nachbarzelle existiert
+        living_neighbors_cnt += (current_grid[i] & (0x01 << (j - 1))) ? 1 : 0;
+    }
+    
+    if (left_gap) {  // wenn j < 7, dann ist j + 1 <= 7, also linke Nachbarzelle existiert
+        living_neighbors_cnt += (current_grid[i] & (0x01 << (j + 1))) ? 1 : 0;
     }
 
     return living_neighbors_cnt;
