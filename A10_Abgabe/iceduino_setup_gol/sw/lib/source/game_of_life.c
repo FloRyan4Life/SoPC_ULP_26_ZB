@@ -1,4 +1,3 @@
-#include "game_of_life.h"
 
 #include "neorv32_iceduino.h"
 
@@ -48,6 +47,21 @@ void load_pattern_to_grid(uint8_t *grid, uint8_t *pattern)
 {
     for(int i=0;i<8;i++){
         grid[i] = pattern[i];
+    }
+}
+
+// SDU aus MMCP-Protokoll in das Grid laden
+// Spiegelung der Bits, erforderlich.
+void set_grid_from_sdu(uint8_t *grid, uint8_t *sdu){
+    reset_grid(grid);  // Setze das Grid zurück, bevor das Muster geladen wird
+
+    // Iteriere über jede Zeile und Spalte des 8x8 Grids
+    for(uint8_t i = 0; i < 8; i++){
+        for(uint8_t j = 0; j < 8; j++){
+            if(sdu[7 - i] & (0x01 << (j))){
+                grid[i] |= (0x01 << (7 - j));  // Setze das entsprechende Bit im Grid
+            }
+        }
     }
 }
 

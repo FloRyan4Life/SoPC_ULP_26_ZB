@@ -1,8 +1,7 @@
 #ifndef GAME_OF_LIFE_H
 #define GAME_OF_LIFE_H
 
-#include <stdint.h>
-#include <stdbool.h>
+
 // #include "neorv32_iceduino.h"
 
 // Konstanten
@@ -22,6 +21,7 @@ void reset_grid(uint8_t *grid);
 void reset_extended_grid(uint16_t *extended_grid);
 void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_extended_grid, uint8_t *sdu);
 void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, uint8_t *edge_sdu);
+void set_grid_from_sdu(uint8_t *grid, uint8_t *sdu);
 
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation
@@ -47,9 +47,6 @@ static inline uint8_t count_living_neighbors(const uint16_t *current_extended_gr
     // Zähle die lebenden Nachbarn in der mittleren Zeile (i), links
     living_neighbors_cnt += (current_extended_grid[i] & (0x0001 << (j + 1 + j_shift))) ? 1 : 0;
 
-    if (living_neighbors_cnt != 0) {
-        printf("Cnt[Zeile:%d][Spalte:%d] = %d\n", i, j, living_neighbors_cnt);
-    }
 
     return living_neighbors_cnt;
 }
@@ -67,31 +64,31 @@ static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_
     switch (living_neighbors_cnt) {
         case 0:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
 
         case 1:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
 
         case 2:  // Überleben bei 2 lebenden Nachbarn
 
             if ((current_grid[i - offset] & (0x0001 << (j - offset))) ? 1 : 0) {
-                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);   // Zelle bleibt am Leben
+                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset));   // Zelle bleibt am Leben
             } else {
-                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);  // Zelle bleibt tot
+                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));  // Zelle bleibt tot
             }
             break;
 
         case 3:  // Geburt bei 3 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset));
             break;
 
         default:  // Überbevölkerungstod bei > 3 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
     }
 }

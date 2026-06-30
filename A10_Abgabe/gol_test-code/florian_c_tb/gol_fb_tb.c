@@ -23,7 +23,7 @@ const uint8_t ALL_ALIVE[8] = {
     0b11111111,
     0b11111111
 };
-
+/*
 const uint8_t DIAGONALE[8] = {
     0b10000000,
     0b01000000,
@@ -34,7 +34,7 @@ const uint8_t DIAGONALE[8] = {
     0b00000010,
     0b00000001
 };
-
+*/
 
 const uint8_t BLOCK[8] = {
     0b00000000,
@@ -153,6 +153,21 @@ void load_pattern_to_grid(uint8_t *grid, const uint8_t *pattern)
 {
     for(int i=0;i<8;i++){
         grid[i] = pattern[i];
+    }
+}
+
+// SDU aus MMCP-Protokoll in das Grid laden
+// Spiegelung der Bits, erforderlich.
+void set_grid_from_sdu(uint8_t *grid, uint8_t *sdu){
+    reset_grid(grid);  // Setze das Grid zurück, bevor das Muster geladen wird
+
+    // Iteriere über jede Zeile und Spalte des 8x8 Grids
+    for(uint8_t i = 0; i < 8; i++){
+        for(uint8_t j = 0; j < 8; j++){
+            if(sdu[7 - i] & (0x01 << (j))){ // Überprüfe, ob das Bit in der SDU gesetzt ist
+                grid[i] |= (0x01 << (j));  // Setze das entsprechende Bit im Grid
+            }
+        }
     }
 }
 
@@ -370,8 +385,20 @@ int main(void) {
     // extended grid for testing
     uint16_t extended_grid[10] = {0};
 
+    uint8_t DIAGONALE[8] = {
+    0b10000000,
+    0b01000000,
+    0b00100000,
+    0b00010000,
+    0b00001000,
+    0b00000100,
+    0b00000010,
+    0b00000001
+};
+
     
-    load_pattern_to_grid(grid1, OCTAGON_2);
+    load_pattern_to_grid(grid1, DIAGONALE);
+    //set_grid_from_sdu(grid1, DIAGONALE);
 
     write_grid_to_matrix(grid1, SET_PIXEL_DELAY_MS);
 
