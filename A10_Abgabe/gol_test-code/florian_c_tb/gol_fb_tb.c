@@ -213,31 +213,31 @@ static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_
     switch (living_neighbors_cnt) {
         case 0:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
 
         case 1:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
 
         case 2:  // Überleben bei 2 lebenden Nachbarn
 
             if ((current_grid[i - offset] & (0x0001 << (j - offset))) ? 1 : 0) {
-                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);   // Zelle bleibt am Leben
+                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset));   // Zelle bleibt am Leben
             } else {
-                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);  // Zelle bleibt tot
+                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));  // Zelle bleibt tot
             }
             break;
 
         case 3:  // Geburt bei 3 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset));
             break;
 
         default:  // Überbevölkerungstod bei > 3 lebenden Nachbarn
 
-            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));
             break;
     }
 }
