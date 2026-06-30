@@ -179,15 +179,18 @@ static inline uint8_t count_living_neighbors(const uint16_t *current_extended_gr
 
     uint8_t j_shift = 6;  // Kompatibilität der 8x8 Grids mit den 10x10 Grids.
     
+    // Dadurch zb j = 1 bis 8, wird zu j = 7 bis 14, was den Indizes des erweiterten Grids entspricht.
     for (uint8_t s = (j - 1 + j_shift); s <= (j + 1 + j_shift); s++) {
-
+        // Zähle die lebenden Nachbarn in der oberen Zeile (i-1)
         living_neighbors_cnt += (current_extended_grid[i - 1] & (0x0001 << s)) ? 1 : 0;
-        
+        // Zähle die lebenden Nachbarn in der unteren Zeile (i+1)
         living_neighbors_cnt += (current_extended_grid[i + 1] & (0x0001 << s)) ? 1 : 0;
         
     }
 
+    // Zähle die lebenden Nachbarn in der mittleren Zeile (i), rechts
     living_neighbors_cnt += (current_extended_grid[i] & (0x0001 << (j - 1 + j_shift))) ? 1 : 0;
+    // Zähle die lebenden Nachbarn in der mittleren Zeile (i), links
     living_neighbors_cnt += (current_extended_grid[i] & (0x0001 << (j + 1 + j_shift))) ? 1 : 0;
 
     if (living_neighbors_cnt != 0) {
@@ -203,37 +206,38 @@ static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_
                                      const uint8_t living_neighbors_cnt,
                                      uint8_t i, uint8_t j) {
 
-    const int8_t compatibility_shift_j = -1;  // Kompatibilität der 8x8 Grids mit den 10x10 Grids.
-    const int8_t compatibility_shift_i = -1;  // Kompatibilität der 8x8 Grids mit den 10x10 Grids.
+    const uint8_t offset = 1;  // dient der Kompabilität der 8x8 Grids mit den 10x10 Grids.
+    // Dadurch zb i = 1 bis 9, wird zu i = 0 bis 8, was den Indizes des 8x8 Grids entspricht. 
+
 
     switch (living_neighbors_cnt) {
         case 0:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i + compatibility_shift_i] = next_grid[i+compatibility_shift_i] & ~(0x01 << j + compatibility_shift_j);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
             break;
 
         case 1:  // Einsamkeitstod bei < 2 lebenden Nachbarn
 
-            next_grid[i+compatibility_shift_i] = next_grid[i+compatibility_shift_i] & ~(0x01 << j + compatibility_shift_j);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
             break;
 
         case 2:  // Überleben bei 2 lebenden Nachbarn
 
-            if ((current_grid[i - compatibility_shift_i] & (0x01 << (j + compatibility_shift_j))) ? 1 : 0) {
-                next_grid[i+compatibility_shift_i] = next_grid[i+compatibility_shift_i] | (0x01 << j + compatibility_shift_j);   // Zelle bleibt am Leben
+            if ((current_grid[i - offset] & (0x0001 << (j - offset))) ? 1 : 0) {
+                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);   // Zelle bleibt am Leben
             } else {
-                next_grid[i+compatibility_shift_i] = next_grid[i+compatibility_shift_i] & ~(0x01 << j + compatibility_shift_j);  // Zelle bleibt tot
+                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);  // Zelle bleibt tot
             }
             break;
 
         case 3:  // Geburt bei 3 lebenden Nachbarn
 
-            next_grid[i+compatibility_shift_i] = next_grid[i+compatibility_shift_i] | (0x01 << j + compatibility_shift_j);
+            next_grid[i - offset] = next_grid[i - offset] | (0x0001 << j - offset);
             break;
 
         default:  // Überbevölkerungstod bei > 3 lebenden Nachbarn
 
-            next_grid[i+compatibility_shift_i] = next_grid[i+compatibility_shift_i] & ~(0x01 << j + compatibility_shift_j);
+            next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << j - offset);
             break;
     }
 }
@@ -367,7 +371,7 @@ int main(void) {
     uint16_t extended_grid[10] = {0};
 
     
-    load_pattern_to_grid(grid1, BLOCK_CORNER);
+    load_pattern_to_grid(grid1, OCTAGON_2);
 
     write_grid_to_matrix(grid1, SET_PIXEL_DELAY_MS);
 

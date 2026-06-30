@@ -80,7 +80,7 @@ void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_e
     merge_grid_with_edge(current_grid, current_extended_grid, sdu);
 
     // Berechne die nächste Generation
-    // Iteriere über jede Zelle im 8x8 Grid
+    // Iteriere über jede Zelle des 8x8 Grids im erweiterten 10x10 Grid
     for (int i = 1; i < 9; i++) {
         for (int j = 1; j < 9; j++) {
             // Zähle die lebenden Nachbarn der aktuellen Zelle
