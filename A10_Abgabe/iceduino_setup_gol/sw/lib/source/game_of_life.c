@@ -1,7 +1,8 @@
 #include "game_of_life.h"
 
+#include "neorv32_iceduino.h"
 
-const uint8_t GLIDER[8] = {
+uint8_t GLIDER[8] = {
     0b00100000,   
     0b00010000,   
     0b01110000,   
@@ -12,7 +13,7 @@ const uint8_t GLIDER[8] = {
     0b00000000
 };
 
-const uint8_t OCTAGON_2[8] = {
+uint8_t OCTAGON_2[8] = {
     0b00011000,
     0b00100100,
     0b01000010,

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "neorv32_iceduino.h"
+// #include "neorv32_iceduino.h"
 
 // Konstanten
 #define GRB_ALIVE 255, 0, 0
@@ -11,8 +11,9 @@
 #define SET_PIXEL_DELAY_MS 2
 
 // Muster (extern, da Definition in .c)
-extern const uint8_t GLIDER[8];
-extern const uint8_t OCTAGON_2[8];
+extern uint8_t GLIDER[8];
+extern uint8_t OCTAGON_2[8];
+
 
 // Prototypen für normale Funktionen
 void write_grid_to_matrix(uint8_t *grid, int delay_ms);
