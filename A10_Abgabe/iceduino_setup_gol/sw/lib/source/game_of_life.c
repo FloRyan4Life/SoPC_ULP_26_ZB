@@ -80,7 +80,7 @@ void reset_extended_grid(uint16_t *extended_grid){
 }
 
 // Berechnet die nächste Generation basierend auf den aktuellen Zuständen der Zellen und deren Nachbarn.
-void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_extended_grid, uint8_t *sdu) {
+void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_extended_grid, uint8_t *edge_sdu) {
 
     uint8_t living_neighbors_cnt = 0;
     // static Variable, um den aktuellen aktiven Grid zwischen den Aufrufen zu verfolgen
@@ -91,7 +91,7 @@ void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_e
     uint8_t *next_grid = (grid_switch == 0) ? grid2 : grid1;
 
     // Kombinieren des aktuellen inneren Grids mit den Randinformationen aus der SDU.
-    merge_grid_with_edge(current_grid, current_extended_grid, sdu);
+    merge_grid_with_edge(current_grid, current_extended_grid, edge_sdu);
 
     // Berechne die nächste Generation
     // Iteriere über jede Zelle des 8x8 Grids im erweiterten 10x10 Grid
@@ -157,10 +157,97 @@ void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, uint8_t *edge_
         }
         
     }
-
+    
     //Zeile 9 (letzte Zeile)
     // N(27), N(26), N(25), N(24), N(23), N(22), N(21), N(20), N(19), N(18)
     extended_grid[9] |= (((uint16_t)edge_sdu[4] & 0x000F) << 12) ;  // N(27)-N(24) aus SDU[4]
     extended_grid[9] |= (((uint16_t)edge_sdu[5] & ~(0x0003)) << 4) ;   // N(23)-N(20) aus SDU[5]
+
+}
+
+void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *edge_sdu, uint8_t *rx_buffer, uint8_t *tx_buffer){
+
+    mmcp_slave_state_t mmcp_slave_state = STATE_IDLE;
+
+    uint8_t living_neighbors_cnt = 0;
+    // static Variable, um den aktuellen aktiven Grid zwischen den Aufrufen zu verfolgen
+    static uint8_t grid_switch = 0;
+
+    // Bestimme, welcher Grid aktuell aktiv ist und welcher aktualisiert wird
+    uint8_t *current_grid = (grid_switch == 0) ? grid1 : grid2;
+    uint8_t *next_grid = (grid_switch == 0) ? grid2 : grid1;
+
+
+    // Zustand wechseln, basierend auf ApNr im rx_buffer[5]
+    switch (rx_buffer[5]) {
+        case 0x00:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+
+        case 0x01:
+            mmcp_slave_state = STATE_RECEIVE_GRID;
+            break;
+
+        case 0x02:
+            mmcp_slave_state = STATE_NEXT_GEN;
+            break;
+
+        case 0x06:
+            mmcp_slave_state = STATE_RECEIVE_EDGE;
+            break;
+
+        default:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+    }
+
+
+    switch (mmcp_slave_state) {
+        case STATE_IDLE:
+            break;
+
+        case STATE_RECEIVE_GRID:
+            set_grid_from_sdu(current_grid, &rx_buffer[6]);  // Setze das aktuelle Grid basierend auf den empfangenen Daten
+            break;
+
+        case STATE_RECEIVE_EDGE:
+            for(int i=6; i<13; i++){
+                edge_sdu[i - 6] = rx_buffer[i];  // Speichere die empfangenen Randinformationen in der SDU
+            }
+            break;
+
+        case STATE_NEXT_GEN:
+
+            // Kombinieren des aktuellen inneren Grids mit den Randinformationen
+            // aus der SDU.
+            merge_grid_with_edge(current_grid, extended_grid, edge_sdu);
+
+            // Berechne die nächste Generation
+            // Iteriere über jede Zelle des 8x8 Grids im erweiterten 10x10 Grid
+            for (int i = 1; i < 9; i++) {
+                for (int j = 1; j < 9; j++) {
+
+                    // Zähle die lebenden Nachbarn der aktuellen Zelle
+                    living_neighbors_cnt = count_living_neighbors(extended_grid, i, j);
+                    // Aktualisiere den Zustand der Zelle in der nächsten
+                    // Generation basierend auf den Regeln des Spiels
+                    update_cell_state(current_grid, next_grid, living_neighbors_cnt, i, j);
+                }
+            }
+
+            // Schreibe die neue Generation in den DP-RAM (LED-Matrix)
+            write_grid_to_matrix(next_grid, SET_PIXEL_DELAY_MS);
+
+            // Setze den alten Grid zurück, um ihn für die nächste Berechnung
+            // vorzubereiten
+            reset_grid(current_grid);
+            
+            grid_switch = (grid_switch == 0) ? 1 : 0;
+            break;
+
+        default:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+    }
 
 }

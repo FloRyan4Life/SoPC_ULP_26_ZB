@@ -9,6 +9,16 @@
 #define GRB_DEAD 0, 0, 0
 #define SET_PIXEL_DELAY_MS 2
 
+// MMCP Slave FSM Zustände
+typedef enum {
+    STATE_IDLE = 0,
+    STATE_RECEIVE_GRID,
+    STATE_RECEIVE_EDGE,
+    STATE_NEXT_GEN,
+} mmcp_slave_state_t;
+
+//extern mmcp_slave_state_t mmcp_slave_state;
+
 // Muster (extern, da Definition in .c)
 extern uint8_t GLIDER[8];
 extern uint8_t OCTAGON_2[8];
@@ -22,6 +32,7 @@ void reset_extended_grid(uint16_t *extended_grid);
 void compute_next_generation(uint8_t *grid1, uint8_t *grid2, uint16_t *current_extended_grid, uint8_t *sdu);
 void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, uint8_t *edge_sdu);
 void set_grid_from_sdu(uint8_t *grid, uint8_t *sdu);
+void slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *sdu, uint8_t *rx_buffer, uint8_t *tx_buffer);
 
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation

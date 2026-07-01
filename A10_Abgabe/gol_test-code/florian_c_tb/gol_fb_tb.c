@@ -10,6 +10,18 @@
 
 #define SET_PIXEL_DELAY_MS 2
 
+static uint8_t rx_buffer[16] = {0};  // Buffer für empfangene Daten per MMCP
+static uint8_t tx_buffer[16] = {0};  // Buffer für zu sendende Daten per MMCP
+
+// MMCP Slave FSM Zustände
+typedef enum {
+    STATE_IDLE = 0,
+    STATE_RECEIVE_GRID,
+    STATE_RECEIVE_EDGE,
+    STATE_NEXT_GEN,
+} mmcp_slave_state_t;
+
+
 uint8_t grid1[8] = {0};
 uint8_t grid2[8] = {0};
 
@@ -371,7 +383,92 @@ void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, uint8_t *edge_
 
 }
 
+void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *edge_sdu, uint8_t *rx_buffer, uint8_t *tx_buffer){
 
+    mmcp_slave_state_t mmcp_slave_state = STATE_IDLE;
+
+    uint8_t living_neighbors_cnt = 0;
+    // static Variable, um den aktuellen aktiven Grid zwischen den Aufrufen zu verfolgen
+    static uint8_t grid_switch = 0;
+
+    // Bestimme, welcher Grid aktuell aktiv ist und welcher aktualisiert wird
+    uint8_t *current_grid = (grid_switch == 0) ? grid1 : grid2;
+    uint8_t *next_grid = (grid_switch == 0) ? grid2 : grid1;
+
+
+    // Zustand wechseln, basierend auf ApNr im rx_buffer[5]
+    switch (rx_buffer[5]) {
+        case 0x00:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+
+        case 0x01:
+            mmcp_slave_state = STATE_RECEIVE_GRID;
+            break;
+
+        case 0x02:
+            mmcp_slave_state = STATE_NEXT_GEN;
+            break;
+
+        case 0x06:
+            mmcp_slave_state = STATE_RECEIVE_EDGE;
+            break;
+
+        default:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+    }
+
+
+    switch (mmcp_slave_state) {
+        case STATE_IDLE:
+            break;
+
+        case STATE_RECEIVE_GRID:
+            set_grid_from_sdu(current_grid, &rx_buffer[6]);  // Setze das aktuelle Grid basierend auf den empfangenen Daten
+            break;
+
+        case STATE_RECEIVE_EDGE:
+            for(int i=6; i<13; i++){
+                edge_sdu[i - 6] = rx_buffer[i];  // Speichere die empfangenen Randinformationen in der SDU
+            }
+            break;
+
+        case STATE_NEXT_GEN:
+
+            // Kombinieren des aktuellen inneren Grids mit den Randinformationen
+            // aus der SDU.
+            merge_grid_with_edge(current_grid, extended_grid, edge_sdu);
+
+            // Berechne die nächste Generation
+            // Iteriere über jede Zelle des 8x8 Grids im erweiterten 10x10 Grid
+            for (int i = 1; i < 9; i++) {
+                for (int j = 1; j < 9; j++) {
+
+                    // Zähle die lebenden Nachbarn der aktuellen Zelle
+                    living_neighbors_cnt = count_living_neighbors(extended_grid, i, j);
+                    // Aktualisiere den Zustand der Zelle in der nächsten
+                    // Generation basierend auf den Regeln des Spiels
+                    update_cell_state(current_grid, next_grid, living_neighbors_cnt, i, j);
+                }
+            }
+
+            // Schreibe die neue Generation in den DP-RAM (LED-Matrix)
+            write_grid_to_matrix(next_grid, SET_PIXEL_DELAY_MS);
+
+            // Setze den alten Grid zurück, um ihn für die nächste Berechnung
+            // vorzubereiten
+            reset_grid(current_grid);
+            
+            grid_switch = (grid_switch == 0) ? 1 : 0;
+            break;
+
+        default:
+            mmcp_slave_state = STATE_IDLE;
+            break;
+    }
+
+}
 
 int main(void) {
     // init grid
@@ -403,7 +500,10 @@ int main(void) {
     write_grid_to_matrix(grid1, SET_PIXEL_DELAY_MS);
 
 
+    uint8_t first_turn = 1;
     uint8_t edge_sdu[8] = {0};
+
+    uint8_t edge_sdu_empty[8] = {0};
     /*
     edge_sdu[2] = 0b11111111;
     edge_sdu[3] = 0b11111111;
@@ -415,14 +515,39 @@ int main(void) {
     while (1) {
         if (iceduino_button_get(2)) {
             // debouncing
+            /*
+            if(first_turn == 1){
+                rx_buffer[5] = 0x01;  // ApNr für Grid empfangen
+                rx_buffer[6] = DIAGONALE[0];  // Beispiel-Daten für das Grid
 
+                for (int i = 0; i < 7; i++) {
+                    printf("DIAGONALE[%d] = 0x%02X\n", i, rx_buffer[6 + i]);
+                }
+
+                mmcp_slave_fsm(grid1, grid2, extended_grid, edge_sdu, rx_buffer, tx_buffer);
+
+                write_grid_to_matrix(grid1, SET_PIXEL_DELAY_MS);
+
+                rx_buffer[5] = 0x06;
+                for (int i = 0; i < 8; i++) {
+                    rx_buffer[6 + i] = edge_sdu[i];  // Beispiel-Daten für die Randinformationen
+                }
+
+
+                mmcp_slave_fsm(grid1, grid2, extended_grid, edge_sdu, rx_buffer, tx_buffer);
+                first_turn = 0;
+            }
+            */
+
+            rx_buffer[5] = 0x02;
+
+            mmcp_slave_fsm(grid1, grid2, extended_grid, edge_sdu, rx_buffer, tx_buffer);
             // merge_grid_with_edge(grid1, extended_grid, edge_sdu);
             //write_extended_grid_to_matrix(extended_grid, SET_PIXEL_DELAY_MS);
             
             //write_extended_grid_to_matrix(extended_grid, SET_PIXEL_DELAY_MS);
             
-            compute_next_generation(grid1, grid2, extended_grid, edge_sdu);
-
+            //compute_next_generation(grid1, grid2, extended_grid, edge_sdu);
 
             //compute_next_generation(grid1, grid2);
         }
