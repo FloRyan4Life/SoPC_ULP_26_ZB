@@ -16,16 +16,16 @@ int main(void) {
     neorv32_cpu_delay_ms(10);
     
     // Lade das GLIDER-Muster in das erste Grid
-    load_pattern_to_grid(grid_1, GLIDER);
+    load_pattern_to_grid(grid_1, PULSAR_GEN_1);
 
     uint8_t edge_sdu_cache[8] = {0};
 
 
     // Schreibe das initiale Muster in die LED-Matrix
-    write_grid_to_matrix(grid_1, SET_PIXEL_DELAY_MS);
+    // write_grid_to_matrix(grid_1, SET_PIXEL_DELAY_MS);
 
     while (1) {
-        if (iceduino_button_get(2)) {
+        if (iceduino_button_get(1)) {
             // debouncing
 
             mmcp_master_fsm(rx_buffer, tx_buffer, PULSAR_GEN_1);

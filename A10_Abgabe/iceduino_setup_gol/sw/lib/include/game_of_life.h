@@ -1,13 +1,14 @@
 #ifndef GAME_OF_LIFE_H
 #define GAME_OF_LIFE_H
 
+#include <stdint.h>
 
 // #include "neorv32_iceduino.h"
 
 // Konstanten
 #define GRB_ALIVE 255, 0, 0
 #define GRB_DEAD 0, 0, 0
-#define SET_PIXEL_DELAY_MS 2
+#define SET_PIXEL_DELAY_MS 3
 
 
 // MMCP Slave FSM Zustände
@@ -50,6 +51,7 @@ void build_mmcp_frame(uint8_t *buffer, uint8_t apnr, const uint8_t *data);
 void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *edge_sdu_cache, uint8_t *rx_buffer, uint8_t *tx_buffer);
 void mmcp_master_fsm(uint8_t *rx_buffer, uint8_t *tx_buffer, const uint8_t *start_pattern);
 
+uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j);
 
 
 

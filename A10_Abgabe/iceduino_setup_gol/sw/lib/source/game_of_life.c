@@ -183,7 +183,7 @@ void set_grid_from_sdu(uint8_t *grid, const uint8_t *sdu){
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation
 // Randbehandlung nicht nötig, da nur durch das innere Grid iteriert aber im erweiterten Grid nach Nachbarn gesucht wird.
-static inline uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j) {
+uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j) {
 
     // Anzahl der Nachbarn
     uint8_t living_neighbors_cnt = 0;
@@ -369,6 +369,7 @@ void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uin
 
         case STATE_RECEIVE_GRID:
             set_grid_from_sdu(current_grid, &rx_buffer[6]);  // Setze das aktuelle Grid basierend auf den empfangenen Daten
+            write_grid_to_matrix(current_grid, SET_PIXEL_DELAY_MS);
             break;
 
         case STATE_RECEIVE_EDGE:
