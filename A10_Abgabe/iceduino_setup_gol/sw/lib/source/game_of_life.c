@@ -326,7 +326,8 @@ void build_mmcp_frame(uint8_t *rx_buffer, uint8_t apnr, const uint8_t *sdu) {
     rx_buffer[15] = 0x00;  // EOF
 }
 
-void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *edge_sdu_cache, uint8_t *rx_buffer, uint8_t *tx_buffer){
+void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid,
+     uint8_t *edge_sdu_cache, uint8_t *rx_buffer, uint8_t *tx_buffer){
 
     mmcp_slave_state_t mmcp_slave_state = STATE_IDLE;
 

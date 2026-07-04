@@ -1,25 +1,120 @@
 \newpage
-\section{Game of Life ohne Kommunikation \\ (Aufgabe 10)}
+\section{Game of Life ohne Kommunikation (Aufgabe 10)}
+
+Aufgabe 10 baut auf den vorherigen Aufgaben auf. In dieser Aufgabe wird das Game of Life auf der LED-Matrix implementiert.
 
 
-In der Main\-Datei werden zwei Arrays, grid1[8] und grid2[8], angelegt. Beide stellen das vollständige LED\-Raster dar. Die
-Arrays sind vom Typ integer, welche jeweils aus 8 Bit bestehen. 
+\subsection{Aufbau der Software}
+
+
+Es werden zwei Arrays, grid1[8] und grid2[8], angelegt. Beide stellen das vollständige LED\-Raster dar. Die
+Arrays sind vom Typ integer.
 Bei einem Zustandsübergang im Game of Life, also bei der Berechnung des Folgerasters, wird abhängig von einem der grid\-Arrays das
 jeweils andere neu berechnet. Liegt das alte Raster im ersten Array, so wird das Folgeraster neu berechnet und in das zweite Array
-geschrieben. Anschließend wird mithilfe der schon im vorigen Kapitel beschriebenen C\-Bibliothek namens \"ws2812.h\", das 
+geschrieben. Anschließend wird mithilfe der schon im vorherigen Kapitel beschriebenen C\-Bibliothek namens \"ws2812.h\", das 
 neue Raster auf die LED\-Matrix übertragen. In der folgenden Runde werden die Rasterspeicher getauscht behandelt. 
 
 
 
 
-\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A10_Abgabe/iceduino_setup/sw/programs/main.c}
 
+
+
+
+\inputminted[linenos,frame=single,fontsize=\footnotesize]{c}{A10_Abgabe/iceduino_setup_gol/sw/programs/iceduino_game_of_life/main.c}
+
+In der Main wird das Setup der LED-Matrix durchgeführt und anschließend in einer Endlosschleife das Game of Life ausgeführt. 
+Es wird zusätzlich ein virtueller Master, welcher den Steuerrechner imitiert, implementiert. Dieser Master sendet MMCP Pakete an
+den Slave. Folgende Anweisungen sind implementiert:
+\begin{itemize}
+    
+    \item \textbf{set Muster}: Empfängt das einzustellende Initialmuster vom Master.
+    \item \textbf{NextGen}: Weist den Slave an, die nächste Generation zu berechnen und auf der LED-Matrix darzustellen.
+    \item \textbf{receiveEdge}: Hinzugefügt um die Imitation der Kantenbedingungen zu implementieren. Empfängt die Kantenbedingungen vom Master. Diese werden in den Payload des MMCP Pakets übertragen.
+    
+\end{itemize}
+
+Der Slave reagiert anhand der empfangenen Anweisung. Hierbei können derzeit 4 verschieden States auftreten. Diese sind:
+\begin{itemize}
+    \item \textbf{STATE RECEIVE GRID}: Der Slave wartet auf eine Anweisung vom Master.
+    \item \textbf{STATE RECEIVE EDGE}: Der Slave empfängt die Kantenbedingungen vom Master und speichert diese in einem Array.
+    \item \textbf{STATE NEXT GEN}: Der Slave berechnet die nächste Generation und stellt diese auf der LED-Matrix dar.
+    \item \textbf{STATE IDLE}: Der Slave empfängt das neue Raster vom Master und speichert es in einem der beiden Arrays.
+\end{itemize}
+
+Receive Grid wird durch die set Muster Anweisung vom Master ausgelöst. Receive Edge wird durch die receiveEdge
+ Anweisung vom Master ausgelöst. Next Gen wird durch die NextGen Anweisung vom Master ausgelöst.
+  Idle stellt einen Standardzustand dar, welcher fehlerhafte Auslösungen verhindern soll.
+
+Dies kann im folgenden Slave Code nachvollzogen werden:
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=329, lastline=418]{c}{A10_Abgabe/iceduino_setup_gol/sw/lib/source/game_of_life.c}
+
+
+
+\subsection{Masterimitation}
+Der folgende Code zeigt die Masterimitation, welche die Anweisungen an den Slave sendet.
+\inputminted[linenos,frame=single,fontsize=\footnotesize, firstline=420, lastline=467]{c}{A10_Abgabe/iceduino_setup_gol/sw/lib/source/game_of_life.c}
+
+
+
+\subsection{Speicherorganisation}
+
+\subsection{Implementation des Octagons}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth, angle=0]{A10_Abgabe/res/xxxx.png}
-\caption{Ausschnitt der Simulation: CPU schreibt Pixelwerte in DPRAM}
-\label{fig:ws2812_sim_1}
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/octagon_1.jpeg}
+\caption{Simulation des Octagon: Erste Generation}
+\label{fig:octagon_1}
 \end{figure}
 
-\subsection{Dual-Port-RAM}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/octagon_2.jpeg}
+\caption{Simulation des Octagon: Zweite Generation}
+\label{fig:octagon_2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/octagon_3.jpeg}
+\caption{Simulation des Octagon: Dritte Generation}
+\label{fig:octagon_3}
+\end{figure}
+
+\subsection{Implementation des Pulsars}
+
+Die Funktionsfähigkeit des Pulsars wurde ebenfalls überprüft. Dies ist in den folgenden Abbildungen dargestellt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/pulsar_1.jpeg}
+\caption{Simulation des Octagon: Erste Generation}
+\label{fig:octagon_1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/pulsar_2.jpeg}
+\caption{Simulation des Octagon: Zweite Generation}
+\label{fig:octagon_2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth, angle=-90]{A10_Abgabe/res/pulsar_3.jpeg}
+\caption{Simulation des Octagon: Dritte Generation}
+\label{fig:octagon_3}
+\end{figure}
+
+\subsection{Ausblick}
+
+Um die Matrizen miteinander zu verbinden, muss die Kommunikation vollständig implementiert werden. 
+Dazu muss eine Schnittstelle mittels UART zu einem Rechner implementiert werden, sodass
+Anweisungen an den Slave, in diesem Fall an die LED-Matrix, gesendet werden können.
+
+ 
+
+
+
+
