@@ -27,7 +27,7 @@ const uint8_t BLOCK[8] = {
     0b00000000,
     0b01100000,
     0b01100000,
-    0b00000000,
+    0b00000000, 
     0b00000000,
     0b00000000,
     0b00000000,
@@ -76,6 +76,39 @@ const uint8_t OCTAGON_2[8] = {
     0b01000010,
     0b00100100,
     0b00011000
+};
+
+const uint8_t OCTAGON_2_EDGES[3][8]= {
+    {
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000
+    },
+    {
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000
+    },
+    {
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000
+    }
 };
 
 const uint8_t PULSAR_GEN_1[8] = {
@@ -182,7 +215,8 @@ void set_grid_from_sdu(uint8_t *grid, const uint8_t *sdu){
 
 // static inline Definitionen direkt im Header
 // Zählt die lebenden Nachbarn einer Zelle in der aktuellen Generation
-// Randbehandlung nicht nötig, da nur durch das innere Grid iteriert aber im erweiterten Grid nach Nachbarn gesucht wird.
+// Randbehandlung nicht nötig, da nur durch das innere Grid iteriert
+//aber im erweiterten Grid nach Nachbarn gesucht wird.
 uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j) {
 
     // Anzahl der Nachbarn
@@ -232,9 +266,9 @@ static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_
         case 2:  // Überleben bei 2 lebenden Nachbarn
 
             if ((current_grid[i - offset] & (0x0001 << (j - offset))) ? 1 : 0) {
-                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset));   // Zelle bleibt am Leben
+                next_grid[i - offset] = next_grid[i - offset] | (0x0001 << (j - offset)); // Zelle bleibt am Leben
             } else {
-                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));  // Zelle bleibt tot
+                next_grid[i - offset] = next_grid[i - offset] & ~(0x0001 << (j - offset));// Zelle bleibt tot
             }
             break;
 
@@ -250,7 +284,8 @@ static inline void update_cell_state(const uint8_t *current_grid, uint8_t *next_
     }
 }
 
-//Kombiniert das aktuelle Grid mit den Randinformationen aus der SDU und speichert das Ergebnis im erweiterten Grid.
+//Kombiniert das aktuelle Grid mit den Randinformationen
+//aus der SDU und speichert das Ergebnis im erweiterten Grid.
 void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid,const uint8_t *edge_sdu){
 
     // Setze das erweiterte Grid zurück
@@ -275,7 +310,7 @@ void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid,const uint8_t *
 
         // ´Linker Rand: N(35 - j) aus SDU[3] und SDU[4]
         if(j <= 3){
-            extended_grid[j + 1] |= ((uint16_t)edge_sdu[3] & (0x0001 << (3 - j))) << (8 + 4 + j);    // N(35 - j)
+            extended_grid[j + 1] |= ((uint16_t)edge_sdu[3] & (0x0001 << (3 - j))) << (8 + 4 + j); // N(35 - j)
         } else {
             extended_grid[j + 1] |= ((uint16_t)edge_sdu[4] & (0x0001 << (7 + 4 - j))) << (8 - 4 + j);    
         }
@@ -285,9 +320,9 @@ void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid,const uint8_t *
         
         //Rechter Rand: N(10 + j) aus SDU[5] und SDU[6]
         if(j < 5){  // N(10 + j) aus SDU[6] für j=0 bis 4
-            extended_grid[j + 1] |= (((uint16_t)edge_sdu[6] & (0x0001 << (2 + j))) << (4 - j));    // N(10 + j)
-        }else if(j == 5){ // N(15) aus SDU[6] für j=5 mit eigener Verzweigung, da hier das Bit nach rechts verschoben werden muss
-            extended_grid[j + 1] |= (((uint16_t)edge_sdu[6] & (0x0001 << (2 + j))) >> (j - 4));    // N(10 + j)         
+            extended_grid[j + 1] |= (((uint16_t)edge_sdu[6] & (0x0001 << (2 + j))) << (4 - j)); // N(10 + j)
+        }else if(j == 5){ // N(15) aus SDU[6] für j=5 mit eigener Verzweigung
+            extended_grid[j + 1] |= (((uint16_t)edge_sdu[6] & (0x0001 << (2 + j))) >> (j - 4)); // N(10 + j)         
         }else{  // N(10 + j) aus SDU[5] für j=6 bis 7
             extended_grid[j + 1] |= (((uint16_t)edge_sdu[5] & (0x0001 << (j - 6))) << (6 + 6 -j));
         }
@@ -369,7 +404,7 @@ void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid,
             break;
 
         case STATE_RECEIVE_GRID:
-            set_grid_from_sdu(current_grid, &rx_buffer[6]);  // Setze das aktuelle Grid basierend auf den empfangenen Daten
+            set_grid_from_sdu(current_grid, &rx_buffer[6]);
             write_grid_to_matrix(current_grid, SET_PIXEL_DELAY_MS);
             break;
 
@@ -428,28 +463,28 @@ void mmcp_master_fsm(uint8_t *rx_buffer, uint8_t *tx_buffer, const uint8_t *star
         case STATE_SEND_GRID:
             // Implementiere die Logik zum Senden des Grids
 
-            build_mmcp_frame(rx_buffer, 0x01, start_pattern);  // Beispiel-Daten für das Grid
+            build_mmcp_frame(rx_buffer, 0x01, start_pattern);
 
 
             gen_counter++;
 
-            mmcp_master_state = STATE_SEND_EDGE;  // Wechsel zum nächsten Zustand
+            mmcp_master_state = STATE_SEND_EDGE;
 
             break;
 
         case STATE_SEND_EDGE:
 
             // Implementiere die Logik zum Senden der Randinformationen
-            build_mmcp_frame(rx_buffer, 0x06, PULSAR_EDGES[gen_counter - 1]);  // Beispiel-Daten für die Randinformationen
+            build_mmcp_frame(rx_buffer, 0x06, OCTAGON_2_EDGES[gen_counter - 1]); 
 
 
-            mmcp_master_state = STATE_TRIG_NEXT_GEN;  // Wechsel zum nächsten Zustand
+            mmcp_master_state = STATE_TRIG_NEXT_GEN;
             break;
 
         case STATE_TRIG_NEXT_GEN:
             // Implementiere die Logik zum Auslösen der nächsten Generation
 
-            build_mmcp_frame(rx_buffer, 0x02, NULL);  // Beispiel-Daten für das Auslösen der nächsten Generation
+            build_mmcp_frame(rx_buffer, 0x02, NULL);
 
             if(gen_counter == 3) {
                 gen_counter = 1;
@@ -457,7 +492,7 @@ void mmcp_master_fsm(uint8_t *rx_buffer, uint8_t *tx_buffer, const uint8_t *star
                 gen_counter++;
             }
 
-            mmcp_master_state = STATE_SEND_EDGE;  // Wechsel zurück zum ersten Zustand
+            mmcp_master_state = STATE_SEND_EDGE;
             
             break;
             

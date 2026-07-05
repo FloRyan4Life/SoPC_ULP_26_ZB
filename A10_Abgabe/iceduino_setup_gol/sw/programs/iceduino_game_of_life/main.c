@@ -4,7 +4,7 @@
 static uint8_t grid_1[8] = {0};
 static uint8_t grid_2[8] = {0};
 
-static uint16_t extended_grid[10] = {0};  // 10x10 Grid, um unsichtbare Zellen zu berücksichtigen
+static uint16_t extended_grid[10] = {0};
 
 static uint8_t rx_buffer[16] = {0};  // Buffer für empfangene Daten per MMCP
 static uint8_t tx_buffer[16] = {0};  // Buffer für zu sendende Daten per MMCP

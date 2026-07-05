@@ -45,10 +45,12 @@ void write_grid_to_matrix(uint8_t *grid, int delay_ms);
 void load_pattern_to_grid(uint8_t *grid, const uint8_t *pattern);
 void reset_grid(uint8_t *grid);
 void reset_extended_grid(uint16_t *extended_grid);
-void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid, const uint8_t *edge_sdu);
+void merge_grid_with_edge(uint8_t *grid, uint16_t *extended_grid,
+     const uint8_t *edge_sdu);
 void set_grid_from_sdu(uint8_t *grid, const uint8_t *sdu);
 void build_mmcp_frame(uint8_t *buffer, uint8_t apnr, const uint8_t *data);
-void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid, uint8_t *edge_sdu_cache, uint8_t *rx_buffer, uint8_t *tx_buffer);
+void mmcp_slave_fsm(uint8_t *grid1, uint8_t *grid2, uint16_t *extended_grid,
+     uint8_t *edge_sdu_cache, uint8_t *rx_buffer, uint8_t *tx_buffer);
 void mmcp_master_fsm(uint8_t *rx_buffer, uint8_t *tx_buffer, const uint8_t *start_pattern);
 
 uint8_t count_living_neighbors(const uint16_t *current_extended_grid, uint8_t i, uint8_t j);
