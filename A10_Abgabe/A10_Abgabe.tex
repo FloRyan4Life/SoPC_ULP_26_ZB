@@ -9,8 +9,14 @@ Game of Life auf der LED-Matrix implementiert.
 \inputminted[linenos,fontsize=\footnotesize]{c}{A10_Abgabe/iceduino_setup_gol/sw/programs/iceduino_game_of_life/main.c}
 
 In der Main wird das Setup der LED-Matrix durchgeführt und anschließend in
-einer Endlosschleife das Game of Life ausgeführt. Es wird zusätzlich ein
-virtueller Master, welcher den Steuerrechner imitiert, implementiert. Dieser
+einer Endlosschleife das Game of Life ausgeführt. Eine neue Runde kann durch
+das Drücken eines Tasters (Taster Nr.~2) ausgelöst werden. 
+Der Steuercomputer, welcher die Anweisungen an den Slave sendet, stellt den
+Master dar. Der Slave ist der lokale Teilnehmer, welche die Anweisungen vom Master
+empfängt und ausführt. 
+Um die Funktionsfähigkeit des Game of Life zu testen, wird ein virtueller
+Master implementiert, welcher die Anweisungen an den Slave sendet.
+Dieser
 Master sendet MMCP Pakete an den Slave. Folgende Anweisungen sind
 implementiert:
 \begin{itemize}
@@ -39,7 +45,8 @@ Dies kann im folgenden Slave Code nachvollzogen werden:
 \inputminted[linenos,fontsize=\footnotesize, firstline=364,
   lastline=452]{c}{A10_Abgabe/iceduino_setup_gol/sw/lib/source/game_of_life.c}
 
-Nachfolgend wird die Berechnung der nächsten Generation beschrieben.
+Nachfolgend wird die Berechnung der nächsten Generation, welche 
+im Slave Code im Zustand STATE NEXT GEN zu finden ist, beschrieben.
 
 Zur Berechnung einer neuen Generation wird das aktuelle Raster mit den
 Kanteninformationen zusammengefügt.

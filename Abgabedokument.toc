@@ -57,7 +57,7 @@
 \contentsline {section}{\numberline {9}Game of Life ohne Kommunikation (Aufgabe 10)}{85}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Aufbau der Software}{85}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Masterimitation}{91}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Speicherorganisation}{92}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.3}Speicherorganisation}{93}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}Implementation des Octagons}{96}{subsection.9.4}%
 \contentsline {subsection}{\numberline {9.5}Implementation des Pulsars}{101}{subsection.9.5}%
 \contentsline {subsection}{\numberline {9.6}Ausblick}{104}{subsection.9.6}%
